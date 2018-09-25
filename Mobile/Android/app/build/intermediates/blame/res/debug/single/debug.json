@@ -804,6 +804,10 @@
         "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/color-v23/abc_btn_colored_borderless_text_material.xml"
     },
     {
+        "merged": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/font_ubuntu.ttf.flat",
+        "source": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/src/main/res/font/ubuntu.ttf"
+    },
+    {
         "merged": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
         "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/drawable-mdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
     },
@@ -1070,6 +1074,10 @@
     {
         "merged": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/font_ubuntu_light.xml.flat",
+        "source": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/src/main/res/font/ubuntu_light.xml"
     },
     {
         "merged": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
