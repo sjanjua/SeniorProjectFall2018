@@ -17,14 +17,11 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         val btn : Button = findViewById( R.id.loginButton )
-
-
     }
 
     fun loginButtonClicked( view : View) : Unit
     {
         val intent = Intent( this, HomePage::class.java )
-
         startActivity( intent )
     }
 }
