@@ -193,6 +193,22 @@
             ]
         },
         {
+            "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-watch-v20_values-watch-v20.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-pt_values-pt.arsc.flat",
             "map": [
                 {
@@ -220,22 +236,6 @@
                         "startOffsets": "1989",
                         "endColumns": "100",
                         "endOffsets": "2085"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-watch-v20_values-watch-v20.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/values-watch-v20/values-watch-v20.xml",
-                    "from": {
-                        "startLines": "2,5,8",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,214,385",
-                        "endLines": "4,7,10",
-                        "endColumns": "12,12,12",
-                        "endOffsets": "209,380,553"
                     }
                 }
             ]
@@ -288,6 +288,22 @@
             ]
         },
         {
+            "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-hdpi-v4_values-hdpi-v4.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-uz_values-uz.arsc.flat",
             "map": [
                 {
@@ -320,22 +336,6 @@
             ]
         },
         {
-            "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-hdpi-v4_values-hdpi-v4.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/values-hdpi-v4/values-hdpi-v4.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "6",
-                        "endColumns": "13",
-                        "endOffsets": "327"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-v18_values-v18.arsc.flat",
             "map": [
                 {
@@ -346,22 +346,6 @@
                         "startOffsets": "55",
                         "endColumns": "48",
                         "endOffsets": "99"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-v17_values-v17.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/values-v17/values-v17.xml",
-                    "from": {
-                        "startLines": "2,5,9,12,15,18,22,26,29,32,35,39,42,46",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,228,456,614,764,936,1164,1406,1577,1751,1920,2193,2393,2597",
-                        "endLines": "4,8,11,14,17,21,25,28,31,34,38,41,45,49",
-                        "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12,12,12",
-                        "endOffsets": "223,451,609,759,931,1159,1401,1572,1746,1915,2188,2388,2592,2921"
                     }
                 }
             ]
@@ -394,6 +378,22 @@
                         "startOffsets": "105,208,305,412,497,602,714,791,869,949,1056,1153,1251,1356,1459,1563,1720,1816",
                         "endColumns": "102,96,106,84,104,111,76,77,79,106,96,97,104,102,103,156,95,80",
                         "endOffsets": "203,300,407,492,597,709,786,864,944,1051,1148,1246,1351,1454,1558,1715,1811,1892"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/sarimjanjua/Documents/GitHub/SeniorProjectFall2018/Mobile/Android/app/build/intermediates/res/merged/debug/values-v17_values-v17.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/sarimjanjua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f4aecf2687a7a7397a52b443b6333dd6/res/values-v17/values-v17.xml",
+                    "from": {
+                        "startLines": "2,5,9,12,15,18,22,26,29,32,35,39,42,46",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,228,456,614,764,936,1164,1406,1577,1751,1920,2193,2393,2597",
+                        "endLines": "4,8,11,14,17,21,25,28,31,34,38,41,45,49",
+                        "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12,12,12",
+                        "endOffsets": "223,451,609,759,931,1159,1401,1572,1746,1915,2188,2388,2592,2921"
                     }
                 }
             ]

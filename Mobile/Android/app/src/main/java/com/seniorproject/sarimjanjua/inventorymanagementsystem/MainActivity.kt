@@ -3,14 +3,11 @@ package com.seniorproject.sarimjanjua.inventorymanagementsystem
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< HEAD
+
 import android.support.constraint.ConstraintLayout
 import android.widget.Button
-
-=======
 import android.view.View
-import android.widget.Button
->>>>>>> Sarim
+
 
 class MainActivity : AppCompatActivity()
 {
