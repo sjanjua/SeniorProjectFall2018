@@ -89,3 +89,12 @@ C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\In
 C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\obj\Debug\Inventory.csproj.CopyComplete
 C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\obj\Debug\Inventory.dll
 C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\obj\Debug\Inventory.pdb
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\System.Net.Http.Formatting.dll
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\System.Web.Http.dll
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\System.Web.Http.WebHost.dll
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\System.Net.Http.Formatting.xml
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\System.Web.Http.xml
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\System.Web.Http.WebHost.xml
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\MySql.Data.dll
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\Google.Protobuf.dll
+C:\chaitanya\Git Repository\chaitanyakumar\SeniorProjectFall2018\Website\Code\Inventory\Inventory\bin\MySql.Data.xml
