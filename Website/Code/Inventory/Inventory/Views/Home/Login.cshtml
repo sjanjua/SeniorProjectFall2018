@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<h2>@ViewBag.Title</h2>
+<style>
+    label{
+        padding: 5px;
+        display: inline;
+        text-align: right;
+    }
+</style>
+<div class="container">
+    <div class="block">
+        <label for="userName"><b>User Name:</b></label>
+        <input id="userNameField" type="text" required /><br />
+    </div>
+    <div class="block">
+        <label for="password"><b>Password: </b></label>
+        <input id="passwordField" type="password" required /><br />
+    </div>
+    <input id="loginButton" type="button" value="Login" />
+    <hyperlink>@Html.ActionLink("SignUp", "SignUp", "Home")</hyperlink>
+</div>
+
