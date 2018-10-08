@@ -26,5 +26,17 @@ namespace Inventory.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Your Login page.";
+            return View();
+        }
+
+        public ActionResult SignUp()
+        {
+            ViewBag.Message = "Sign Up page.";
+            return View();
+        }
     }
 }
