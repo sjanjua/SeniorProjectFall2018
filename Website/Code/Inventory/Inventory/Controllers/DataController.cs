@@ -22,7 +22,6 @@ namespace Inventory.Controllers
 
             try
             {
-
                 string sqlCmd = "select * from Shippers";
 
                 MySqlDataAdapter adr = new MySqlDataAdapter(sqlCmd, cn);

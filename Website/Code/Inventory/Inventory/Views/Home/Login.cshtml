@@ -3,23 +3,30 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<style>
-    label{
-        padding: 5px;
-        display: inline;
-        text-align: right;
-    }
-</style>
-<div class="container">
-    <div class="block">
-        <label for="userName"><b>User Name:</b></label>
-        <input id="userNameField" type="text" required /><br />
+<div class="row">
+    <div class="col-md-2">
+        <label for="userName">User Name:</label>
     </div>
-    <div class="block">
-        <label for="password"><b>Password: </b></label>
-        <input id="passwordField" type="password" required /><br />
+    <div class="col-md-2">
+        <input id="userNameField" type="text" required />
     </div>
-    <input id="loginButton" type="button" value="Login" />
-    <hyperlink>@Html.ActionLink("SignUp", "SignUp", "Home")</hyperlink>
 </div>
+<div class="row">
+    <div class="col-md-2">
+        <label for="password">Password:</label>
+    </div>
+    <div class="col-md-2">
+        <input id="passwordField" type="password" required />
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-2">
+        <input id="loginButton" type="button" value="Login" />
+    </div>
+    <div class="col-md-2">
+        <hyperlink>@Html.ActionLink("SignUp", "SignUp", "Home")</hyperlink>
+    </div>
+</div>
+
 
