@@ -29,6 +29,8 @@ namespace Inventory.Controllers
                 DataTable dt = new DataTable();
                 adr.Fill(dt); //opens and closes the DB connection automatically !! (fetches from pool)
 
+                dt.TableName = "Shippers";
+
                 DataSet dsData = new DataSet();
                 dsData.Tables.Add(dt);
 
