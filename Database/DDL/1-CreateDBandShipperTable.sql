@@ -21,9 +21,9 @@ CREATE TABLE shipper (
 # ---------------------------------------------------------------------- #
 
 TRUNCATE TABLE Shipper;
-INSERT INTO Shipper (ShipperID, ShipperName, Phone, ActiveYN)
+INSERT INTO shipper (ShipperID, ShipperName, Phone, ActiveYN)
 VALUES(1, 'Speedy Express', '(503) 555-9831', 'Y');
-INSERT INTO Shipper (ShipperID, ShipperName, Phone, ActiveYN)
+INSERT INTO shipper (ShipperID, ShipperName, Phone, ActiveYN)
 VALUES(2, 'United Package', '(503) 555-3199', 'Y');
-INSERT INTO Shipper (ShipperID, ShipperName, Phone, ActiveYN)
+INSERT INTO shipper (ShipperID, ShipperName, Phone, ActiveYN)
 VALUES(3, 'Federal Shipping', '(503) 555-9931', 'Y');
