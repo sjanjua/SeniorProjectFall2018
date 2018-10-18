@@ -164,15 +164,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Utils\Repository\MySQLRepository.cs" />
+    <Compile Include="App_Code\Utils\Repository\ShipperRepository.cs" />
+    <Compile Include="App_Code\Utils\DBUtils.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ShipperController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Shipper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,11 +222,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Shipper\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\Utils\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

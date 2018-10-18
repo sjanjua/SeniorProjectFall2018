@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
+namespace Inventory.Models
+{
+    public class Shipper
+    {
+        [ScaffoldColumn(false)]
+        public int ShipperID { get; set; }
+        [DisplayName("Shipper")]
+        public string ShipperName { get; set; }
+        [DisplayName("Phone No")]
+        public string Phone { get; set; }
+        [DisplayName("Status")]
+        public string ActiveYN { get; set; }
+    }
+}
