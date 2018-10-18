@@ -13,30 +13,9 @@ namespace Inventory.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult ShowChart()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            ViewBag.Message = "Your Login page.";
-            return View();
-        }
-
-        public ActionResult SignUp()
-        {
-            ViewBag.Message = "Sign Up page.";
-            return View();
+            return PartialView("ChartView");
         }
     }
 }

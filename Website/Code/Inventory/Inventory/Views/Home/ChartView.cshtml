@@ -1,0 +1,9 @@
+﻿@{
+    var myChart = new Chart(width: 900, height: 400, theme: ChartTheme.Green)
+        .AddTitle("Monthwise Order")
+        .AddSeries(
+            name: "Month",
+            xValue: new[] { "January", "February", "March", "April", "May" },
+            yValues: new[] { "2", "6", "4", "5", "3" })
+        .Write();
+}

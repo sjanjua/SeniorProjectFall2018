@@ -3,42 +3,61 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Home")</li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Inventory Management System</a>
+    </nav>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-2">
+                <a class="btn" href="#" onclick="location.href='@Url.Action("Index", "Home")'" role="button">
+                    <i class="fa fa-home fa-2x"></i>
+                </a>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Administration</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Maintenance</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Shipper", "Maintenance")'">Shipper</a>
+                            <a class="dropdown-item" href="#">Supplier</a>
+                            <a class="dropdown-item" href="#">Customer</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Purchase</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Order</a>
+                    </li>
                 </ul>
+
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy;2018 - Senior Project Fall</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $('.tree-toggle').click(function () {
+            $(this).parent().children('ul.tree').toggle(200);
+        });
+        $(function () {
+            $('.tree-toggle').parent().children('ul.tree').toggle();
+        })
+    </script>
 </body>
 </html>
