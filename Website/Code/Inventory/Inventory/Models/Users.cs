@@ -20,9 +20,5 @@ namespace Inventory.Models
         public String Zip_Code { get; set; }
         public String Email { get; set; }
 
-        public void Add_Button_Click(object sender, EventArgs e)
-        {
-            var name = "";
-        }
     }
 }
