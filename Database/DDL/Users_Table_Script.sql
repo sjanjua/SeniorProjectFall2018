@@ -1,15 +1,15 @@
 use inventory;
 
-CREATE TABLE users (
-userId char(20) NOT NULL PRIMARY KEY
-, password char(20) NOT NULL
-, first_name char(25) NOT NULL
-, last_name char(25) NOT NULL
-, phone_number char(10) NOT NULL
-, street char(25) NOT NULL
-, city char(25) NOT NULL
-, zip_code char(5) NOT NULL
-, email char(40) NOT NULL
-, user_type char(1) NOT NULL
+CREATE TABLE Users (
+UserID char(20) NOT NULL PRIMARY KEY
+, Password char(20) NOT NULL
+, First_Name char(25) NOT NULL
+, Last_Name char(25) NOT NULL
+, Phone_Number char(10) NOT NULL
+, Street char(25) NOT NULL
+, City char(25) NOT NULL
+, Zip_Code char(5) NOT NULL
+, Email char(40) NOT NULL
+, User_Type char(1) NOT NULL
 );
 
