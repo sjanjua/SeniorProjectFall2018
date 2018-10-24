@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Inventory.Controllers
 {
+    
     public class AccountController : Controller
     {
         // GET: Account
@@ -20,6 +21,5 @@ namespace Inventory.Controllers
             ViewBag.Message = "Sign Up page.";
             return View();
         }
-
     }
 }

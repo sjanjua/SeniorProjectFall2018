@@ -5,6 +5,12 @@
 
 <h1>Create an Account</h1>
 
+<script type="text/html">
+    function Add_Button_Click(){
+        Users.Add_Button_Click();
+    }
+</script>
+
 <h3>Enter Personal Information</h3>
 <div class="row">
     <div class="col-md-2">
@@ -90,11 +96,14 @@
     </div>
 </div>
 <br />
-<div class="row">
-    <div class="col-md-2">
-        <input id="addButton" type="button" value="Add" />
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    <div class="row">
+        <div class="col-md-2">
+            <input runat="server" id="addButton" type="button" value="Add" onclick="Users.Add_Button_Click" />
+        </div>
+        <div class="col-md-2">
+            <input id="cancelButton" type="button" value="Cancel" />
+        </div>
     </div>
-    <div class="col-md-2">
-        <input id="cancelButton" type="button" value="Cancel" />
-    </div>
-</div>
+</asp:ScriptManager>
+

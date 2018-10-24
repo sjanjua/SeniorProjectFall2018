@@ -101,6 +101,21 @@ namespace Inventory.DataLayer.Repository
             }
             return list;
         }
+
+        protected void AddRecord(MySqlCommand command)
+        {
+            command.Connection = _connection;
+            _connection.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        } 
     }
 
 }
