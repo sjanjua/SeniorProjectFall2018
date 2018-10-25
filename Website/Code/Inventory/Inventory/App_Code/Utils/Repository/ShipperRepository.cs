@@ -15,8 +15,6 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<Shipper> GetAll()
         {
-            // DBAs across the country are having strokes 
-            //  over this next command!
             using (var command = new MySqlCommand("SELECT * FROM shipper"))
             {
                 return GetRecords(command);
