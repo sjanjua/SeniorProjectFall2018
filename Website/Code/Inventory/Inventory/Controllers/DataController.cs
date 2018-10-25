@@ -27,7 +27,7 @@ namespace Inventory.Controllers
                 MySqlDataAdapter adr = new MySqlDataAdapter(sqlCmd, cn);
                 adr.SelectCommand.CommandType = CommandType.Text;
                 DataTable dt = new DataTable();
-                adr.Fill(dt); //opens and closes the DB connection automatically !! (fetches from pool)
+                adr.Fill(dt); 
 
                 dt.TableName = "Shippers";
 
