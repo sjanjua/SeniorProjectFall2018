@@ -166,6 +166,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Security\InventoryAuthorize.cs" />
+    <Compile Include="App_Code\Security\SessionContext.cs" />
     <Compile Include="App_Code\Utils\Repository\MySQLRepository.cs" />
     <Compile Include="App_Code\Utils\Repository\ShipperRepository.cs" />
     <Compile Include="App_Code\Utils\DBUtils.cs" />
@@ -262,7 +264,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
-    <Content Include="Views\Maintenance\Shipper.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -275,6 +276,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\ChartView.cshtml" />
     <Content Include="Views\Home\Web.config" />
+    <Content Include="Views\Maintenance\Shipper.cshtml" />
+    <Content Include="Views\Maintenance\Shippers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

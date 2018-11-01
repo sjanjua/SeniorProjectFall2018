@@ -24,7 +24,7 @@ namespace Inventory.DataLayer.Repository
         public Shipper GetById(string id)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("SELECT * FROM Shipper WHERE ShipperId = @id"))
+            using (var command = new MySqlCommand("SELECT * FROM shipper WHERE ShipperId = @id"))
             {
                 command.Parameters.Add(new MySqlParameter("id", id));
                 return GetRecord(command);
