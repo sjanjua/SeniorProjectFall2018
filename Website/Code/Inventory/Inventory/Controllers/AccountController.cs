@@ -26,19 +26,28 @@ namespace Inventory.Controllers
             return View();
         }
 
-        public ActionResult ValidateLogin(String userNameField, String Password)
+        [HttpPost]
+        public ActionResult ValidateLogin(Users user)
         {
-            Users users = null;
-            using (MySqlConnection conn = DBUtils.GetConnection())
+            if (ModelState.IsValid)
             {
-                UsersRepository repo = new UsersRepository(conn);
-                users = repo.GetById(userNameField);
+                Users users = null;
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    UsersRepository repo = new UsersRepository(conn);
+                    users = repo.GetById(user.UserID);
+                }
+                if (users.Password.Equals(user.Password))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else {
+                    ModelState.AddModelError(string.Empty, "Invalid Login Information.");
+                    return View("Login", user);
+                }
             }
-            if (users.Password.Equals(Password))
-            {
-                return View();
-            }
-            return null;
+
+            return View("Login", user);
         }
     }
 }
