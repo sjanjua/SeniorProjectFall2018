@@ -5,11 +5,11 @@
 @model Inventory.Models.Users
 
 <h1>Create an Account</h1>
-
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
 <h3>Enter Personal Information</h3>
 <div class="row">
     <div class="col-md-2">
-       <label>First Name</label>
+        <label>First Name</label>
     </div>
     <div class="col-md-2">
         @Html.TextBoxFor(m => m.First_Name)
@@ -67,7 +67,7 @@
 <h3>Enter Login Information</h3>
 <div class="row">
     <div class="col-md-2">
-       <label>User Name</label>
+        <label>User Name</label>
     </div>
     <div class="col-md-2">
         @Html.TextBoxFor(m => m.UserID)
@@ -92,12 +92,12 @@
 </div>
 <br />
 
-    <div class="row">
-        <div class="col-md-2">
-            <input id="addButton" type="submit" value="Add" formaction=@Url.Action("AddUser") formmethod="post"  />
-        </div>
-        <div class="col-md-2">
-            <input id="cancelButton" type="button" value="Cancel" />
-        </div>
+<div class="row">
+    <div class="col-md-2">
+        <input id="addButton" type="submit" value="Add" formaction=@Url.Action("AddUser") formmethod="post" />
     </div>
+    <div class="col-md-2">
+        <input id="cancelButton" type="button" value="Cancel" />
+    </div>
+</div>
 

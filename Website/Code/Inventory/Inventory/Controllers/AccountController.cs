@@ -14,10 +14,10 @@ namespace Inventory.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public ActionResult Login(String userNameField, String password)
+        public ActionResult Login()
         {
             ViewBag.Message = "Your Login page.";
-            return View(userNameField, password);
+            return View();
         }
 
         public ActionResult SignUp()

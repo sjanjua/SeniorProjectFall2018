@@ -19,5 +19,16 @@ namespace Inventory
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
             );
         }
+
+        public static void ValidateRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resourcse}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "Validate",
+                url: "{controller}/{action}/{id}",
+                defaults: new {controller = "Account", action = "ValidateLogin", id = UrlParameter.Optional }
+                );
+        }
     }
 }
