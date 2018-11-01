@@ -7,12 +7,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Inventory.DataLayer.Repository;
+using Inventory.Security;
+using System.Web.Security;
 
 namespace Inventory.Controllers
 {
     
     public class AccountController : Controller
     {
+        SessionContext context = new SessionContext();
+
         // GET: Account
         public ActionResult Login()
         {
@@ -39,6 +43,7 @@ namespace Inventory.Controllers
                 }
                 if (users.Password_Field.Equals(user.Password_Field))
                 {
+                    context.SetAuthenticationToken(user.UserID.ToString(), false, user);
                     return RedirectToAction("Index", "Home");
                 }
                 else {
@@ -73,6 +78,12 @@ namespace Inventory.Controllers
                 }
             }
             return View("Login", user);
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
         }
     }
 }

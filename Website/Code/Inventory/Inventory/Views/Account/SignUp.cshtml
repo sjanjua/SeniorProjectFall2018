@@ -94,8 +94,13 @@
 
 <div class="row">
     <div class="col-md-2">
-        <input id="addButton" type="submit" value="Add" formaction=@Url.Action("AddUser") formmethod="post" />
+        <input id="addButton" type="submit" value="Add" formaction=@Url.Action("ValidateLogin") formmethod="post" />
     </div>
+    @* Button to add new user *@
+    <div class="col-md-2">
+        <input id="addButton" type="submit" value="Add" formaction=@Url.Action("ValidateLogin") formmethod="post" />
+    </div>
+    @* Button to cancel signing up a user *@
     <div class="col-md-2">
         <input id="cancelButton" type="button" value="Cancel" />
     </div>
