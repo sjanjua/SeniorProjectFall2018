@@ -49,5 +49,30 @@ namespace Inventory.Controllers
 
             return View("Login", user);
         }
+
+        [HttpPost]
+        public ActionResult AddUser(Users user)
+        {
+            if (ModelState.IsValid)
+            {
+                Users users = null;
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    UsersRepository repo = new UsersRepository(conn);
+                    Dictionary<String, Object> hash = new Dictionary<String, Object>();
+                    hash.Add("UserID", user.UserID);
+                    hash.Add("Password_Field", user.Password_Field);
+                    hash.Add("First_Name", user.First_Name);
+                    hash.Add("Last_Name", user.Last_Name);
+                    hash.Add("Phone_Number", user.Phone_Number);
+                    hash.Add("Street", user.Street);
+                    hash.Add("City", user.City);
+                    hash.Add("Zip_Code", user.Zip_Code);
+                    hash.Add("Email", user.Email);
+                    repo.SetAll(hash);
+                }
+            }
+            return View("Login", user);
+        }
     }
 }
