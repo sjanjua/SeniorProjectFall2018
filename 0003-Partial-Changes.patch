@@ -1,0 +1,44 @@
+From 22cc6ba7f623cd071a8702ab0d84b4538ba32785 Mon Sep 17 00:00:00 2001
+From: KyleParker14 <parkerk2@students.rowan.edu>
+Date: Wed, 24 Oct 2018 19:28:55 -0400
+Subject: [PATCH 3/3] Partial Changes
+
+---
+ Website/Code/Inventory/Inventory/Models/Users.cs             | 4 ----
+ Website/Code/Inventory/Inventory/Views/Account/SignUp.cshtml | 5 -----
+ 2 files changed, 9 deletions(-)
+
+diff --git a/Website/Code/Inventory/Inventory/Models/Users.cs b/Website/Code/Inventory/Inventory/Models/Users.cs
+index b9be934..8b72380 100644
+--- a/Website/Code/Inventory/Inventory/Models/Users.cs
++++ b/Website/Code/Inventory/Inventory/Models/Users.cs
+@@ -20,9 +20,5 @@ namespace Inventory.Models
+         public String Zip_Code { get; set; }
+         public String Email { get; set; }
+ 
+-        public void Add_Button_Click(object sender, EventArgs e)
+-        {
+-            var name = "";
+-        }
+     }
+ }
+\ No newline at end of file
+diff --git a/Website/Code/Inventory/Inventory/Views/Account/SignUp.cshtml b/Website/Code/Inventory/Inventory/Views/Account/SignUp.cshtml
+index 6bfc8fd..7056784 100644
+--- a/Website/Code/Inventory/Inventory/Views/Account/SignUp.cshtml
++++ b/Website/Code/Inventory/Inventory/Views/Account/SignUp.cshtml
+@@ -5,11 +5,6 @@
+ 
+ <h1>Create an Account</h1>
+ 
+-<script type="text/html">
+-    function Add_Button_Click(){
+-        Users.Add_Button_Click();
+-    }
+-</script>
+ 
+ <h3>Enter Personal Information</h3>
+ <div class="row">
+-- 
+2.19.1.windows.1
+

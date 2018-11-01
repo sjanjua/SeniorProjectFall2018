@@ -166,7 +166,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Utils\Repository\UsersRepository.cs" />
     <Compile Include="App_Code\Utils\Repository\MySQLRepository.cs" />
     <Compile Include="App_Code\Utils\Repository\ShipperRepository.cs" />
     <Compile Include="App_Code\Utils\DBUtils.cs" />
@@ -178,6 +177,7 @@
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="App_Code\Utils\Repository\UsersRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

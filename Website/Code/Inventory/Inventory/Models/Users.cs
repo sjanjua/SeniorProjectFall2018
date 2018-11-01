@@ -12,6 +12,7 @@ namespace Inventory.Models
     public class Users
     {
         public String UserID { get; set; }
+        public String Password { get; set; }
         public String First_Name { get; set; }
         public String Last_Name { get; set; }
         public String Phone_Number { get; set; }
