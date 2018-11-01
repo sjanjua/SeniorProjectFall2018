@@ -12,7 +12,7 @@
         <label>First Name</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.First_Name)
+        @Html.TextBoxFor(m => m.First_Name, new { MaxLength = 25 })
     </div>
 </div>
 <div class="row">
@@ -20,7 +20,7 @@
         <label>Last Name</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Last_Name)
+        @Html.TextBoxFor(m => m.Last_Name, new { MaxLength = 25 })
     </div>
 </div>
 <div class="row">
@@ -28,7 +28,7 @@
         <label>Phone</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Phone_Number)
+        @Html.TextBoxFor(m => m.Phone_Number, new { MaxLength = 10 })
     </div>
 </div>
 <div class="row">
@@ -36,7 +36,7 @@
         <label>Street</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Street)
+        @Html.TextBoxFor(m => m.Street, new { MaxLength = 25 })
     </div>
 </div>
 <div class="row">
@@ -44,7 +44,7 @@
         <label>City</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.City)
+        @Html.TextBoxFor(m => m.City, new { MaxLength = 25 })
     </div>
 </div>
 <div class="row">
@@ -52,7 +52,7 @@
         <label>Zip Code</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Zip_Code)
+        @Html.TextBoxFor(m => m.Zip_Code, new { MaxLength = 5 })
     </div>
 </div>
 <div class="row">
@@ -60,7 +60,7 @@
         <label>Email</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { MaxLength = 40 })
     </div>
 </div>
 
@@ -70,7 +70,7 @@
         <label>User Name</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.UserID)
+        @Html.TextBoxFor(m => m.UserID, new { MaxLength = 20 })
     </div>
 </div>
 <div class="row">
@@ -79,7 +79,7 @@
     </div>
     <div class="col-md-2">
 
-        @Html.TextBoxFor(m => m.Password_Field)
+        @Html.TextBoxFor(m => m.Password_Field, new { MaxLength = 20 })
     </div>
 </div>
 <div class="row">
@@ -87,7 +87,7 @@
         <label>Re-enter Password</label>
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.Password_Field)
+        @Html.TextBoxFor(m => m.Password_Field, new { MaxLength = 20 })
     </div>
 </div>
 <br />
