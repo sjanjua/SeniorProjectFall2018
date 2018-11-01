@@ -26,9 +26,11 @@
 </div>
 <br />
 <div class="row">
+    @* Button to login a user *@
     <div class="col-md-2">
         <input id="loginButton" type="submit" value="Login" maxlength="20" formaction=@Url.Action("ValidateLogin") formmethod="post" />
     </div>
+    @* Button to sign up a user *@
     <div class="col-md-2">
         <input id="btnSignUp" type="button" value="SignUp" maxlength="20" onclick="location.href='@Url.Action("SignUp", "Account")'" />
     </div>
