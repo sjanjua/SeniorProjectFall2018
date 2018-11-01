@@ -10,7 +10,7 @@ namespace Inventory.Security
 {
     public class SessionContext
     {
-        public void SetAuthenticationToken(string name, bool isPersistant, Users userData)
+        public void SetAuthenticationToken(string name, bool isPersistant, Logon userData)
         {
             string data = null;
             if (userData != null)
@@ -28,9 +28,9 @@ namespace Inventory.Security
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
 
-        public Users GetUserData()
+        public Logon GetUserData()
         {
-            Users userData = null;
+            Logon userData = null;
 
             try
             {
@@ -39,7 +39,7 @@ namespace Inventory.Security
                 {
                     FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
 
-                    userData = new JavaScriptSerializer().Deserialize(ticket.UserData, typeof(Users)) as Users;
+                    userData = new JavaScriptSerializer().Deserialize(ticket.UserData, typeof(Logon)) as Logon;
                 }
             }
             catch (Exception ex)

@@ -31,14 +31,14 @@ namespace Inventory.Controllers
         }
 
         [HttpPost]
-        public ActionResult ValidateLogin(Users user)
+        public ActionResult ValidateLogin(Logon user)
         {
             if (ModelState.IsValid)
             {
-                Users users = null;
+                Logon users = null;
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
-                    UsersRepository repo = new UsersRepository(conn);
+                    LogonRepository repo = new LogonRepository(conn);
                     users = repo.GetById(user.UserID);
                 }
                 if (users.Password_Field.Equals(user.Password_Field))
@@ -58,9 +58,9 @@ namespace Inventory.Controllers
         [HttpPost]
         public ActionResult AddUser(Users user)
         {
+            Logon logIn = null;
             if (ModelState.IsValid)
             {
-                Users users = null;
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     UsersRepository repo = new UsersRepository(conn);
@@ -75,9 +75,18 @@ namespace Inventory.Controllers
                     hash.Add("Zip_Code", user.Zip_Code);
                     hash.Add("Email", user.Email);
                     repo.SetAll(hash);
+                    LogonRepository repo1 = new LogonRepository(conn);
+                    logIn = repo1.GetById(user.UserID);
                 }
             }
-            return View("Login", user);
+            if (logIn != null)
+            {
+                return View("Login", logIn);
+            }
+            else
+            {
+                return View("SignUp");
+            }
         }
 
         public ActionResult Logout()
