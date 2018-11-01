@@ -13,8 +13,8 @@ namespace Inventory.Models
     {
         [Display(Name ="User Name"), Required(ErrorMessage = "Please enter User Name")]
         public String UserID { get; set; }
-        [Display(Name = "Password"), Required(ErrorMessage = "Please enter Password"), DataType(DataType.Password)]
-        public String Password { get; set; }
+        [Display(Name = "Password_Field"), Required(ErrorMessage = "Please enter Password"), DataType(DataType.Password)]
+        public String Password_Field { get; set; }
         public String First_Name { get; set; }
         public String Last_Name { get; set; }
         public String Phone_Number { get; set; }
