@@ -52,10 +52,10 @@ namespace Inventory.DataLayer.Repository
             }
             else
             {
-                using (var command = new MySqlCommand("INSERT INTO Users UserID = @id, Password = @password, First_Name = @firstName, Last_Name = @lastName, Phone_Number = @phoneNumber, Street = @street, City = @city, Zip_Code = @zipCode, Email = @email"))
+                using (var command = new MySqlCommand("INSERT INTO Users (UserID, Password_Field, First_Name, Last_Name, Phone_Number, Street, City, Zip_Code, Email, User_Type) Values(@id, @password, @firstName, @lastName, @phoneNumber, @street, @city, @zipCode, @email, @userType);"))
                 {
                     command.Parameters.Add(new MySqlParameter("id", (String)hash["UserID"]));
-                    command.Parameters.Add(new MySqlParameter("password", (String)hash["Password"]));
+                    command.Parameters.Add(new MySqlParameter("password", (String)hash["Password_Field"]));
                     command.Parameters.Add(new MySqlParameter("firstName", (String)hash["First_Name"]));
                     command.Parameters.Add(new MySqlParameter("lastName", (String)hash["Last_Name"]));
                     command.Parameters.Add(new MySqlParameter("phoneNumber", (String)hash["Phone_Number"]));
@@ -63,6 +63,7 @@ namespace Inventory.DataLayer.Repository
                     command.Parameters.Add(new MySqlParameter("city", (String)hash["City"]));
                     command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["Zip_Code"]));
                     command.Parameters.Add(new MySqlParameter("email", (String)hash["Email"]));
+                    command.Parameters.Add(new MySqlParameter("userType", "C"));
                     AddRecord(command);
                 }
             }

@@ -2,102 +2,102 @@
 @{
     ViewBag.title = "SignUp";
 }
-<h1>Create an Account</h1>
+@model Inventory.Models.Users
 
+<h1>Create an Account</h1>
 
 <h3>Enter Personal Information</h3>
 <div class="row">
     <div class="col-md-2">
-        <label for="firstName">First Name:</label>
+        @Html.LabelFor(m => m.First_Name)
     </div>
     <div class="col-md-2">
-        <input id="firstName" type="text" size="25" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2">
-        <label for="lastName">Last Name:</label>
-    </div>
-    <div class="col-md-2">
-        <input id="lastName" type="text" size="25" />
+        @Html.TextBoxFor(m => m.First_Name)
     </div>
 </div>
 <div class="row">
     <div class="col-md-2">
-        <label for="phoneNumber">Phone Number:</label>
+        @Html.LabelFor(m => m.Last_Name)
     </div>
     <div class="col-md-2">
-        <input id="phoneNumber" type="tel" size="10" inputmode="numeric" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2">
-        <label for="street">Street:</label>
-    </div>
-    <div class="col-md-2">
-        <input id="street" type="text" size="25" />
+        @Html.TextBoxFor(m => m.Last_Name)
     </div>
 </div>
 <div class="row">
     <div class="col-md-2">
-        <label for="city">City:</label>
+        @Html.LabelFor(m => m.Phone_Number)
     </div>
     <div class="col-md-2">
-        <input id="city" type="text" size="25" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2">
-        <label for="zip_code">Zip Code:</label>
-    </div>
-    <div class="col-md-2">
-        <input id="zip_code" type="text" size="5" />
+        @Html.TextBoxFor(m => m.Phone_Number)
     </div>
 </div>
 <div class="row">
     <div class="col-md-2">
-        <label for="email">Email:</label>
+        @Html.LabelFor(m => m.Street)
     </div>
     <div class="col-md-2">
-        <input id="email" type="email" size="40" inputmode="email" />
+        @Html.TextBoxFor(m => m.Street)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        @Html.LabelFor(m => m.City)
+    </div>
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.City)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        @Html.LabelFor(m => m.Zip_Code)
+    </div>
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.Zip_Code)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        @Html.LabelFor(m => m.Email)
+    </div>
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.Email)
     </div>
 </div>
 
 <h3>Enter Login Information</h3>
 <div class="row">
     <div class="col-md-2">
-        <label for="userName">User Name:</label>
+        @Html.LabelFor(m => m.UserID)
     </div>
     <div class="col-md-2">
-        <input id="userNameField" type="text" required size="20" />
+        @Html.TextBoxFor(m => m.UserID)
     </div>
 </div>
 <div class="row">
     <div class="col-md-2">
-        <label for="password">Password: </label>
+        @Html.LabelFor(m => m.Password_Field)
     </div>
     <div class="col-md-2">
 
-        <input id="passwordField" type="password" required size="20" />
+        @Html.TextBoxFor(m => m.Password_Field)
     </div>
 </div>
 <div class="row">
     <div class="col-md-2">
-        <label for="password">Re-Enter Password: </label>
+        @Html.LabelFor(m => m.Password_Field)
     </div>
     <div class="col-md-2">
-        <input id="passwordField1" type="password" required size="20" />
+        @Html.TextBoxFor(m => m.Password_Field)
     </div>
 </div>
 <br />
-<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+
     <div class="row">
         <div class="col-md-2">
-            <input runat="server" id="addButton" type="button" value="Add" onclick="Users.Add_Button_Click" />
+            <input id="addButton" type="submit" value="Add" formaction=@Url.Action("AddUser") formmethod="post"  />
         </div>
         <div class="col-md-2">
             <input id="cancelButton" type="button" value="Cancel" />
         </div>
     </div>
-</asp:ScriptManager>
 

@@ -108,7 +108,7 @@ namespace Inventory.DataLayer.Repository
             _connection.Open();
             try
             {
-                command.ExecuteNonQuery();
+                command.ExecuteReader();
                 _connection.Close();
             }
             finally
