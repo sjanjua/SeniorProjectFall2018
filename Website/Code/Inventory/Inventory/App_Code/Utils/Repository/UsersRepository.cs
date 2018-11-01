@@ -49,7 +49,8 @@ namespace Inventory.DataLayer.Repository
                     command.Parameters.Add(new MySqlParameter("email", (String)hash["Email"]));
                     AddRecord(command);
                 }
-            } else
+            }
+            else
             {
                 using (var command = new MySqlCommand("INSERT INTO Users UserID = @id, Password = @password, First_Name = @firstName, Last_Name = @lastName, Phone_Number = @phoneNumber, Street = @street, City = @city, Zip_Code = @zipCode, Email = @email"))
                 {
@@ -84,5 +85,5 @@ namespace Inventory.DataLayer.Repository
         }
 
     }
-    
+
 }
