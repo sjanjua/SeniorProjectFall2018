@@ -37,7 +37,7 @@ namespace Inventory.Controllers
                     UsersRepository repo = new UsersRepository(conn);
                     users = repo.GetById(user.UserID);
                 }
-                if (users.Password.Equals(user.Password))
+                if (users.Password_Field.Equals(user.Password_Field))
                 {
                     return RedirectToAction("Index", "Home");
                 }

@@ -74,6 +74,7 @@ namespace Inventory.DataLayer.Repository
             return new Users
             {
                 UserID = reader.GetString("UserID"),
+                Password_Field = reader.GetString("Password_Field"),
                 First_Name = reader.GetString("First_Name"),
                 Last_Name = reader.GetString("Last_Name"),
                 Phone_Number = reader.GetString("Phone_Number"),
