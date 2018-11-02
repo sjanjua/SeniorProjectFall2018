@@ -42,5 +42,14 @@ namespace Inventory.DataLayer.Repository
                 ActiveYN = reader.GetString("ActiveYN")
             };
         }
+
+        public void Delete(String id)
+        {
+            using(var command = new MySqlCommand("DELETE FROM shipper WHERE ShipperId = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("id", id));
+                ExecuteStoredProc(command);
+            }
+        }
     }
 }

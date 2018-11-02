@@ -15,6 +15,8 @@ namespace Inventory.Models
         public String UserID { get; set; }
         [Display(Name = "Password"), Required(ErrorMessage = "Please enter Password"), DataType(DataType.Password)]
         public String Password_Field { get; set; }
+        [Display(Name = "Re-Enter Password"), Required(ErrorMessage = "Please re-enter Password"), DataType(DataType.Password)]
+        public String Password_Field1 { get; set; }
         [Display(Name = "First Name"), Required(ErrorMessage = "Please enter First Name")]
         public String First_Name { get; set; }
         [Display(Name = "Last Name"), Required(ErrorMessage = "Please enter Last Name")]
