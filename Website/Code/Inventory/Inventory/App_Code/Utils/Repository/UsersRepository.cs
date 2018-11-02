@@ -69,6 +69,16 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
+        public void changeUserRole(String userID, char userType)
+        {
+            using (var command = new MySqlCommand("Update Users SET User_Type = @type WHERE UserID = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("type", userType));
+                command.Parameters.Add(new MySqlParameter("id", userID));
+                AddRecord(command);
+            }
+        }
+
 
         public override Users PopulateRecord(MySqlDataReader reader)
         {
