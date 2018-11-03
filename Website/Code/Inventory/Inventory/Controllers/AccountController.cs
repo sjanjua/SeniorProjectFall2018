@@ -77,8 +77,7 @@ namespace Inventory.Controllers
                     else
                     {
                     if (ModelState.IsValid)
-                    {
-                        
+                    {                       
                             Dictionary<String, Object> hash = new Dictionary<String, Object>();
                             hash.Add("UserName", user.UserName);
                             hash.Add("Password", user.Password_Field);
