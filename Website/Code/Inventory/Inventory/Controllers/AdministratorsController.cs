@@ -23,14 +23,14 @@ namespace Inventory.Controllers
         [HttpPost]
         public ActionResult ChangeRole(Administrators admin)
         {
-            if (admin.UserID != null)
+            if (admin.UserName != null)
             {
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     UsersRepository repo = new UsersRepository(conn);
-                    Users user = repo.GetById(admin.UserID);
+                    Users user = repo.GetByName(admin.UserName);
                     if (user != null) { 
-                    repo.changeUserRole(admin.UserID, admin.User_Type[0]);
+                    repo.changeUserRole(admin.UserName, admin.User_Type[0]);
                 }
                 }
             }
