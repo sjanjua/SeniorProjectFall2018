@@ -23,19 +23,19 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
-        public Users GetById(string id)
+        public Users GetByName(string name)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("SELECT * FROM user WHERE UserID = @id"))
+            using (var command = new MySqlCommand("SELECT * FROM user WHERE UserName = @name"))
             {
-                command.Parameters.Add(new MySqlParameter("id", id));
+                command.Parameters.Add(new MySqlParameter("name", name));
                 return GetRecord(command);
             }
         }
 
         public void SetAll(Dictionary<String, Object> hash)
         {
-            Users user = GetById((String)hash["UserID"]);
+            Users user = GetByName((String)hash["UserName"]);
             if (user != null)
             {
                 using (var command = new MySqlCommand("UPDATE users SET FirstName = @firstName, LastName = @lastName, PhoneNumber = @phoneNumber, Street = @street, City = @city, ZipCode = @zipCode, Email = @email WHERE UserID = @id"))

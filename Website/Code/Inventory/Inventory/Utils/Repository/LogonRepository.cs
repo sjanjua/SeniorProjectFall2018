@@ -23,7 +23,7 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
-        public Logon GetById(string name)
+        public Logon GetByName(string name)
         {
             // PARAMETERIZED QUERIES!
             using (var command = new MySqlCommand("SELECT u.*, aes_decrypt(Password,'seniorproject') as DecryptPassword FROM user u WHERE UserName = @id"))
