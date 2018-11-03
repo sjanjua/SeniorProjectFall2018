@@ -39,11 +39,11 @@ namespace Inventory.Controllers
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     LogonRepository repo = new LogonRepository(conn);
-                    users = repo.GetById(user.UserID);
+                    users = repo.GetById(user.UserName);
                 }
-                if (users.Password_Field.Equals(user.Password_Field))
+                if (users.Password.Equals(user.Password))
                 {
-                    context.SetAuthenticationToken(user.UserID.ToString(), false, user);
+                    context.SetAuthenticationToken(user.UserName.ToString(), false, user);
                     return RedirectToAction("Index", "Home");
                 }
                 else {
@@ -68,7 +68,7 @@ namespace Inventory.Controllers
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     UsersRepository repo = new UsersRepository(conn);
-                    Users isNew = repo.GetById(user.UserID);
+                    Users isNew = repo.GetById(user.UserName);
                     if (isNew != null)
                     {
                         ModelState.AddModelError("UserID", "This User Name Already Exists");
@@ -82,16 +82,16 @@ namespace Inventory.Controllers
                             Dictionary<String, Object> hash = new Dictionary<String, Object>();
                             hash.Add("UserID", user.UserID);
                             hash.Add("Password_Field", user.Password_Field);
-                            hash.Add("First_Name", user.First_Name);
-                            hash.Add("Last_Name", user.Last_Name);
-                            hash.Add("Phone_Number", user.Phone_Number);
+                            hash.Add("First_Name", user.FirstName);
+                            hash.Add("Last_Name", user.LastName);
+                            hash.Add("Phone_Number", user.PhoneNumber);
                             hash.Add("Street", user.Street);
                             hash.Add("City", user.City);
-                            hash.Add("Zip_Code", user.Zip_Code);
+                            hash.Add("Zip_Code", user.ZipCode);
                             hash.Add("Email", user.Email);
                             repo.SetAll(hash);
                             LogonRepository repo1 = new LogonRepository(conn);
-                            logIn = repo1.GetById(user.UserID);
+                            logIn = repo1.GetById(user.UserName);
                         }
                     }
                     if (logIn != null)

@@ -17,7 +17,7 @@ namespace Inventory.DataLayer.Repository
         {
             // DBAs across the country are having strokes 
             //  over this next command!
-            using (var command = new MySqlCommand("SELECT * FROM Users"))
+            using (var command = new MySqlCommand("SELECT * FROM user"))
             {
                 return GetRecords(command);
             }
@@ -26,7 +26,7 @@ namespace Inventory.DataLayer.Repository
         public Users GetById(string id)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("SELECT * FROM Users WHERE UserID = @id"))
+            using (var command = new MySqlCommand("SELECT * FROM user WHERE UserID = @id"))
             {
                 command.Parameters.Add(new MySqlParameter("id", id));
                 return GetRecord(command);
@@ -38,32 +38,32 @@ namespace Inventory.DataLayer.Repository
             Users user = GetById((String)hash["UserID"]);
             if (user != null)
             {
-                using (var command = new MySqlCommand("UPDATE Users SET First_Name = @firstName, Last_Name = @lastName, Phone_Number = @phoneNumber, Street = @street, City = @city, Zip_Code = @zipCode, Email = @email WHERE UserID = @id"))
+                using (var command = new MySqlCommand("UPDATE users SET FirstName = @firstName, LastName = @lastName, PhoneNumber = @phoneNumber, Street = @street, City = @city, ZipCode = @zipCode, Email = @email WHERE UserID = @id"))
                 {
-                    command.Parameters.Add(new MySqlParameter("firstName", (String)hash["First_Name"]));
-                    command.Parameters.Add(new MySqlParameter("lastName", (String)hash["Last_Name"]));
-                    command.Parameters.Add(new MySqlParameter("phoneNumber", (String)hash["Phone_Number"]));
+                    command.Parameters.Add(new MySqlParameter("firstName", (String)hash["FirstName"]));
+                    command.Parameters.Add(new MySqlParameter("lastName", (String)hash["LastName"]));
+                    command.Parameters.Add(new MySqlParameter("phoneNumber", (String)hash["PhoneNumber"]));
                     command.Parameters.Add(new MySqlParameter("street", (String)hash["Street"]));
                     command.Parameters.Add(new MySqlParameter("city", (String)hash["City"]));
-                    command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["Zip_Code"]));
+                    command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["ZipCode"]));
                     command.Parameters.Add(new MySqlParameter("email", (String)hash["Email"]));
                     AddRecord(command);
                 }
             }
             else
             {
-                using (var command = new MySqlCommand("INSERT INTO Users (UserID, Password_Field, First_Name, Last_Name, Phone_Number, Street, City, Zip_Code, Email, User_Type) Values(@id, @password, @firstName, @lastName, @phoneNumber, @street, @city, @zipCode, @email, @userType);"))
+                using (var command = new MySqlCommand("INSERT INTO Users (UserName, Password, FirstName, LastName, PhoneNumber, Street, City, ZipCode, Email, RoleID) Values(@username, aes_encrypt(@password,'seniorproject'), @firstName, @lastName, @phoneNumber, @street, @city, @zipCode, @email, @roleid);"))
                 {
-                    command.Parameters.Add(new MySqlParameter("id", (String)hash["UserID"]));
-                    command.Parameters.Add(new MySqlParameter("password", (String)hash["Password_Field"]));
-                    command.Parameters.Add(new MySqlParameter("firstName", (String)hash["First_Name"]));
-                    command.Parameters.Add(new MySqlParameter("lastName", (String)hash["Last_Name"]));
-                    command.Parameters.Add(new MySqlParameter("phoneNumber", (String)hash["Phone_Number"]));
+                    command.Parameters.Add(new MySqlParameter("username", (String)hash["UserName"]));
+                    command.Parameters.Add(new MySqlParameter("password", (String)hash["Password"]));
+                    command.Parameters.Add(new MySqlParameter("firstName", (String)hash["FirstName"]));
+                    command.Parameters.Add(new MySqlParameter("lastName", (String)hash["LastName"]));
+                    command.Parameters.Add(new MySqlParameter("phoneNumber", (String)hash["PhoneNumber"]));
                     command.Parameters.Add(new MySqlParameter("street", (String)hash["Street"]));
                     command.Parameters.Add(new MySqlParameter("city", (String)hash["City"]));
-                    command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["Zip_Code"]));
+                    command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["ZipCode"]));
                     command.Parameters.Add(new MySqlParameter("email", (String)hash["Email"]));
-                    command.Parameters.Add(new MySqlParameter("userType", "C"));
+                    command.Parameters.Add(new MySqlParameter("roleid", "2"));
                     AddRecord(command);
                 }
             }
@@ -71,7 +71,7 @@ namespace Inventory.DataLayer.Repository
 
         public void changeUserRole(String userID, char userType)
         {
-            using (var command = new MySqlCommand("Update Users SET User_Type = @type WHERE UserID = @id"))
+            using (var command = new MySqlCommand("Update user SET User_Type = @type WHERE UserID = @id"))
             {
                 command.Parameters.Add(new MySqlParameter("type", userType));
                 command.Parameters.Add(new MySqlParameter("id", userID));
@@ -84,14 +84,15 @@ namespace Inventory.DataLayer.Repository
         {
             return new Users
             {
-                UserID = reader.GetString("UserID"),
+                UserID = reader.GetInt32("UserID"),
+                UserName = reader.GetString("UserName"),
                 Password_Field = reader.GetString("Password_Field"),
-                First_Name = reader.GetString("First_Name"),
-                Last_Name = reader.GetString("Last_Name"),
-                Phone_Number = reader.GetString("Phone_Number"),
+                FirstName = reader.GetString("First_Name"),
+                LastName = reader.GetString("Last_Name"),
+                PhoneNumber = reader.GetString("Phone_Number"),
                 Street = reader.GetString("Street"),
                 City = reader.GetString("City"),
-                Zip_Code = reader.GetString("Zip_Code"),
+                ZipCode = reader.GetString("Zip_Code"),
                 Email = reader.GetString("Email")
             };
         }
