@@ -168,31 +168,31 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ApiOrderController.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Utils\Repository\DisplayOrderRepository.cs" />
-    <Compile Include="Utils\Repository\DisplayProductRepository.cs" />
-    <Compile Include="Utils\Repository\OrderDetailsRepository.cs" />
-    <Compile Include="Utils\Repository\OrderRepository.cs" />
-    <Compile Include="Utils\Repository\ProductRepository.cs" />
-    <Compile Include="Utils\Security\InventoryAuthorize.cs" />
-    <Compile Include="Utils\Security\SessionContext.cs" />
-    <Compile Include="Utils\Repository\CustomerRepository.cs" />
-    <Compile Include="Utils\Repository\DisplayShipperRepository.cs" />
-    <Compile Include="Utils\Repository\DisplayCustomerRepository.cs" />
-    <Compile Include="Utils\Repository\MySQLRepository.cs" />
-    <Compile Include="Utils\Repository\ShipperRepository.cs" />
-    <Compile Include="Utils\DBUtils.cs" />
+    <Compile Include="Server\Repository\DisplayOrderRepository.cs" />
+    <Compile Include="Server\Repository\DisplayProductRepository.cs" />
+    <Compile Include="Server\Repository\OrderDetailsRepository.cs" />
+    <Compile Include="Server\Repository\OrderRepository.cs" />
+    <Compile Include="Server\Repository\ProductRepository.cs" />
+    <Compile Include="Server\Security\InventoryAuthorize.cs" />
+    <Compile Include="Server\Security\SessionContext.cs" />
+    <Compile Include="Server\Repository\CustomerRepository.cs" />
+    <Compile Include="Server\Repository\DisplayShipperRepository.cs" />
+    <Compile Include="Server\Repository\DisplayCustomerRepository.cs" />
+    <Compile Include="Server\Repository\MySQLRepository.cs" />
+    <Compile Include="Server\Repository\ShipperRepository.cs" />
+    <Compile Include="Server\DBUtils.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Utils\Repository\LogonRepository.cs" />
+    <Compile Include="Server\Repository\LogonRepository.cs" />
     <Compile Include="Controllers\AdministratorsController.cs" />
     <Compile Include="Controllers\Api\ApiAccountController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\Api\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Utils\Repository\UsersRepository.cs" />
+    <Compile Include="Server\Repository\UsersRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
