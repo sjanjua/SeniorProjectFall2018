@@ -1,0 +1,135 @@
+﻿@model Inventory.Models.Administrators
+
+@{
+    ViewBag.Title = "Administrator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Administration</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Change User Roles</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.UserID, new { MaxLength = 20, Length=20 })
+            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.First_Name, htmlAttributes: new {  @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.First_Name, new { MaxLength = 25, Length = 25})
+            @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.Last_Name, new { MaxLength = 25, Length = 25 })
+            @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.User_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Administrator",
+                    Value = "Administrator"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Manager",
+                    Value = "Manager"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Customer",
+                    Value = "Customer"
+                });
+            }
+                @Html.DropDownListFor(model => model.User_Type, listItems, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User_Type, "", new { @class = "text-danger" })
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-2">
+            <input type="submit" value="Submit" class="btn btn-default" formaction=@Url.Action("ChangeRole") formmethod="post"/>
+        </div>
+    </div>
+    <br />
+</div>
+    <h2>Maintenance</h2>
+    <div class="form-horizontal">
+        <h4>Delete Shippers, Suppliers, or Customers</h4>
+        <hr />
+        <div class="row">
+            @Html.LabelFor(model => model.Maint_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @{
+                    List<SelectListItem> maintItems = new List<SelectListItem>();
+                    maintItems.Add(new SelectListItem
+                    {
+                        Text = "Shipper",
+                        Value = "Shipper"
+                    });
+                    maintItems.Add(new SelectListItem
+                    {
+                        Text = "Supplier",
+                        Value = "Supplier"
+                    });
+                    maintItems.Add(new SelectListItem
+                    {
+                        Text = "Customer",
+                        Value = "Customer"
+                    });
+                }
+                @Html.DropDownListFor(model => model.Maint_Type, maintItems, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.ShipperID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.ShipperID, new { MaxLength = 11 })
+                @Html.ValidationMessageFor(model => model.ShipperID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.ShipperName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.ShipperName, new { MaxLength = 40 })
+                @Html.ValidationMessageFor(model => model.ShipperName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.ActiveYN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.ActiveYN, new { MaxLength = 1 })
+                @Html.ValidationMessageFor(model => model.ActiveYN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-2">
+                <input type="submit" value="Delete" class="btn btn-default" formaction=@Url.Action("RemoveShipper") formmethod="post"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
