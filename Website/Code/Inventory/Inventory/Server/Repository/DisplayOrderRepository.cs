@@ -14,7 +14,6 @@ namespace Inventory.DataLayer.Repository
         {
         }
 
-        //comment by erik again
         public IEnumerable<DisplayOrder> GetAll()
         {
             using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))

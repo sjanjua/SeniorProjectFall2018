@@ -46,7 +46,7 @@ namespace Inventory.DataLayer.Repository
                 Country = reader.GetString("Country"),
                 Phone = reader.GetString("Phone"),
                 Fax = reader.GetString("Fax"),
-                //HomePage = reader.GetString("HomePage")
+              //homepage
             };
         }
     }

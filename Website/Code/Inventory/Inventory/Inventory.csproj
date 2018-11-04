@@ -171,6 +171,7 @@
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Server\Repository\DisplayOrderRepository.cs" />
     <Compile Include="Server\Repository\DisplayProductRepository.cs" />
+    <Compile Include="Server\Repository\DisplaySupplierRepository.cs" />
     <Compile Include="Server\Repository\OrderDetailsRepository.cs" />
     <Compile Include="Server\Repository\OrderRepository.cs" />
     <Compile Include="Server\Repository\ProductRepository.cs" />

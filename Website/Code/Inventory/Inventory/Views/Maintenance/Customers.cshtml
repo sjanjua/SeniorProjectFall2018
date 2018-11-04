@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Inventory.Models.Customer>
 
 @{
-    ViewBag.Title = "Suppliers";
+    ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Suppliers</h2>
+<h2>Customers</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -42,9 +42,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Fax)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.HomePage)
-            </th>*@
         <th></th>
     </tr>
 
@@ -81,9 +78,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Fax)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.HomePage)
-                </td>*@
         </tr>
     }
 

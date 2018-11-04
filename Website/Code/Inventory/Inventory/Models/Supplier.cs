@@ -34,7 +34,14 @@ namespace Inventory.Models
         public string Phone { get; set; }
         [DisplayName("Fax")]
         public string Fax { get; set; }
-        // [DisplayName("HomePage")]
-        // public string HomePage { get; set; }
     }
+
+    public class DisplaySupplier
+    {
+        [ScaffoldColumn(false)]
+        public int SupplierID { get; set; }
+        [DisplayName("Supplier")]
+        public string SupplierName { get; set; }
+    }
+
 }

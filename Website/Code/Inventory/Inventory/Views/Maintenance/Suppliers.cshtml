@@ -42,9 +42,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Fax)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.HomePage)
-            </th>*@
         <th></th>
     </tr>
 
@@ -81,9 +78,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Fax)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.HomePage)
-                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Supplier", new { id = item.SupplierID})
+            </td>
         </tr>
     }
 
