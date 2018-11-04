@@ -69,5 +69,21 @@ namespace Inventory.Controllers
             return View("Administrator");
         }
 
+        [HttpPost]
+        public ActionResult RemoveCustomer(Administrators admin)
+        {
+            Customer customer = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                CustomerRepository repo = new CustomerRepository(conn);
+                customer = repo.GetById(admin.ShipperID.ToString());
+                if (customer != null)
+                {
+                    repo.Delete(customer.CustomerID.ToString());
+                }
+            }
+            return View("Administrator");
+        }
+
     }
 }

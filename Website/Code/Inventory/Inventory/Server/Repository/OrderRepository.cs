@@ -8,13 +8,21 @@ using System.Web;
 
 namespace Inventory.DataLayer.Repository
 {
-    public class OrderRepository : MySQLRepository<Order>
+    public class OrderRepository : MySQLRepository<Orders>
     {
         public OrderRepository(MySqlConnection connection) : base(connection)
         {
         }
 
-        public Order GetById(int id)
+        public IEnumerable<Orders> GetAll()
+        {
+            using (var command = new MySqlCommand("SELECT * FROM order"))
+            {
+                return GetRecords(command);
+            }
+        }
+
+        public Orders GetById(int id)
         {
             // PARAMETERIZED QUERIES!
             using (var command = new MySqlCommand("SELECT * FROM orders WHERE OrderID = @id"))
@@ -24,9 +32,9 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
-        public override Order PopulateRecord(MySqlDataReader reader)
+        public override Orders PopulateRecord(MySqlDataReader reader)
         {
-            return new Order
+            return new Orders
             {
                 OrderID = reader.GetInt32("OrderID"),
                 ShipperID = reader.GetInt32("ShipperID"),

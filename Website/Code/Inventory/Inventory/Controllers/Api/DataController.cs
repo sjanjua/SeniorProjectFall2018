@@ -19,7 +19,7 @@ namespace Inventory.ApiControllers
     {
         [HttpGet]
         public HttpResponseMessage Shippers()
-        {            
+        {
             try
             {
                 List<DisplayShipper> shippers = new List<DisplayShipper>();
@@ -36,7 +36,7 @@ namespace Inventory.ApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
             }
-            
+
         }
 
         [HttpGet]
@@ -102,7 +102,27 @@ namespace Inventory.ApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
             }
+        }
 
+        [HttpGet]
+        public HttpResponseMessage Orders()
+        {
+            try
+            {
+                List<DisplayOrder> orders = new List<DisplayOrder>();
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    DisplayOrderRepository repo = new DisplayOrderRepository(conn);
+                    orders = repo.GetAll().ToList<DisplayOrder>();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, orders);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+            }
         }
     }
 }

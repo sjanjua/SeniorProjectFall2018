@@ -39,7 +39,7 @@ namespace Inventory.Controllers.Api
         {
             try
             {
-                Order order = new Order();
+                Orders order = new Orders();
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     OrderRepository repo = new OrderRepository(conn);

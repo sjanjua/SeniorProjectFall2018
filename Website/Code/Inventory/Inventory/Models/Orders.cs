@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Inventory.Models
 {
-    public class Order
+    public class Orders
     {
         [ScaffoldColumn(false)]
         public int OrderID { get; set; }
