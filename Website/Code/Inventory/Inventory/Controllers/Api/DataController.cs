@@ -40,6 +40,28 @@ namespace Inventory.ApiControllers
         }
 
         [HttpGet]
+        public HttpResponseMessage Suppliers()
+        {
+            try
+            {
+                List<DisplaySupplier> suppliers = new List<DisplaySupplier>();
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    DisplaySupplierRepository repo = new DisplaySupplierRepository(conn);
+                    suppliers = repo.GetAll().ToList<DisplaySupplier>();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, suppliers);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+            }
+
+        }
+
+        [HttpGet]
         public HttpResponseMessage Customers()
         {
             try

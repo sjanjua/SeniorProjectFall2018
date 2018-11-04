@@ -15,7 +15,7 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<DisplaySupplier> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM supplier where activeyn='Y'"))
+            using (var command = new MySqlCommand("SELECT * FROM supplier"))
             {
                 return GetRecords(command);
             }
