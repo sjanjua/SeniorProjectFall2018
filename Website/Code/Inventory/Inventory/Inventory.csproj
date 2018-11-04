@@ -168,11 +168,13 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ApiOrderController.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Supplier.cs" />
     <Compile Include="Server\Repository\DisplayOrderRepository.cs" />
     <Compile Include="Server\Repository\DisplayProductRepository.cs" />
     <Compile Include="Server\Repository\OrderDetailsRepository.cs" />
     <Compile Include="Server\Repository\OrderRepository.cs" />
     <Compile Include="Server\Repository\ProductRepository.cs" />
+    <Compile Include="Server\Repository\SupplierRepository.cs" />
     <Compile Include="Server\Security\InventoryAuthorize.cs" />
     <Compile Include="Server\Security\SessionContext.cs" />
     <Compile Include="Server\Repository\CustomerRepository.cs" />
@@ -298,6 +300,8 @@
     <Content Include="Views\Maintenance\Shipper.cshtml" />
     <Content Include="Views\Maintenance\Shippers.cshtml" />
     <Content Include="Views\Administrators\Administrator.cshtml" />
+    <Content Include="Views\Maintenance\Supplier.cshtml" />
+    <Content Include="Views\Maintenance\Suppliers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
