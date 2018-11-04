@@ -302,10 +302,14 @@
     <Content Include="Views\Administrators\Administrator.cshtml" />
     <Content Include="Views\Maintenance\Supplier.cshtml" />
     <Content Include="Views\Maintenance\Suppliers.cshtml" />
+    <Content Include="Views\Maintenance\Customer.cshtml" />
+    <Content Include="Views\Maintenance\Customers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Order\" />
+    <Folder Include="Views\Purchase\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
