@@ -1,4 +1,5 @@
 ﻿using Inventory.Models;
+using Inventory.Utils;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace Inventory.DataLayer.Repository
         public SupplierRepository(MySqlConnection connection) : base(connection)
         {
         }
-
 
         public IEnumerable<Supplier> GetAll()
         {
@@ -41,13 +41,22 @@ namespace Inventory.DataLayer.Repository
                 ContactTitle = reader.GetString("ContactTitle"),
                 Address = reader.GetString("Address"),
                 City = reader.GetString("City"),
-                Region = reader.GetString("Region"),
+                Region = DBUtils.GetString(reader, "Region"),
                 PostalCode = reader.GetString("PostalCode"),
                 Country = reader.GetString("Country"),
                 Phone = reader.GetString("Phone"),
-                Fax = reader.GetString("Fax"),
+                Fax = DBUtils.GetString(reader, "Fax"),
               //homepage
             };
+        }
+
+        public void Delete(String id)
+        {
+            using (var command = new MySqlCommand("DELETE FROM supplier WHERE SupplierId = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("id", id));
+                ExecuteStoredProc(command);
+            }
         }
     }
 }

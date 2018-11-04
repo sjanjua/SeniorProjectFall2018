@@ -53,5 +53,21 @@ namespace Inventory.Controllers
             return View("Administrator");
         }
 
+        [HttpPost]
+        public ActionResult RemoveSupplier(Administrators admin)
+        {
+            Supplier supplier = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                SupplierRepository repo = new SupplierRepository(conn);
+                supplier = repo.GetById(admin.ShipperID.ToString());
+                if (supplier != null)
+                {
+                    repo.Delete(supplier.SupplierID.ToString());
+                }
+            }
+            return View("Administrator");
+        }
+
     }
 }
