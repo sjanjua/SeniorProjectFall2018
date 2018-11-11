@@ -8,9 +8,9 @@ using System.Web;
 
 namespace Inventory.DataLayer.Repository
 {
-    public class DisplayOrderRepository : MySQLRepository<DisplayOrder>
+    public class DisplayOrderHistoryRepository : MySQLRepository<DisplayOrder>
     {
-        public DisplayOrderRepository(MySqlConnection connection) : base(connection)
+        public DisplayOrderHistoryRepository(MySqlConnection connection) : base(connection)
         {
         }
 
@@ -30,9 +30,9 @@ namespace Inventory.DataLayer.Repository
                 OrderDate = DBUtils.GetDate(reader, "OrderDate"),
                 RequiredDate = DBUtils.GetDate(reader, "RequiredDate"),
                 ShippedDate = DBUtils.GetDate(reader, "ShippedDate"),
-                ShippedName = reader.GetString("ShipName"),
-                ShippedAddress = reader.GetString("ShipAddress"),
-                ShippedCity = reader.GetString("ShipCity"),
+                ShippedName = DBUtils.GetString(reader, "ShipName"),
+                ShippedAddress = DBUtils.GetString(reader, "ShipAddress"),
+                ShippedCity = DBUtils.GetString(reader, "ShipCity"),
                 ShippedRegion = DBUtils.GetString(reader, "ShipRegion"),
                 Freight = reader.GetDecimal("Freight")
             };

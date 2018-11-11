@@ -21,7 +21,7 @@ namespace Inventory.Controllers.Api
                 List<DisplayOrder> orders = new List<DisplayOrder>();
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
-                    DisplayOrderRepository repo = new DisplayOrderRepository(conn);
+                    DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
                     orders = repo.GetAll().ToList<DisplayOrder>();
                 }
 
