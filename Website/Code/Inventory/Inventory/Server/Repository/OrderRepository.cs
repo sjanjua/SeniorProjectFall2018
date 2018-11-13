@@ -16,7 +16,7 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<Orders> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM order"))
+            using (var command = new MySqlCommand("SELECT * FROM orders"))
             {
                 return GetRecords(command);
             }
