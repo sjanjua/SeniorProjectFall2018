@@ -23,14 +23,14 @@ namespace Inventory.Controllers
         [HttpPost]
         public ActionResult ChangeRole(Administrators admin)
         {
-            if (admin.UserID != null)
+            if (admin.UserName != null)
             {
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     UsersRepository repo = new UsersRepository(conn);
-                    Users user = repo.GetById(admin.UserID);
+                    Users user = repo.GetByName(admin.UserName);
                     if (user != null) { 
-                    repo.changeUserRole(admin.UserID, admin.User_Type[0]);
+                    repo.changeUserRole(admin.UserName, admin.User_Type[0]);
                 }
                 }
             }
@@ -48,6 +48,38 @@ namespace Inventory.Controllers
                 if (shipper != null)
                 {
                     repo.Delete(shipper.ShipperID.ToString());
+                }
+            }
+            return View("Administrator");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveSupplier(Administrators admin)
+        {
+            Supplier supplier = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                SupplierRepository repo = new SupplierRepository(conn);
+                supplier = repo.GetById(admin.ShipperID.ToString());
+                if (supplier != null)
+                {
+                    repo.Delete(supplier.SupplierID.ToString());
+                }
+            }
+            return View("Administrator");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveCustomer(Administrators admin)
+        {
+            Customer customer = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                CustomerRepository repo = new CustomerRepository(conn);
+                customer = repo.GetById(admin.ShipperID.ToString());
+                if (customer != null)
+                {
+                    repo.Delete(customer.CustomerID.ToString());
                 }
             }
             return View("Administrator");

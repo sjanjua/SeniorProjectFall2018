@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Inventory</RootNamespace>
     <AssemblyName>Inventory</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -75,11 +75,11 @@
     <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -166,27 +166,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\Security\InventoryAuthorize.cs" />
-    <Compile Include="App_Code\Security\SessionContext.cs" />
-    <Compile Include="App_Code\Utils\Repository\MySQLRepository.cs" />
-    <Compile Include="App_Code\Utils\Repository\ShipperRepository.cs" />
-    <Compile Include="App_Code\Utils\DBUtils.cs" />
+    <Compile Include="Controllers\Api\ApiOrderController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Server\Repository\DisplayOrderHistoryRepository.cs" />
+    <Compile Include="Server\Repository\DisplayProductRepository.cs" />
+    <Compile Include="Server\Repository\DisplaySupplierRepository.cs" />
+    <Compile Include="Server\Repository\OrderDetailsRepository.cs" />
+    <Compile Include="Server\Repository\OrderRepository.cs" />
+    <Compile Include="Server\Repository\ProductRepository.cs" />
+    <Compile Include="Server\Repository\SupplierRepository.cs" />
+    <Compile Include="Server\Security\InventoryAuthorize.cs" />
+    <Compile Include="Server\Security\SessionContext.cs" />
+    <Compile Include="Server\Repository\CustomerRepository.cs" />
+    <Compile Include="Server\Repository\DisplayShipperRepository.cs" />
+    <Compile Include="Server\Repository\DisplayCustomerRepository.cs" />
+    <Compile Include="Server\Repository\MySQLRepository.cs" />
+    <Compile Include="Server\Repository\ShipperRepository.cs" />
+    <Compile Include="Server\DBUtils.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="App_Code\Utils\Repository\LogonRepository.cs" />
+    <Compile Include="Server\Repository\LogonRepository.cs" />
     <Compile Include="Controllers\AdministratorsController.cs" />
+    <Compile Include="Controllers\Api\ApiAccountController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
-    <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\Api\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="App_Code\Utils\Repository\UsersRepository.cs" />
+    <Compile Include="Server\Repository\UsersRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Administrators.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Logon.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\Shipper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -254,7 +271,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -283,8 +302,17 @@
     <Content Include="Views\Maintenance\Shipper.cshtml" />
     <Content Include="Views\Maintenance\Shippers.cshtml" />
     <Content Include="Views\Administrators\Administrator.cshtml" />
+    <Content Include="Views\Maintenance\Supplier.cshtml" />
+    <Content Include="Views\Maintenance\Suppliers.cshtml" />
+    <Content Include="Views\Maintenance\Customer.cshtml" />
+    <Content Include="Views\Maintenance\Customers.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Purchase\Purchase.cshtml" />
+    <Content Include="Views\Purchase\Purchases.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

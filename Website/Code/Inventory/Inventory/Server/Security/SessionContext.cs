@@ -16,7 +16,7 @@ namespace Inventory.Security
             if (userData != null)
                 data = new JavaScriptSerializer().Serialize(userData);
 
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, name, DateTime.Now, DateTime.Now.AddYears(1), isPersistant, userData.UserID.ToString());
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, name, DateTime.Now, DateTime.Now.AddYears(1), isPersistant, userData.UserName.ToString());
 
             string cookieData = FormsAuthentication.Encrypt(ticket);
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieData)

@@ -9,7 +9,7 @@ namespace Inventory.Models
     public class Administrators
     {
         [Display(Name = "User Name"), Required(ErrorMessage = "Please enter User Name")]
-        public String UserID { get; set; }
+        public String UserName { get; set; }
         [Display(Name = "First Name")]
         public String First_Name { get; set; }
         [Display(Name = "Last Name")]
