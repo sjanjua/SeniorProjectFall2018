@@ -45,7 +45,7 @@ namespace Inventory.DataLayer.Repository
             }
             else
             {
-                using (var command = new MySqlCommand("INSERT INTO Orders (CustomerID, UserID, OrderDate, RequiredDate, ShipperID, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry) Values(@custid, @uid, @orddate, @reqdate, @shipid, @freight, @shipname, @shipaddress, @shipcity, @shipregion, @shippost, @shipcountry);"))
+                using (var command = new MySqlCommand("INSERT INTO orders (CustomerID, UserID, OrderDate, RequiredDate, ShipperID, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry) Values(@custid, @uid, @orddate, @reqdate, @shipid, @freight, @shipname, @shipaddress, @shipcity, @shipregion, @shippost, @shipcountry);"))
                 {
                     command.Parameters.Add(new MySqlParameter("custid", order.CustomerID));
                     command.Parameters.Add(new MySqlParameter("uid", order.UserID));
