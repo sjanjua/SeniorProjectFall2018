@@ -6,11 +6,12 @@ using System.Web;
 
 namespace Inventory.Models
 {
-    public class Order
+    public class Orders
     {
         [ScaffoldColumn(false)]
         public int OrderID { get; set; }
         [ScaffoldColumn(false)]
+        [Display(Name = "Customer"), Required(ErrorMessage = "Please select Customer")]
         public string CustomerID { get; set; }
         [ScaffoldColumn(false)]
         public int UserID { get; set; }
@@ -34,6 +35,10 @@ namespace Inventory.Models
         public decimal Freight { get; set; }
 
         public List<OrderDetails> Details { get; set; }
+        public List<DisplayCustomer> CustomerList { get; set; }
+        public List<DisplayShipper> ShipperList { get; set; }
+        public List<DisplayProduct> ProductList { get; set; }
+
     }
 
     public class OrderDetails
@@ -42,6 +47,7 @@ namespace Inventory.Models
         public int OrderID { get; set; }
         [ScaffoldColumn(false)]
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public float UnitPrice { get; set; }
         public Int16 Quantity { get; set; }
         public decimal Discount { get; set; }

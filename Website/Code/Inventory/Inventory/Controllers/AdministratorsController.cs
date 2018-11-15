@@ -75,5 +75,37 @@ namespace Inventory.Controllers
             return View("Administrator");
         }
 
+        [HttpPost]
+        public ActionResult RemoveSupplier(Administrators admin)
+        {
+            Supplier supplier = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                SupplierRepository repo = new SupplierRepository(conn);
+                supplier = repo.GetById(admin.ShipperID.ToString());
+                if (supplier != null)
+                {
+                    repo.Delete(supplier.SupplierID.ToString());
+                }
+            }
+            return View("Administrator");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveCustomer(Administrators admin)
+        {
+            Customer customer = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                CustomerRepository repo = new CustomerRepository(conn);
+                customer = repo.GetById(admin.ShipperID.ToString());
+                if (customer != null)
+                {
+                    repo.Delete(customer.CustomerID.ToString());
+                }
+            }
+            return View("Administrator");
+        }
+
     }
 }

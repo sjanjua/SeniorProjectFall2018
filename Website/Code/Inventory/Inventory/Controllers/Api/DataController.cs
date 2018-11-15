@@ -19,7 +19,7 @@ namespace Inventory.ApiControllers
     {
         [HttpGet]
         public HttpResponseMessage Shippers()
-        {            
+        {
             try
             {
                 List<DisplayShipper> shippers = new List<DisplayShipper>();
@@ -36,7 +36,29 @@ namespace Inventory.ApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
             }
-            
+
+        }
+
+        [HttpGet]
+        public HttpResponseMessage Suppliers()
+        {
+            try
+            {
+                List<DisplaySupplier> suppliers = new List<DisplaySupplier>();
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    DisplaySupplierRepository repo = new DisplaySupplierRepository(conn);
+                    suppliers = repo.GetAll().ToList<DisplaySupplier>();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, suppliers);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+            }
+
         }
 
         [HttpGet]
@@ -80,7 +102,27 @@ namespace Inventory.ApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
             }
+        }
 
+        [HttpGet]
+        public HttpResponseMessage Orders()
+        {
+            try
+            {
+                List<DisplayOrder> orders = new List<DisplayOrder>();
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
+                    orders = repo.GetAll().ToList<DisplayOrder>();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, orders);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+            }
         }
     }
 }
