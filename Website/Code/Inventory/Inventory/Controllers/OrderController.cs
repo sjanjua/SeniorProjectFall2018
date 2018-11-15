@@ -41,7 +41,22 @@ namespace Inventory.Controllers
         // GET: Order/Create
         public ActionResult Create()
         {
-            return View();
+            Orders order = new Orders();
+
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                DisplayCustomerRepository cust = new DisplayCustomerRepository(conn);
+                order.CustomerList = cust.GetAll().ToList<DisplayCustomer>();
+
+                DisplayShipperRepository shipper = new DisplayShipperRepository(conn);
+                order.ShipperList = shipper.GetAll().ToList<DisplayShipper>();
+
+                DisplayProductRepository product = new DisplayProductRepository(conn);
+                order.ProductList = product.GetAll().ToList<DisplayProduct>();
+
+            }
+
+            return View(order);
         }
 
         // POST: Order/Create

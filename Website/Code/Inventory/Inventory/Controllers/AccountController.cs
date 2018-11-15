@@ -44,10 +44,12 @@ namespace Inventory.Controllers
                 if (users.Password.Equals(user.Password))
                 {
                     context.SetAuthenticationToken(user.UserName.ToString(), false, user);
+                    Session["UserID"] = users.UserID;
                     return RedirectToAction("Index", "Home");
                 }
                 else {
                     ModelState.AddModelError(string.Empty, "Invalid Login Information.");
+                    Session["UserID"] = null;
                     return View("Login", user);
                 }
             }
