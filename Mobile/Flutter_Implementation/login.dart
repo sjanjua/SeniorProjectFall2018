@@ -4,6 +4,12 @@ import 'signup.dart';
 
 class LogInScreen extends StatelessWidget
 {
+  final GlobalKey< FormState > _formKey = GlobalKey< FormState >();
+  bool _autoValidate = false;
+
+  String _email;
+  String _password;
+
   @override
   Widget build( BuildContext context )
   {
@@ -21,26 +27,29 @@ class LogInScreen extends StatelessWidget
             child: Container(
               padding: EdgeInsets.fromLTRB( 35.0, 200.0, 35.0, 35.0 ),
               child: Column(
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(
-                      icon: Icon( Icons.email ),
-                      hintText: 'email', 
-                    ),
+                children: <Widget>[ 
+                  Form(
+                    key: _formKey,
+                    autovalidate: _autoValidate,
+                    child: FormUI()
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      icon: Icon( Icons.lock ),
-                      hintText: 'password'
-                    ),
-                  ), 
                   Container(
                     padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0 , 0.0),
                     child: Column(
                       children: <Widget>[
                         RaisedButton( 
                           onPressed: () {
-                            Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                          
+                            if ( _formKey.currentState.validate() ) {
+
+                              if ( _email == 'admin' && _password == 'admin' )
+                              {
+                                Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                              }
+
+                              // Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+
+                            }
                           },
                           color: Colors.cyan,
                           child: Text( 'Login' ),
@@ -63,4 +72,54 @@ class LogInScreen extends StatelessWidget
       )
     );
   }
+
+  Widget FormUI() {
+
+    return Column(
+      children: < Widget >[
+        TextFormField(
+          decoration: InputDecoration( labelText: 'email', icon: Icon( Icons.email ) ),
+          keyboardType: TextInputType.emailAddress,
+          validator: ( value ) {
+            if ( value.isEmpty )
+            {
+              return 'Please enter email';
+            }
+            else
+            {
+              _email = value;
+            }
+          }
+        ),
+        TextFormField(
+          decoration: InputDecoration( labelText: 'password', icon: Icon( Icons.lock ) ),
+          keyboardType: TextInputType.text,
+          validator: ( value ) {
+            if ( value.isEmpty )
+            {
+              return 'Please enter password';
+            }
+            else
+            {
+              _password = value;
+            }
+          },
+          obscureText: true,
+        )
+      ]
+    );
+  }
+
+  // TextField(
+  //                   decoration: InputDecoration(
+  //                     icon: Icon( Icons.email ),
+  //                     hintText: 'email', 
+  //                   ),
+  //                 ),
+  //                 TextField(
+  //                   decoration: InputDecoration(
+  //                     icon: Icon( Icons.lock ),
+  //                     hintText: 'password'
+  //                   ),
+  //                 ),
 }
