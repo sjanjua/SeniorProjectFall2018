@@ -169,6 +169,7 @@
     <Compile Include="Controllers\Api\ApiOrderController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\SignIn.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Server\Repository\DisplayOrderHistoryRepository.cs" />
     <Compile Include="Server\Repository\DisplayProductRepository.cs" />
@@ -312,6 +313,11 @@
     <Content Include="Views\Purchase\Purchase.cshtml" />
     <Content Include="Views\Purchase\Purchases.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\Order\CreateOrderDetail.cshtml" />
+    <Content Include="Views\Administrators\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
