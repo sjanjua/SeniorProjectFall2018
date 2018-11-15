@@ -1,0 +1,99 @@
+﻿@model Inventory.Models.Orders
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequiredDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedRegion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedRegion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedPostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedPostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedCountry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedCountry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Freight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Freight)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Order Details", "OrderDetails", new { id = Model.OrderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

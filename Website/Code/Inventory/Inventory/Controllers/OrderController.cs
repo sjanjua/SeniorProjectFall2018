@@ -15,15 +15,15 @@ namespace Inventory.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            List<Orders> orders = new List<Orders>();
+            List<DisplayOrder> orders = new List<DisplayOrder>();
             using (MySqlConnection conn = DBUtils.GetConnection())
             {
-                OrderRepository repo = new OrderRepository(conn);
-                orders = repo.GetAll().ToList<Orders>();
+                DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
+                orders = repo.GetAll().ToList<DisplayOrder>();
             }
             return View(orders);
         }
-        
+
 
         // GET: Order/Details/5
         public ActionResult Details(int id)
@@ -41,7 +41,7 @@ namespace Inventory.Controllers
         // GET: Order/Create
         public ActionResult Create()
         {
-            Orders order = new Orders();
+            CreateOrder order = new CreateOrder();
 
             using (MySqlConnection conn = DBUtils.GetConnection())
             {
@@ -51,8 +51,8 @@ namespace Inventory.Controllers
                 DisplayShipperRepository shipper = new DisplayShipperRepository(conn);
                 order.ShipperList = shipper.GetAll().ToList<DisplayShipper>();
 
-                DisplayProductRepository product = new DisplayProductRepository(conn);
-                order.ProductList = product.GetAll().ToList<DisplayProduct>();
+                //DisplayProductRepository product = new DisplayProductRepository(conn);
+                //order.ProductList = product.GetAll().ToList<DisplayProduct>();
 
             }
 
@@ -61,18 +61,54 @@ namespace Inventory.Controllers
 
         // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CreateOrder order)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                Orders newOrder = new Orders();
+                Int32 newOrderID = 0;
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    CustomerRepository custRepo = new CustomerRepository(conn);
+                    Customer cust = custRepo.GetById(order.CustomerID);
+
+                    newOrder.CustomerID = order.CustomerID;
+                    newOrder.ShipperID = order.ShipperID;
+                    newOrder.OrderDate = order.OrderDate;
+                    newOrder.RequiredDate = order.RequiredDate;
+                    newOrder.Freight = order.Freight;
+                    newOrder.UserID = 1;
+
+                    newOrder.ShippedName = cust.CompanyName;
+                    newOrder.ShippedAddress = cust.Address;
+                    newOrder.ShippedCity = cust.City;
+                    newOrder.ShippedRegion = cust.Region;
+                    newOrder.ShippedPostalCode = cust.PostalCode;
+                    newOrder.ShippedCountry = cust.Country;
+
+                    OrderRepository orderRepo = new OrderRepository(conn);
+                    newOrderID = orderRepo.Save(newOrder);
+                }
+
+                return RedirectToAction("Details", new { id = newOrderID });
             }
+
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                DisplayCustomerRepository cust = new DisplayCustomerRepository(conn);
+                order.CustomerList = cust.GetAll().ToList<DisplayCustomer>();
+
+                DisplayShipperRepository shipper = new DisplayShipperRepository(conn);
+                order.ShipperList = shipper.GetAll().ToList<DisplayShipper>();
+
+                //DisplayProductRepository product = new DisplayProductRepository(conn);
+                //order.ProductList = product.GetAll().ToList<DisplayProduct>();
+
+            }
+
+            return View("Create", order);
+
         }
 
         // GET: Order/Edit/5
@@ -117,6 +153,70 @@ namespace Inventory.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult OrderDetails(int id)
+        {
+            List<OrderDetails> orderdet;
+            DisplayOrderDetails displayDet = new DisplayOrderDetails();
+            displayDet.OrderID = id;
+
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                OrderDetailsRepository repo = new OrderDetailsRepository(conn);
+                orderdet = repo.GetById(id).ToList<OrderDetails>();
+            }
+
+            displayDet.Details = orderdet;
+            return View(displayDet);
+        }
+
+        // GET: Order/Create
+        public ActionResult CreateOrderDetail(int id)
+        {
+            CreateOrderDetail order = new CreateOrderDetail();
+            order.OrderID = id;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                DisplayProductRepository product = new DisplayProductRepository(conn);
+                order.ProductList = product.GetAll().ToList<DisplayProduct>();
+
+            }
+
+            return View(order);
+        }
+
+        // POST: Order/Create
+        [HttpPost]
+        public ActionResult CreateOrderDetail(int id, CreateOrderDetail orderDetail)
+        {
+            if (ModelState.IsValid)
+            {
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    OrderDetails orderdet = new OrderDetails();
+
+                    orderdet.OrderID = orderDetail.OrderID;
+                    orderdet.ProductID = orderDetail.ProductID;
+                    orderdet.Quantity = orderDetail.Quantity;
+                    orderdet.UnitPrice = orderDetail.UnitPrice;
+                    orderdet.Discount = 0;
+                    
+                    OrderDetailsRepository orderRepo = new OrderDetailsRepository(conn);
+                    orderRepo.Save(orderdet);
+                }
+
+                return RedirectToAction("OrderDetails", new { id = orderDetail.OrderID });
+            }
+
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                DisplayProductRepository product = new DisplayProductRepository(conn);
+                orderDetail.ProductList = product.GetAll().ToList<DisplayProduct>();
+
+            }
+
+            return View(orderDetail);
         }
     }
 }

@@ -72,6 +72,34 @@ namespace Inventory.DataLayer.Repository
             }
             return record;
         }
+        protected Int32 GetIdentity()
+        {
+            var command = new MySqlCommand("SELECT LAST_INSERT_ID()");
+            command.Connection = _connection;
+            _connection.Open();
+            try
+            {
+                var reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        return reader.GetInt32(0);
+                        
+                    }
+                }
+                finally
+                {
+                    // Always call Close when done reading.
+                    reader.Close();
+                }
+            }
+            finally
+            {
+                _connection.Close();
+            }
+            return -1;
+        }
         protected IEnumerable<T> ExecuteStoredProc(MySqlCommand command)
         {
             var list = new List<T>();
