@@ -10,13 +10,7 @@ namespace Inventory.Models
     {
         [Display(Name = "User Name"), Required(ErrorMessage = "Please enter User Name")]
         public String UserName { get; set; }
-        [Display(Name = "User Type")]
+        [Display(Name = "User Role")]
         public String User_Type { get; set; }
-
-        [Display(Name = "Maintenance Type")]
-        public String Maint_Type { get; set; }
-
-        public int ShipperID { get; set; }
-        public String ActiveYN { get; set; }
     }
 }

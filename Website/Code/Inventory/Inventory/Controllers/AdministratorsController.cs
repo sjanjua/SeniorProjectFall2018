@@ -21,7 +21,39 @@ namespace Inventory.Controllers
             return View();
         }
 
-        public ActionResult Users()
+        public ActionResult Edit(Int32 userID)
+        {
+            Users users = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                UsersRepository repo = new UsersRepository(conn);
+                users = repo.GetById(userID.ToString());
+            }
+            if (users != null)
+            {
+                Administrators admin = new Administrators();
+                admin.UserName = users.UserName;
+                switch (users.RoleID)
+                {
+                    case 1:
+                        admin.User_Type = "Administrator";
+                        break;
+                    case 2:
+                        admin.User_Type = "Manager";
+                        break;
+                    case 3:
+                        admin.User_Type = "Cashier";
+                        break;
+                }
+                return View("Administrator", admin);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult ChangeUsers()
         {
             List<Users> users = new List<Users>();
             using (MySqlConnection conn = DBUtils.GetConnection())
@@ -58,54 +90,5 @@ namespace Inventory.Controllers
             }
             return View("Administrator");
         }
-
-        [HttpPost]
-        public ActionResult RemoveShipper(Administrators admin)
-        {
-            Shipper shipper = null;
-            using (MySqlConnection conn = DBUtils.GetConnection())
-            {
-                ShipperRepository repo = new ShipperRepository(conn);
-                shipper = repo.GetById(admin.ShipperID.ToString());
-                if (shipper != null)
-                {
-                    repo.Delete(shipper.ShipperID.ToString());
-                }
-            }
-            return View("Administrator");
-        }
-
-        [HttpPost]
-        public ActionResult RemoveSupplier(Administrators admin)
-        {
-            Supplier supplier = null;
-            using (MySqlConnection conn = DBUtils.GetConnection())
-            {
-                SupplierRepository repo = new SupplierRepository(conn);
-                supplier = repo.GetById(admin.ShipperID.ToString());
-                if (supplier != null)
-                {
-                    repo.Delete(supplier.SupplierID.ToString());
-                }
-            }
-            return View("Administrator");
-        }
-
-        [HttpPost]
-        public ActionResult RemoveCustomer(Administrators admin)
-        {
-            Customer customer = null;
-            using (MySqlConnection conn = DBUtils.GetConnection())
-            {
-                CustomerRepository repo = new CustomerRepository(conn);
-                customer = repo.GetById(admin.ShipperID.ToString());
-                if (customer != null)
-                {
-                    repo.Delete(customer.CustomerID.ToString());
-                }
-            }
-            return View("Administrator");
-        }
-
     }
 }

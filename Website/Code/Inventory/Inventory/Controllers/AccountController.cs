@@ -62,7 +62,7 @@ namespace Inventory.Controllers
             Logon logIn = null;
             if (!user.Password.Equals(user.Password1))
             {
-                ModelState.AddModelError("Password_Field", "The passwords entered do not match");
+                ModelState.AddModelError("Password", "The passwords entered do not match");
                 return View("SignUp", user);
             }
             else
