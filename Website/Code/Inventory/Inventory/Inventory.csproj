@@ -298,6 +298,7 @@
     <Content Include="Views\Maintenance\Shipper.cshtml" />
     <Content Include="Views\Maintenance\Shippers.cshtml" />
     <Content Include="Views\Administrators\Administrator.cshtml" />
+    <Content Include="Views\Administrators\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

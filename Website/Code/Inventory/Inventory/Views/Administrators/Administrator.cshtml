@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Administration</h2>
+<h1>Administration</h1>
 
 @using (Html.BeginForm())
 {
@@ -16,26 +16,16 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
+        @Html.Action("Users", "Administrators")
+    </div>
+    <br />
+    <h4>Change User Roles</h4>
+    <hr />
+    <div class="row">
         @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-2">
-            @Html.EditorFor(model => model.UserName, new { MaxLength = 20, Length=20 })
+            @Html.EditorFor(model => model.UserName, new { MaxLength = 20, Length = 20 })
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="row">
-        @Html.LabelFor(model => model.First_Name, htmlAttributes: new {  @class = "control-label col-md-2" })
-        <div class="col-md-2">
-            @Html.EditorFor(model => model.First_Name, new { MaxLength = 25, Length = 25})
-            @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="row">
-        @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-2">
-            @Html.EditorFor(model => model.Last_Name, new { MaxLength = 25, Length = 25 })
-            @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -56,17 +46,17 @@
                 });
                 listItems.Add(new SelectListItem
                 {
-                    Text = "Customer",
-                    Value = "Customer"
+                    Text = "Cashier",
+                    Value = "Cashier"
                 });
             }
-                @Html.DropDownListFor(model => model.User_Type, listItems, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_Type, "", new { @class = "text-danger" })
-            </div>
+            @Html.DropDownListFor(model => model.User_Type, listItems, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User_Type, "", new { @class = "text-danger" })
+        </div>
     </div>
     <div class="row">
         <div class="col-md-offset-2 col-md-2">
-            <input type="submit" value="Submit" class="btn btn-default" formaction=@Url.Action("ChangeRole") formmethod="post"/>
+            <input type="submit" value="Submit" class="btn btn-default" formaction=@Url.Action("ChangeRole") formmethod="post" />
         </div>
     </div>
     <br />
@@ -108,14 +98,6 @@
         </div>
 
         <div class="row">
-            @Html.LabelFor(model => model.ShipperName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.ShipperName, new { MaxLength = 40 })
-                @Html.ValidationMessageFor(model => model.ShipperName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="row">
             @Html.LabelFor(model => model.ActiveYN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-2">
                 @Html.EditorFor(model => model.ActiveYN, new { MaxLength = 1 })
@@ -130,6 +112,3 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

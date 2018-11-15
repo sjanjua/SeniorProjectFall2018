@@ -58,7 +58,7 @@ namespace Inventory.Controllers
         public ActionResult AddUser(Users user)
         {
             Logon logIn = null;
-            if (!user.Password_Field.Equals(user.Password_Field1))
+            if (!user.Password.Equals(user.Password1))
             {
                 ModelState.AddModelError("Password_Field", "The passwords entered do not match");
                 return View("SignUp", user);
@@ -80,7 +80,7 @@ namespace Inventory.Controllers
                     {                       
                             Dictionary<String, Object> hash = new Dictionary<String, Object>();
                             hash.Add("UserName", user.UserName);
-                            hash.Add("Password", user.Password_Field);
+                            hash.Add("Password", user.Password);
                             hash.Add("FirstName", user.FirstName);
                             hash.Add("LastName", user.LastName);
                             hash.Add("PhoneNumber", user.PhoneNumber);

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Inventory.Controllers
 {
+    [Authorize]
     public class AdministratorsController : Controller
     {
         SessionContext context = new SessionContext();
@@ -18,6 +19,17 @@ namespace Inventory.Controllers
         public ActionResult Administrator()
         {
             return View();
+        }
+
+        public ActionResult Users()
+        {
+            List<Users> users = new List<Users>();
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                UsersRepository repo = new UsersRepository(conn);
+                users = repo.GetAll().ToList<Users>();
+            }
+            return PartialView("Users", users);
         }
 
         [HttpPost]
@@ -29,9 +41,19 @@ namespace Inventory.Controllers
                 {
                     UsersRepository repo = new UsersRepository(conn);
                     Users user = repo.GetByName(admin.UserName);
-                    if (user != null) { 
-                    repo.changeUserRole(admin.UserName, admin.User_Type[0]);
-                }
+                    if (user != null) {
+                        switch (admin.User_Type) {
+                            case "Administrator":
+                                repo.changeUserRole(admin.UserName, "1");
+                                break;
+                            case "Manager":
+                                repo.changeUserRole(admin.UserName, "2");
+                                break;
+                            case "Cashier":
+                                repo.changeUserRole(admin.UserName, "3");
+                                break;
+                        }
+                    }
                 }
             }
             return View("Administrator");
