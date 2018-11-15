@@ -25,6 +25,17 @@ namespace Inventory.Controllers
             return View(shippers);
         }
 
+        public ActionResult PartialShippers()
+        {
+            List<Shipper> shippers = new List<Shipper>();
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                ShipperRepository repo = new ShipperRepository(conn);
+                shippers = repo.GetAll().ToList<Shipper>();
+            }
+            return PartialView("Shippers", shippers);
+        }
+
         public ActionResult Shipper(Int32 id) {
             Shipper shipper;
             using (MySqlConnection conn = DBUtils.GetConnection())
