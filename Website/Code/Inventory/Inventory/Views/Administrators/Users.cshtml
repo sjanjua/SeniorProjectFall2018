@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Inventory.Models.Users>
+
+<h4>Users</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleID)
+        </th>
+        <th></th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @{ 
+                    if (item.RoleID.Equals(1))
+                    {
+                        <label>Administrator</label>
+                    }
+                    else if (item.RoleID.Equals(2))
+                    {
+                        <label>Manager</label>
+                    }
+                    else if (item.RoleID.Equals(3))
+                    {
+                        <label>Cashier</label>
+                    }
+            }
+            </td>
+                    <td>
+                        @Html.ActionLink("Change Role", "Edit", "Administrators", new { item.UserID }, "")
+                        <hr/>
+                        @Html.ActionLink("Edit", "ViewDetails", "Administrators", new { item.UserID}, "")
+                    </td>
+                </tr>
+    }
+</table>
+

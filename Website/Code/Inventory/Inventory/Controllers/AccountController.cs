@@ -44,10 +44,12 @@ namespace Inventory.Controllers
                 if (users.Password.Equals(user.Password))
                 {
                     context.SetAuthenticationToken(user.UserName.ToString(), false, user);
+                    Session["UserID"] = users.UserID;
                     return RedirectToAction("Index", "Home");
                 }
                 else {
                     ModelState.AddModelError(string.Empty, "Invalid Login Information.");
+                    Session["UserID"] = null;
                     return View("Login", user);
                 }
             }
@@ -58,9 +60,9 @@ namespace Inventory.Controllers
         public ActionResult AddUser(Users user)
         {
             Logon logIn = null;
-            if (!user.Password_Field.Equals(user.Password_Field1))
+            if (!user.Password.Equals(user.Password1))
             {
-                ModelState.AddModelError("Password_Field", "The passwords entered do not match");
+                ModelState.AddModelError("Password", "The passwords entered do not match");
                 return View("SignUp", user);
             }
             else
@@ -80,7 +82,7 @@ namespace Inventory.Controllers
                     {                       
                             Dictionary<String, Object> hash = new Dictionary<String, Object>();
                             hash.Add("UserName", user.UserName);
-                            hash.Add("Password", user.Password_Field);
+                            hash.Add("Password", user.Password);
                             hash.Add("FirstName", user.FirstName);
                             hash.Add("LastName", user.LastName);
                             hash.Add("PhoneNumber", user.PhoneNumber);
@@ -103,7 +105,6 @@ namespace Inventory.Controllers
                     }
                 }
             }
-            return RedirectToAction("Error");
         }
 
         public ActionResult Logout()

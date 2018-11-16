@@ -1,0 +1,56 @@
+﻿@model Inventory.Models.DisplayOrderDetails
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>OrderDetails</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateOrderDetail", new { id = Model.OrderID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Unit Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Details)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@{ if (Model.Details.ToArray<Inventory.Models.OrderDetails>().Length > 0)
+    {
+        <div>
+            @Html.ActionLink("Back to Details", "Details", new { id = Model.Details.ToArray<Inventory.Models.OrderDetails>()[0].OrderID })
+        </div>
+    }
+}

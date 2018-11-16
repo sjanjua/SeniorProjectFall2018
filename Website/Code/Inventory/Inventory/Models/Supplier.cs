@@ -11,9 +11,8 @@ namespace Inventory.Models
     public class Supplier
     {
         [ScaffoldColumn(false)]
-        public int SupplierID { get; set; }
         [DisplayName("Supplier Id")]
-        public string SupplierName { get; set; }
+        public int SupplierID { get; set; }
         [DisplayName("CompanyName")]
         public string CompanyName { get; set; }
         [DisplayName("ContactName")]
@@ -41,7 +40,7 @@ namespace Inventory.Models
         [ScaffoldColumn(false)]
         public int SupplierID { get; set; }
         [DisplayName("Supplier")]
-        public string SupplierName { get; set; }
+        public string CompanyName { get; set; }
     }
 
 }
