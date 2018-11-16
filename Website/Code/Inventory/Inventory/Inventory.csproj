@@ -318,6 +318,7 @@
     <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Order\CreateOrderDetail.cshtml" />
     <Content Include="Views\Administrators\Users.cshtml" />
+    <Content Include="Views\Administrators\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
