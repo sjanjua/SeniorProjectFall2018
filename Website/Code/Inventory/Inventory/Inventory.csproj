@@ -167,12 +167,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ApiOrderController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Server\Repository\DisplayOrderRepository.cs" />
+    <Compile Include="Models\SignIn.cs" />
+    <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Server\Repository\DisplayOrderHistoryRepository.cs" />
     <Compile Include="Server\Repository\DisplayProductRepository.cs" />
+    <Compile Include="Server\Repository\DisplaySupplierRepository.cs" />
     <Compile Include="Server\Repository\OrderDetailsRepository.cs" />
     <Compile Include="Server\Repository\OrderRepository.cs" />
     <Compile Include="Server\Repository\ProductRepository.cs" />
+    <Compile Include="Server\Repository\SupplierRepository.cs" />
     <Compile Include="Server\Security\InventoryAuthorize.cs" />
     <Compile Include="Server\Security\SessionContext.cs" />
     <Compile Include="Server\Repository\CustomerRepository.cs" />
@@ -199,7 +204,7 @@
     <Compile Include="Models\Administrators.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Logon.cs" />
-    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\Shipper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +263,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -298,6 +305,20 @@
     <Content Include="Views\Maintenance\Shipper.cshtml" />
     <Content Include="Views\Maintenance\Shippers.cshtml" />
     <Content Include="Views\Administrators\Administrator.cshtml" />
+    <Content Include="Views\Maintenance\Supplier.cshtml" />
+    <Content Include="Views\Maintenance\Suppliers.cshtml" />
+    <Content Include="Views\Maintenance\Customer.cshtml" />
+    <Content Include="Views\Maintenance\Customers.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Purchase\Purchase.cshtml" />
+    <Content Include="Views\Purchase\Purchases.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\Order\CreateOrderDetail.cshtml" />
+    <Content Include="Views\Administrators\Users.cshtml" />
+    <Content Include="Views\Administrators\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

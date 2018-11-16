@@ -21,7 +21,7 @@ namespace Inventory.Controllers.Api
                 List<DisplayOrder> orders = new List<DisplayOrder>();
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
-                    DisplayOrderRepository repo = new DisplayOrderRepository(conn);
+                    DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
                     orders = repo.GetAll().ToList<DisplayOrder>();
                 }
 
@@ -39,7 +39,7 @@ namespace Inventory.Controllers.Api
         {
             try
             {
-                Order order = new Order();
+                Orders order = new Orders();
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
                     OrderRepository repo = new OrderRepository(conn);

@@ -37,7 +37,8 @@ namespace Inventory.DataLayer.Repository
         {
             return new Logon
             {
-                 UserName= reader.GetString("UserName"),
+                UserID = reader.GetInt32("UserID"),
+                UserName = reader.GetString("UserName"),
                 Password = reader.GetString("DecryptPassword")
             };
         }

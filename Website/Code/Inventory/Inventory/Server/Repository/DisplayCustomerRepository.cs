@@ -13,7 +13,6 @@ namespace Inventory.DataLayer.Repository
         {
         }
 
-        //comment by erik again
         public IEnumerable<DisplayCustomer> GetAll()
         {
             using (var command = new MySqlCommand("SELECT * FROM customer"))

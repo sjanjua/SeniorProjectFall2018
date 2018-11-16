@@ -20,3 +20,6 @@ update product set ActiveYN = 'N' where discontinued = 1;
 
 Alter table product
 Drop Column discontinued;
+
+alter table supplier
+drop column homepage;
