@@ -109,17 +109,4 @@ class LogInScreen extends StatelessWidget
       ]
     );
   }
-
-  // TextField(
-  //                   decoration: InputDecoration(
-  //                     icon: Icon( Icons.email ),
-  //                     hintText: 'email', 
-  //                   ),
-  //                 ),
-  //                 TextField(
-  //                   decoration: InputDecoration(
-  //                     icon: Icon( Icons.lock ),
-  //                     hintText: 'password'
-  //                   ),
-  //                 ),
 }

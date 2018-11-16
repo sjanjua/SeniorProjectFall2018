@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'signup.dart';
+import 'searchForItem.dart';
 import 'package:http/http.dart' as http;
+import 'shippers.dart';
+import 'orders.dart';
 
 Future<Shippers> fetchPost() async
 {
-  final response = await http.get('http://inv.azurewebsites.net/api/data');
+  final response = await http.get('http://inv.azurewebsites.net/api/data/');
 
   if ( response.statusCode == 200 )
-  {   
+  {
     return Shippers.fromJson( json.decode( response.body ) );
   }
   else
@@ -29,7 +33,7 @@ class Shippers
     List< Post > postList = list.map( ( i ) => Post.fromJson( i ) ).toList();
 
     return Shippers(
-      posts: postList
+        posts: postList
     );
   }
 }
@@ -45,14 +49,16 @@ class Post
   factory Post.fromJson( Map< String, dynamic > json )
   {
     return Post(
-      shipperID: json[ 'ShipperID' ],
-      companyName: json[ 'ShipperName' ],
-      phone: json[ 'Phone' ]
+        shipperID: json[ 'ShipperID' ],
+        companyName: json[ 'ShipperName' ],
+        phone: json[ 'Phone' ]
     );
   }
 }
 
 class Home extends StatelessWidget {
+  int _curr = 0;
+  final List<Widget> _children = [];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -61,89 +67,106 @@ class Home extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: Scaffold(
-        appBar: AppBar( 
-          title: Text('Fetch Data Example'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon( Icons.shopping_cart ),
-              onPressed: () {}
-            ),
-            IconButton( 
-              icon: Icon( Icons.monetization_on ),
-              onPressed: () {}
-            )
-          ],
-        ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text( "User Name" ),
-                accountEmail: Text( "SampleEmail@email.com" )
+          appBar: AppBar(
+            title: Text('Dashboard'),
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon( Icons.shopping_cart ),
+                  onPressed: () {}
               ),
-              ListTile(
-                title: Text( "Sample Tile 1" ),
-                trailing: Icon( Icons.android )
-               ),
-              ListTile(
-                title: Text( "Sample Tile 2" ),
-                trailing: Icon( Icons.donut_large )
-              ),
-              ListTile(
-                title: Text( "Sample Tile 3" ),
-                trailing: Icon( Icons.donut_small )
-              ),
-              Divider(),
-              ListTile(
-                title: Text( 'Log Out' ),
-                trailing: Icon( Icons.exit_to_app ),
-                onTap: () {
-                  Navigator.pop( context );
-                }
+              IconButton(
+                  icon: Icon( Icons.monetization_on ),
+                  onPressed: () {}
               )
             ],
-          )
-        ),
-        body: Center(
-          child: FutureBuilder<Shippers>(
-            future: fetchPost(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-
-                String output = '';
-
-                for ( int i = 0; i < snapshot.data.posts.length; i++ )
-                {
-                  output += ( 
-                            ' Shipper ID:   ${ snapshot.data.posts[ i ].shipperID } \n' +
-                            ' Company Name: ${ snapshot.data.posts[ i ].companyName } \n' +
-                            ' Phone Number: ${ snapshot.data.posts[ i ].phone } \n\n\n' 
-                            );
-                }
-                return Text(
-                  output
-                );
-              } 
-              else if (snapshot.hasError)
-              {
-                return Text("${snapshot.error}");
-              }
-              return CircularProgressIndicator();
-            },
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar( 
-          items: [ 
-            BottomNavigationBarItem(
-              icon: Icon( Icons.home ),
-              title: Text( 'Home' )
+          drawer: Drawer(
+              child: ListView(
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                      accountName: Text( "Admin" ),
+                      accountEmail: Text( "admin@email.com" )
+                  ),
+                  ListTile(
+                      title: Text( "Shipper" ),
+                      trailing: Icon( Icons.android ),
+                      onTap: () {
+                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => ShippersWidg() ) );
+                      },
+                  ),
+                  ListTile(
+                      title: Text( "Supplier" ),
+                      trailing: Icon( Icons.donut_large )
+                  ),
+                  ListTile(
+                      title: Text( "Customer" ),
+                      trailing: Icon( Icons.donut_small )
+                  ),
+                  ListTile(
+                      title: Text( "Purchase"),
+                    trailing: Icon( Icons.attach_money )
+                  ),
+                  ListTile(
+                      title: Text( "Order" ),
+                      trailing: Icon( Icons.reorder ),
+                      onTap: () {
+                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrderWidg() ) );
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                      title: Text( 'Log Out' ),
+                      trailing: Icon( Icons.exit_to_app ),
+                      onTap: () {
+                        Navigator.pop( context );
+                      }
+                  )
+                ],
+              )
+          ),
+          body:
+          Center(
+            child: FutureBuilder<Shippers>(
+              future: fetchPost(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+
+                  String output = '';
+
+                  for ( int i = 0; i < snapshot.data.posts.length; i++ )
+                  {
+                    output += (
+                        ' Shipper ID:   ${ snapshot.data.posts[ i ].shipperID } \n' +
+                            ' Company Name: ${ snapshot.data.posts[ i ].companyName } \n' +
+                            ' Phone Number: ${ snapshot.data.posts[ i ].phone } \n\n\n'
+                    );
+                  }
+                  return Text(
+                      output
+                  );
+                }
+                else if (snapshot.hasError)
+                {
+                  return Text("${snapshot.error}");
+                }
+                return CircularProgressIndicator();
+              },
             ),
-            BottomNavigationBarItem(
-              icon: Icon( Icons.search ),
-              title: Text( 'Search For Item' )
-            )
-          ] 
-        )
+          ),
+
+          bottomNavigationBar: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon( Icons.home ),
+                    title: Text( 'Home' )
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon( Icons.search ),
+                    title: Text( 'Search For Item' ),
+
+                )
+              ]
+          )
       ),
     );
   }
