@@ -17,18 +17,18 @@ namespace Inventory.DataLayer.Repository
         {
             // DBAs across the country are having strokes 
             //  over this next command!
-            using (var command = new MySqlCommand("SELECT * FROM Users"))
+            using (var command = new MySqlCommand("SELECT * FROM user"))
             {
                 return GetRecords(command);
             }
         }
 
-        public Logon GetById(string id)
+        public Logon GetByName(string name)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("SELECT * FROM Users WHERE UserID = @id"))
+            using (var command = new MySqlCommand("SELECT u.*, aes_decrypt(Password,'seniorproject') as DecryptPassword FROM user u WHERE UserName = @id"))
             {
-                command.Parameters.Add(new MySqlParameter("id", id));
+                command.Parameters.Add(new MySqlParameter("id", name));
                 return GetRecord(command);
             }
         }
@@ -37,15 +37,9 @@ namespace Inventory.DataLayer.Repository
         {
             return new Logon
             {
-                UserID = reader.GetString("UserID"),
-                Password_Field = reader.GetString("Password_Field"),
-                First_Name = reader.GetString("First_Name"),
-                Last_Name = reader.GetString("Last_Name"),
-                Phone_Number = reader.GetString("Phone_Number"),
-                Street = reader.GetString("Street"),
-                City = reader.GetString("City"),
-                Zip_Code = reader.GetString("Zip_Code"),
-                Email = reader.GetString("Email")
+                UserID = reader.GetInt32("UserID"),
+                UserName = reader.GetString("UserName"),
+                Password = reader.GetString("DecryptPassword")
             };
         }
     }

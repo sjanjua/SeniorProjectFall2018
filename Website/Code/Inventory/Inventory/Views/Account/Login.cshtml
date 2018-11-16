@@ -10,10 +10,10 @@
 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 <div class="row">
     <div class="col-md-2">
-        @Html.LabelFor(m => m.UserID)
+        @Html.LabelFor(m => m.UserName)
     </div>
     <div class="col-md-2">
-        @Html.TextBoxFor(m => m.UserID, new {MaxLength = 20 })
+        @Html.TextBoxFor(m => m.UserName, new {MaxLength = 20 })
     </div>
 </div>
 <div class="row">
@@ -21,7 +21,7 @@
         <label>Password</label>
     </div>
     <div class="col-md-2">
-        @Html.EditorFor(m => m.Password_Field, new { MaxLength = 20 })
+        @Html.EditorFor(m => m.Password, new { MaxLength = 20 })
     </div>
 </div>
 <br />

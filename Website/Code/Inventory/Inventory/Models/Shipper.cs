@@ -16,7 +16,15 @@ namespace Inventory.Models
         public string ShipperName { get; set; }
         [DisplayName("Phone No")]
         public string Phone { get; set; }
-        [DisplayName("Status")]
+        [DisplayName("Active")]
         public string ActiveYN { get; set; }
+    }
+
+    public class DisplayShipper
+    {
+        [ScaffoldColumn(false)]
+        public int ShipperID { get; set; }
+        [DisplayName("Shipper")]
+        public string ShipperName { get; set; }
     }
 }
