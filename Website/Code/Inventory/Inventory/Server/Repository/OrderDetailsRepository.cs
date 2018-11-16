@@ -47,7 +47,7 @@ namespace Inventory.DataLayer.Repository
                 command.Parameters.Add(new MySqlParameter("pid", orderdet.ProductID));
                 command.Parameters.Add(new MySqlParameter("id", orderdet.OrderID));
                 command.Parameters.Add(new MySqlParameter("disc", orderdet.Discount));
-                    AddRecord(command);
+                    ExecuteQuery(command);
                 }
             return true;
               //  order.OrderID = GetIdentity();

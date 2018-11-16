@@ -130,7 +130,7 @@ namespace Inventory.DataLayer.Repository
             return list;
         }
 
-        protected void AddRecord(MySqlCommand command)
+        protected void ExecuteQuery(MySqlCommand command)
         {
             command.Connection = _connection;
             _connection.Open();
