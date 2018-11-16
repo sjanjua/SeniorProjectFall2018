@@ -40,7 +40,7 @@ namespace Inventory.DataLayer.Repository
                 {
                     command.Parameters.Add(new MySqlParameter("shippedDate", order.ShippedDate));
                     command.Parameters.Add(new MySqlParameter("id", order.OrderID));
-                    AddRecord(command);
+                    ExecuteQuery(command);
                 }
             }
             else
@@ -59,7 +59,7 @@ namespace Inventory.DataLayer.Repository
                     command.Parameters.Add(new MySqlParameter("shipregion", order.ShippedRegion));
                     command.Parameters.Add(new MySqlParameter("shippost", order.ShippedPostalCode));
                     command.Parameters.Add(new MySqlParameter("shipcountry", order.ShippedCountry));
-                    AddRecord(command);
+                    ExecuteQuery(command);
                 }
                 
                 order.OrderID = GetIdentity();                

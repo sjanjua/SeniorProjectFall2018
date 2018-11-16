@@ -49,13 +49,11 @@
                     }
             }
             </td>
-
-
                     <td>
                         @Html.ActionLink("Change Role", "Edit", "Administrators", new { item.UserID }, "")
+                        <hr/>
+                        @Html.ActionLink("Edit", "ViewDetails", "Administrators", new { item.UserID}, "")
                     </td>
-
-
                 </tr>
     }
 </table>

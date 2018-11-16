@@ -105,7 +105,6 @@ namespace Inventory.Controllers
                     }
                 }
             }
-            return RedirectToAction("Error");
         }
 
         public ActionResult Logout()

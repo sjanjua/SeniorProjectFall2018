@@ -17,7 +17,7 @@ namespace Inventory.DataLayer.Repository
         {
             // DBAs across the country are having strokes 
             //  over this next command!
-            using (var command = new MySqlCommand("select * from user order by RoleID, FirstName"))
+            using (var command = new MySqlCommand("select * from user WHERE ActiveYN = 'Y' order by RoleID, FirstName"))
             {
                 return GetRecords(command);
             }
@@ -33,7 +33,7 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
-        public Users GetById(string id)
+        public Users GetById(String id)
         {
             // PARAMETERIZED QUERIES!
             using (var command = new MySqlCommand("select * from user WHERE UserID = @id"))
@@ -43,7 +43,7 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
-                public void SetAll(Dictionary<String, Object> hash)
+        public void SetAll(Dictionary<String, Object> hash)
         {
             Users user = GetByName((String)hash["UserName"]);
             if (user != null)
@@ -57,7 +57,8 @@ namespace Inventory.DataLayer.Repository
                     command.Parameters.Add(new MySqlParameter("city", (String)hash["City"]));
                     command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["ZipCode"]));
                     command.Parameters.Add(new MySqlParameter("email", (String)hash["Email"]));
-                    AddRecord(command);
+                    command.Parameters.Add(new MySqlParameter("id", ((Int32)hash["UserID"]).ToString()));
+                    ExecuteQuery(command);
                 }
             }
             else
@@ -74,7 +75,7 @@ namespace Inventory.DataLayer.Repository
                     command.Parameters.Add(new MySqlParameter("zipCode", (String)hash["ZipCode"]));
                     command.Parameters.Add(new MySqlParameter("email", (String)hash["Email"]));
                     command.Parameters.Add(new MySqlParameter("roleid", "3"));
-                    AddRecord(command);
+                    ExecuteQuery(command);
                 }
             }
         }
@@ -85,7 +86,16 @@ namespace Inventory.DataLayer.Repository
             {
                 command.Parameters.Add(new MySqlParameter("type", userType));
                 command.Parameters.Add(new MySqlParameter("id", userID));
-                AddRecord(command);
+                ExecuteQuery(command);
+            }
+        }
+
+        public void SetInactive(String userID)
+        {
+            using (var command = new MySqlCommand("Update user SET ActiveYN = 'N' WHERE UserID = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("id", userID));
+                ExecuteQuery(command);
             }
         }
 

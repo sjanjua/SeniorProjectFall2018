@@ -53,6 +53,54 @@ namespace Inventory.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult EditUser(Users user)
+        {
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                UsersRepository repo = new UsersRepository(conn);
+                    Dictionary<String, Object> hash = new Dictionary<String, Object>();
+                    hash.Add("UserName", user.UserName);
+                    hash.Add("Password", user.Password);
+                    hash.Add("FirstName", user.FirstName);
+                    hash.Add("LastName", user.LastName);
+                    hash.Add("PhoneNumber", user.PhoneNumber);
+                    hash.Add("Street", user.Street);
+                    hash.Add("City", user.City);
+                    hash.Add("ZipCode", user.ZipCode);
+                    hash.Add("Email", user.Email);
+                    hash.Add("UserID", user.UserID);
+                    repo.SetAll(hash);
+            }
+            return RedirectToAction("Administrator", new Administrators());
+        }
+
+        public ActionResult DeleteUser(Int32 userId)
+        {
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                UsersRepository repo = new UsersRepository(conn);
+                repo.SetInactive(userId.ToString());
+            }
+            return RedirectToAction("Administrator", new Administrators());
+        }
+
+        public ActionResult ViewDetails(Int32 userID)
+        {
+            Users users = null;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                UsersRepository repo = new UsersRepository(conn);
+                users = repo.GetById(userID.ToString());
+            }
+            if (users != null)
+            {
+                return PartialView("UserDetails", users);
+            }
+            else
+                return RedirectToAction("Administrator", new Administrators());
+        }
+
         public ActionResult ChangeUsers()
         {
             List<Users> users = new List<Users>();
