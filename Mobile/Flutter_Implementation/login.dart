@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'signup.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 
-class LogInScreen extends StatelessWidget
+class logInScreen extends StatelessWidget
 {
   final GlobalKey< FormState > _formKey = GlobalKey< FormState >();
   bool _autoValidate = false;
 
-  String _email;
+  LoginPost post;
+  String _username;
   String _password;
 
   @override
@@ -31,7 +35,7 @@ class LogInScreen extends StatelessWidget
                   Form(
                     key: _formKey,
                     autovalidate: _autoValidate,
-                    child: FormUI()
+                    child: formUI()
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0 , 0.0),
@@ -41,14 +45,44 @@ class LogInScreen extends StatelessWidget
                           onPressed: () {
                           
                             if ( _formKey.currentState.validate() ) {
+                              
+                              post = LoginPost( username: _username, password: _password );
 
-                              if ( _email == 'admin' && _password == 'admin' )
-                              {
-                                Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
-                              }
+                              createLoginPost( post ).then(
 
-                              // Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                                ( response ) {
 
+                                  print( response.statusCode );
+                                  print( response.body );
+                                  
+                                  if ( response.statusCode == 200 )
+                                  {
+                                    if ( response.body == "{\"Message\":\"Success\"}" )
+                                    {
+                                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                                    }
+
+                                    else
+                                    {
+                                      showDialog(
+                                        context: context,
+                                        builder: ( context ) => SimpleDialog( 
+                                          children: <Widget>[
+                                            Text( 
+                                              'Incorrect username and/or password',
+                                              style: TextStyle( 
+                                                fontWeight: FontWeight.bold 
+                                              ),
+                                              textAlign: TextAlign.center    
+                                            )
+                                          ],
+                                        )
+                                      );
+                                    }
+                                    
+                                  }
+                                }
+                              );
                             }
                           },
                           color: Colors.cyan,
@@ -73,9 +107,9 @@ class LogInScreen extends StatelessWidget
     );
   }
 
-  Widget FormUI() {
+  Widget formUI() {
 
-    return Column(
+    Column column = Column(
       children: < Widget >[
         TextFormField(
           decoration: InputDecoration( labelText: 'email', icon: Icon( Icons.email ) ),
@@ -87,7 +121,7 @@ class LogInScreen extends StatelessWidget
             }
             else
             {
-              _email = value;
+              _username = value;
             }
           }
         ),
@@ -108,5 +142,50 @@ class LogInScreen extends StatelessWidget
         )
       ]
     );
+
+    return column;
   }
+
+  LoginPost postFromJson( String str )
+  {
+    final jsonData = json.decode( str );
+    return LoginPost.fromJson( jsonData );
+  }
+
+  String postToJson( LoginPost data ) 
+  {
+    final dyn = data.toJson();
+    return json.encode( dyn );
+  }
+
+  Future< http.Response > createLoginPost( LoginPost post ) async 
+  {
+    final response = await http.post(
+       Uri.parse( 'http://inv.azurewebsites.net/api/account' ),
+       headers: { HttpHeaders.contentTypeHeader: 'application/json' },
+       body: postToJson( post )
+    );
+
+    return response;
+  }
+
+}
+
+class LoginPost
+{
+  String username;
+  String password;
+
+  LoginPost( {this.username, this.password} );
+
+  factory LoginPost.fromJson( Map< String, dynamic > json ) => new LoginPost(
+    username: json[ "UserName" ],
+    password: json[ "Password" ]
+  );
+
+  Map< String, dynamic > toJson() =>
+  {
+    "UserName": username,
+    "Password": password
+  };
 }
