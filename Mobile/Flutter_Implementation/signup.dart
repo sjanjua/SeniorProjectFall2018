@@ -20,7 +20,7 @@ class SignUpScreen extends StatelessWidget
                         icon: Icon( Icons.exit_to_app ),
                         onPressed: ( ) {
                           Navigator.pop( context );
-                          Navigator.push( context, MaterialPageRoute( builder: ( context ) => LogInScreen() ) );
+                          Navigator.push( context, MaterialPageRoute( builder: ( context ) => logInScreen() ) );
                         }
                     )
                   ],
@@ -113,7 +113,7 @@ class SignUpScreen extends StatelessWidget
                                       RaisedButton(
                                           onPressed: () {
                                             Navigator.pop( context );
-                                            Navigator.push( context, MaterialPageRoute( builder: ( context ) => LogInScreen() ) );
+                                            Navigator.push( context, MaterialPageRoute( builder: ( context ) => logInScreen() ) );
                                           },
                                           color: Colors.cyan,
                                           child: Text( 'Sign Up!' )
