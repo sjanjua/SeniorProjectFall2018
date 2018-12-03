@@ -3,5 +3,5 @@ import 'login.dart';
 
 void main()
 {
-  runApp( LogInScreen() );
+  runApp( logInScreen() );
 }
