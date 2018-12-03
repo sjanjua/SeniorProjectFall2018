@@ -24,6 +24,17 @@ namespace Inventory.Controllers
             return View(orders);
         }
 
+        [HttpPost]
+        public ActionResult Index(string searchString)
+        {
+            List<DisplayOrder> orders = new List<DisplayOrder>();
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
+                orders = repo.GetByQuery(searchString).ToList<DisplayOrder>();
+            }
+            return PartialView("Orders", orders);
+        }
 
         // GET: Order/Details/5
         public ActionResult Details(int id)

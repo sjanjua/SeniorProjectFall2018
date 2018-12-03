@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Inventory.Models;
+using Inventory.Server.LUIS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +19,14 @@ namespace Inventory.Controllers
         public ActionResult ShowChart()
         {
             return PartialView("ChartView");
+        }
+
+        [HttpPost]
+        public ActionResult Search(string searchString)
+        {
+            SearchQueryResponse resp =  LUISAdapter.GetSearchQuery(searchString);
+            
+            return View(resp);
         }
     }
 }

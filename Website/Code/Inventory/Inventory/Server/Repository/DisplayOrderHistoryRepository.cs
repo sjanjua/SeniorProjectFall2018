@@ -22,6 +22,14 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
+        public IEnumerable<DisplayOrder> GetByQuery(string searchQuery)
+        {
+            using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))
+            {
+                return GetRecords(command);
+            }
+        }
+
         public override DisplayOrder PopulateRecord(MySqlDataReader reader)
         {
             return new DisplayOrder

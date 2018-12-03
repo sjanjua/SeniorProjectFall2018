@@ -1,0 +1,16 @@
+﻿@model Inventory.Models.SearchQueryResponse
+
+@{
+    ViewBag.Title = "Search Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Search Results
+</h2>
+
+<div class="col-lg-6">
+    
+    @{Html.RenderAction("Index", "Order", new { searchString = Model.SearchQuery });
+    }
+</div>

@@ -6,11 +6,44 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style type="text/css">
+        .search-container {
+            float: left;
+        }
+
+            .search-container button {
+                float: right;
+                padding: 6px 10px;
+                margin-right: 16px;
+                background: #ddd;
+                border: none;
+                cursor: pointer;
+            }
+
+                .search-container button:hover {
+                    background: #ccc;
+                }
+
+            .search-container input[type=text] {
+                padding: 6px;
+                border: none;
+            }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="#">Inventory Management System</a>
         <div>
+            <div class="search-container">
+                <form method="post" action="@Url.Action("Search", "Home")">
+                    <input type="text" placeholder="Search.." name="searchString">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            &nbsp;&nbsp;
             <a href="#" onclick="location.href='@Url.Action("Logout", "Account")'"><i class="fa fa-power-off fa-2x"></i></a>
         </div>
     </nav>
@@ -49,9 +82,7 @@
             <p>&copy;2018 - Senior Project Fall</p>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/popper")
-    @Scripts.Render("~/bundles/bootstrap")
+    
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         $('.tree-toggle').click(function () {
