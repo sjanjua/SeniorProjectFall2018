@@ -15,10 +15,29 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<Dashboard> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM customer"))
+            using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))
             {
                 return GetRecords(command);
             }
+        }
+
+        public IEnumerable<Dashboard> GetByQuery(string searchQuery)
+        {
+            using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))
+            {
+                return GetRecords(command);
+            }
+        }
+
+        public override Dashboard PopulateRecord(MySqlDataReader reader)
+        {
+            return new Dashboard
+            {
+                OrderID = reader.GetInt32("OrderID"),
+                OrderDate = DBUtils.GetDate(reader, "OrderDate"),
+                ShippedDate = DBUtils.GetDate(reader, "ShippedDate"),
+                ShippedName = DBUtils.GetString(reader, "ShipName")
+            };
         }
 
     }
