@@ -6,6 +6,11 @@ using System.Web;
 
 namespace Inventory.Models
 {
+    public class SearchString
+    {
+        public string Query { get; set; }
+    }
+
     public class SearchQueryResponse
     {
         public string RawJSON { get; set; }

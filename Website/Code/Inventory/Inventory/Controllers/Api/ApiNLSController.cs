@@ -1,5 +1,6 @@
 ﻿using Inventory.DataLayer.Repository;
 using Inventory.Models;
+using Inventory.Server.LUIS;
 using Inventory.Utils;
 using MySql.Data.MySqlClient;
 using System;
@@ -13,19 +14,25 @@ namespace Inventory.Controllers.Api
 {
     public class NLSController : ApiController
     {
-        public HttpResponseMessage Post([FromBody]string searchString)
+        public HttpResponseMessage Post(SearchString searchString)
         {
             try
             {
-                List<DisplayOrder> orders = new List<DisplayOrder>();
-                using (MySqlConnection conn = DBUtils.GetConnection())
+                SearchQueryResponse resp = LUISAdapter.GetSearchQuery(searchString.Query);
+
+                if (!String.IsNullOrEmpty(resp.SearchQuery))
                 {
-                    DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
-                    orders = repo.GetByQuery(searchString).ToList<DisplayOrder>();
+                    List<DisplayOrder> orders = new List<DisplayOrder>();
+                    using (MySqlConnection conn = DBUtils.GetConnection())
+                    {
+                        DisplayOrderHistoryRepository repo = new DisplayOrderHistoryRepository(conn);
+                        orders = repo.GetByQuery(resp.SearchQuery).ToList<DisplayOrder>();
+                    }
+
+                    return Request.CreateResponse(HttpStatusCode.OK, orders);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK, orders);
-
+                return Request.CreateResponse(HttpStatusCode.OK, new List<DisplayOrder>());
             }
             catch (Exception ex)
             {
