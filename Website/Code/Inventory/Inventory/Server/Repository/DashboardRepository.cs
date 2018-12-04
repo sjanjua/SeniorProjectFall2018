@@ -1,4 +1,5 @@
 ﻿using Inventory.Models;
+using Inventory.Utils;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
