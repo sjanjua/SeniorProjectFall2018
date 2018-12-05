@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Inventory.Models.Product>
 
 @{
-    ViewBag.Title = "Shippers";
+    ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Shippers</h2>
+<h2>Products</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,10 +13,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ShipperName)
+            @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Phone)
+            @Html.DisplayNameFor(model => model.QuantityPerUnit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitsInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitsOnOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReOrderLevel)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ActiveYN)
@@ -28,18 +40,28 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ShipperName)
+                @Html.DisplayFor(modelItem => item.ProductName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
+                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReOrderLevel)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ActiveYN)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Shipper", new { id = item.ShipperID })
             </td>
         </tr>
     }
 
 </table>
+
