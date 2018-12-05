@@ -92,5 +92,28 @@ namespace Inventory.Controllers
 
             return View(customer);
         }
+
+        public ActionResult Products()
+        {
+            List<Product> products = new List<Product>();
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                ProductRepository repo = new ProductRepository(conn);
+                products = repo.GetAll().ToList<Product>();
+            }
+            return View(products);
+        }
+
+        public ActionResult Product(Int32 id)
+        {
+            Product product;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                ProductRepository repo = new ProductRepository(conn);
+                product = repo.GetById(id.ToString());
+            }
+
+            return View(product);
+        }
     }
 }
