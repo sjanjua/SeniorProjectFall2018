@@ -33,14 +33,11 @@ namespace Inventory.Models
         [ScaffoldColumn(false)]
         [Display(Name = "Shipper"), Required(ErrorMessage = "Please select SHipper")]
         public int ShipperID { get; set; }
-        [Display(Name = "Shipper Name"), DataType(DataType.Date), Required(ErrorMessage = "Please enter Order Date")]
-        public DateTime ShipperName { get; set; }
-        [Display(Name = "Phone No"), DataType(DataType.Date), Required(ErrorMessage = "Please enter Required Date")]
+        [Display(Name = "Phone No"), DataType(DataType.PhoneNumber), Required(ErrorMessage = "Please enter Phone Number")]
         public DateTime Phone { get; set; }
-        [Display(Name = "Freight")]
-        public decimal Freight { get; set; }
+        [Display(Name = "Active")]
+        public decimal ActiveYN { get; set; }
 
-        public List<DisplayCustomer> CustomerList { get; set; }
         public List<DisplayShipper> ShipperList { get; set; }
     }
 }
