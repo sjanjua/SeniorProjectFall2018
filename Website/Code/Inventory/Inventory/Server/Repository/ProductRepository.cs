@@ -21,6 +21,15 @@ namespace Inventory.DataLayer.Repository
             }
         }
 
+        public Product GetById(string id)
+        {
+            using (var command = new MySqlCommand("SELECT * FROM product WHERE ProductId = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("id", id));
+                return GetRecord(command);
+            }
+        }
+
         public override Product PopulateRecord(MySqlDataReader reader)
         {
             return new Product
