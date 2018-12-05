@@ -332,6 +332,8 @@
     <Content Include="Views\Maintenance\Product.cshtml" />
     <Content Include="Views\Maintenance\Products.cshtml" />
     <Content Include="Views\Maintenance\CreateShipper.cshtml" />
+    <Content Include="Views\Maintenance\CreateProduct.cshtml" />
+    <Content Include="Views\Maintenance\CreateProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
