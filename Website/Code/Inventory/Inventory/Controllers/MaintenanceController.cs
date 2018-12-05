@@ -24,6 +24,68 @@ namespace Inventory.Controllers
             }
             return View(shippers);
         }
+        // GET: Order/Create
+        public ActionResult Create()
+        {
+            CreateOrder shipper = new CreateOrder();
+
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+
+                DisplayShipperRepository ship = new DisplayShipperRepository(conn);
+                shipper.ShipperList = ship.GetAll().ToList<DisplayShipper>();
+
+                //DisplayProductRepository product = new DisplayProductRepository(conn);
+                //order.ProductList = product.GetAll().ToList<DisplayProduct>();
+
+            }
+
+            return View(shipper);
+        }
+
+        // POST: Order/Create
+        [HttpPost]
+        public ActionResult Create(CreateShipper shipper)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Shipper newShipper = new Shipper();
+                Int32 newOrderID = 0;
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    CustomerRepository custRepo = new CustomerRepository(conn);
+                    Logon user = (Logon)Session["User"];
+
+
+                    newShipper.ShipperID = shipper.ShipperID;
+                    newShipper.Phone = shipper.Phone;
+          //         newOrder.RequiredDate = order.RequiredDate;
+          //          newOrder.Freight = order.Freight;
+          //          newOrder.UserID = user.UserID;
+
+
+                //    ShipperRepository orderRepo = new ShipperRepository(conn);
+                 //   newShipperID = orderRepo.Save(newOrder);
+                }
+
+                return RedirectToAction("Details", new { id = newOrderID });
+            }
+
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+
+                DisplayShipperRepository ship = new DisplayShipperRepository(conn);
+               shipper.ShipperList = ship.GetAll().ToList<DisplayShipper>();
+
+                //DisplayProductRepository product = new DisplayProductRepository(conn);
+                //order.ProductList = product.GetAll().ToList<DisplayProduct>();
+
+            }
+
+            return View("Create", shipper);
+
+        }
 
         public ActionResult PartialShippers()
         {
