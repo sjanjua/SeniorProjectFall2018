@@ -83,13 +83,15 @@ namespace Inventory.Controllers
                 {
                     CustomerRepository custRepo = new CustomerRepository(conn);
                     Customer cust = custRepo.GetById(order.CustomerID);
+                    Logon user = (Logon)Session["User"];
+
 
                     newOrder.CustomerID = order.CustomerID;
                     newOrder.ShipperID = order.ShipperID;
                     newOrder.OrderDate = order.OrderDate;
                     newOrder.RequiredDate = order.RequiredDate;
                     newOrder.Freight = order.Freight;
-                    newOrder.UserID = 1;
+                    newOrder.UserID = user.UserID;
 
                     newOrder.ShippedName = cust.CompanyName;
                     newOrder.ShippedAddress = cust.Address;

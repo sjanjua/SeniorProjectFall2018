@@ -50,6 +50,12 @@ namespace Inventory.Server.LUIS
                                 sql = appendString(sql, string.Format("orderdate between '{0}' and '{1}'", item.resolution.values[0].start, endDate));
                             }
                             break;
+                        case "builtin.datetimeV2.date":
+                            if (item.resolution.values.Length > 0)
+                            {
+                                sql = appendString(sql, string.Format("orderdate between '{0}' and '{1}'", item.resolution.values[0].value, item.resolution.values[0].value));
+                            }
+                            break;
                         case "company_name":
                             if (!string.IsNullOrEmpty(item.entity))
                                 sql = appendString(sql, string.Format("lower(shipname) like '%{0}%'", item.entity));
