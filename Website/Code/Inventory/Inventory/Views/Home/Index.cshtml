@@ -11,19 +11,19 @@
 <div class="row">
     <div class="col-md-4">
         <div class="card text-white bg-info mb-3">
-            <div class="card-header">Order</div>
+            <div class="card-header">Orders Placed</div>
             <div class="card-body">
                 <h5 class="card-title">Current Month</h5>
-                <p class="card-text">$xx,xxx</p>
+                <p class="card-text">@Html.DisplayFor(model => model.OrdersInMonth)</p>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-            <div class="card-header">Purchase</div>
+            <div class="card-header">Order Total</div>
             <div class="card-body">
                 <h5 class="card-title">Current Month</h5>
-                <p class="card-text">$xx,xxx</p>
+                <p class="card-text">@Html.DisplayFor(model => model.OrderTotal)</p>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
             <div class="card-header">Product</div>
             <div class="card-body">
                 <h5 class="card-title">Below Reorder Level</h5>
-                <p class="card-text">5</p>
+                <p class="card-text">@Html.DisplayFor(model => model.ProductsReorder)</p>
             </div>
         </div>
     </div>

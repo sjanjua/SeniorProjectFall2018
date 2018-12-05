@@ -1,9 +1,13 @@
-﻿@{
+﻿@model IEnumerable<Inventory.Models.Chart>
+
+@{
     var myChart = new Chart(width: 900, height: 400, theme: ChartTheme.Green)
-        .AddTitle("Monthwise Order")
+        .AddTitle("Monthwise Orders - Last 6 months")
         .AddSeries(
             name: "Month",
-            xValue: new[] { "January", "February", "March", "April", "May" },
-            yValues: new[] { "2", "6", "4", "5", "3" })
+            xValue: Model,
+            xField: "MonthName",
+            yValues: Model,
+            yFields: "NoOfOrders")
         .Write();
 }

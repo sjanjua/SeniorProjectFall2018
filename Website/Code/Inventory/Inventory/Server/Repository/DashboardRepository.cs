@@ -14,19 +14,17 @@ namespace Inventory.DataLayer.Repository
         {
         }
 
-        public IEnumerable<Dashboard> GetAll()
+        public Dashboard GetData()
         {
-            using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))
-            {
-                return GetRecords(command);
-            }
-        }
-
-        public IEnumerable<Dashboard> GetByQuery(string searchQuery)
-        {
-            using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))
-            {
-                return GetRecords(command);
+            // PARAMETERIZED QUERIES!
+            using (var command = new MySqlCommand("SELECT (SELECT COUNT(*) FROM orders WHERE orderdate BETWEEN DATE_ADD(DATE_ADD(LAST_DAY(CURDATE()), " +
+                                                  "INTERVAL 1 DAY), INTERVAL - 1 MONTH) AND LAST_DAY(CURDATE())) AS OrdersInMonth, " +
+                                                  "ifnull((SELECT SUM(od.unitprice * od.quantity) FROM orders o INNER JOIN orderdetails od " +
+                                                  "ON o.orderid = od.orderid WHERE orderdate BETWEEN DATE_ADD(DATE_ADD(LAST_DAY(CURDATE()), " +
+                                                  "INTERVAL 1 DAY), INTERVAL - 1 MONTH) AND LAST_DAY(CURDATE())), 0.0) AS OrderTotal, " +
+                                                  "(SELECT COUNT(*) FROM product WHERE UnitsInStock < ReorderLevel AND activeYn = 'Y') AS ProductInReorder; "))
+            {                
+                return GetRecord(command);
             }
         }
 
@@ -34,10 +32,9 @@ namespace Inventory.DataLayer.Repository
         {
             return new Dashboard
             {
-                OrderID = reader.GetInt32("OrderID"),
-                OrderDate = DBUtils.GetDate(reader, "OrderDate"),
-                ShippedDate = DBUtils.GetDate(reader, "ShippedDate"),
-                ShippedName = DBUtils.GetString(reader, "ShipName")
+                OrdersInMonth = reader.GetInt32("OrdersInMonth"),
+                OrderTotal = reader.GetDecimal("OrderTotal"),
+                ProductsReorder = reader.GetInt32("ProductInReorder")
             };
         }
 
