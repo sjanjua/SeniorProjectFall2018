@@ -17,130 +17,141 @@ class logInScreen extends StatelessWidget
   @override
   Widget build( BuildContext context )
   {
-    return MaterialApp( 
-      title: 'Login Screen',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey
-      ),
-      home: Builder(
-        builder: ( context ) => Scaffold(
-          appBar: AppBar(
-            title: Text( 'Inventory Management System' )
-          ),
-          body: Center(
-            child: Container(
-              padding: EdgeInsets.fromLTRB( 35.0, 200.0, 35.0, 35.0 ),
-              child: Column(
-                children: <Widget>[ 
-                  Form(
-                    key: _formKey,
-                    autovalidate: _autoValidate,
-                    child: formUI()
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0 , 0.0),
-                    child: Column(
-                      children: <Widget>[
-                        RaisedButton( 
-                          onPressed: () {
-                          
-                            if ( _formKey.currentState.validate() ) {
-                              
-                              post = LoginPost( username: _username, password: _password );
+    return MaterialApp(
+        title: 'Login Screen',
+        theme: ThemeData(
+            primarySwatch: Colors.blueGrey
+        ),
+        home: Builder(
+            builder: ( context ) => Scaffold(
+                appBar: AppBar(
+                    title: Text( 'Inventory Management System' )
+                ),
+                body: Center(
+                    child: Container(
+                        padding: EdgeInsets.fromLTRB( 35.0, 200.0, 35.0, 35.0 ),
+                        child: Column(
+                            children: <Widget>[
+                              Form(
+                                  key: _formKey,
+                                  autovalidate: _autoValidate,
+                                  child: formUI()
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0 , 0.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    RaisedButton(
+                                      onPressed: () {
 
-                              createLoginPost( post ).then(
+                                        if ( _formKey.currentState.validate() ) {
 
-                                ( response ) {
+                                          post = LoginPost( username: _username, password: _password );
 
-                                  print( response.statusCode );
-                                  print( response.body );
-                                  
-                                  if ( response.statusCode == 200 )
-                                  {
-                                    if ( response.body == "{\"Message\":\"Success\"}" )
-                                    {
-                                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
-                                    }
+                                          createLoginPost( post ).then(
 
-                                    else
-                                    {
-                                      showDialog(
-                                        context: context,
-                                        builder: ( context ) => SimpleDialog( 
-                                          children: <Widget>[
-                                            Text( 
-                                              'Incorrect username and/or password',
-                                              style: TextStyle( 
-                                                fontWeight: FontWeight.bold 
-                                              ),
-                                              textAlign: TextAlign.center    
-                                            )
-                                          ],
-                                        )
-                                      );
-                                    }
-                                    
-                                  }
-                                }
-                              );
-                            }
-                          },
-                          color: Colors.cyan,
-                          child: Text( 'Login' ),
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            Navigator.push( context, MaterialPageRoute( builder: ( context ) => SignUpScreen() ) );
-                          },
-                          color: Colors.cyan,
-                          child: Text( 'Sign Up' )
+                                            ( response ) {
+
+                                                print( response.statusCode );
+                                                print( response.body );
+
+                                                if ( response.statusCode == 200 )
+                                                {
+                                                  if ( response.body == "{\"Message\":\"Success\"}" )
+                                                  {
+                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                                                  }
+
+                                                else
+                                                {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: ( context ) => SimpleDialog( 
+                                                      children: <Widget>[
+                                                        Text( 
+                                                          'Incorrect username and/or password',
+                                                          style: TextStyle( 
+                                                            fontWeight: FontWeight.bold 
+                                                          ),
+                                                          textAlign: TextAlign.center    
+                                                        )
+                                                      ],
+                                                    )
+                                                  );
+                                                }
+
+                                                }
+
+                                                else
+                                                {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: ( context ) => SimpleDialog( 
+                                                      children: <Widget>[
+                                                        Text( 
+                                                          'Incorrect username and/or password',
+                                                          style: TextStyle( 
+                                                            fontWeight: FontWeight.bold 
+                                                          ),
+                                                          textAlign: TextAlign.center    
+                                                        )
+                                                      ],
+                                                    )
+                                                  );
+                                                }
+                                              }
+                                          );
+                                        }
+                                      },
+                                      color: Colors.cyan,
+                                      child: Text( 'Login' ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ]
                         )
-                      ],
-                    ),
-                  )
-                ]
-              )
+                    )
+                )
             )
-          )
         )
-      )
     );
   }
 
   Widget formUI() {
 
     Column column = Column(
-      children: < Widget >[
-        TextFormField(
-          decoration: InputDecoration( labelText: 'email', icon: Icon( Icons.email ) ),
-          keyboardType: TextInputType.emailAddress,
-          validator: ( value ) {
-            if ( value.isEmpty )
-            {
-              return 'Please enter email';
-            }
-            else
-            {
-              _username = value;
-            }
-          }
-        ),
-        TextFormField(
-          decoration: InputDecoration( labelText: 'password', icon: Icon( Icons.lock ) ),
-          keyboardType: TextInputType.text,
-          validator: ( value ) {
-            if ( value.isEmpty )
-            {
-              return 'Please enter password';
-            }
-            else
-            {
-              _password = value;
-            }
-          },
-          obscureText: true,
-        )
-      ]
+        children: < Widget >[
+          TextFormField(
+              decoration: InputDecoration( labelText: 'email', icon: Icon( Icons.email ) ),
+              keyboardType: TextInputType.emailAddress,
+              validator: ( value ) {
+                if ( value.isEmpty )
+                {
+                  return 'Please enter email';
+                }
+                else
+                {
+                  _username = value;
+                }
+              }
+          ),
+          TextFormField(
+            decoration: InputDecoration( labelText: 'password', icon: Icon( Icons.lock ) ),
+            keyboardType: TextInputType.text,
+            validator: ( value ) {
+              if ( value.isEmpty )
+              {
+                return 'Please enter password';
+              }
+              else
+              {
+                _password = value;
+              }
+            },
+            obscureText: true,
+          )
+        ]
     );
 
     return column;
@@ -152,18 +163,18 @@ class logInScreen extends StatelessWidget
     return LoginPost.fromJson( jsonData );
   }
 
-  String postToJson( LoginPost data ) 
+  String postToJson( LoginPost data )
   {
     final dyn = data.toJson();
     return json.encode( dyn );
   }
 
-  Future< http.Response > createLoginPost( LoginPost post ) async 
+  Future< http.Response > createLoginPost( LoginPost post ) async
   {
     final response = await http.post(
-       Uri.parse( 'http://inv.azurewebsites.net/api/account' ),
-       headers: { HttpHeaders.contentTypeHeader: 'application/json' },
-       body: postToJson( post )
+        Uri.parse( 'http://inv.azurewebsites.net/api/account' ),
+        headers: { HttpHeaders.contentTypeHeader: 'application/json' },
+        body: postToJson( post )
     );
 
     return response;
@@ -179,13 +190,13 @@ class LoginPost
   LoginPost( {this.username, this.password} );
 
   factory LoginPost.fromJson( Map< String, dynamic > json ) => new LoginPost(
-    username: json[ "UserName" ],
-    password: json[ "Password" ]
+      username: json[ "UserName" ],
+      password: json[ "Password" ]
   );
 
   Map< String, dynamic > toJson() =>
-  {
-    "UserName": username,
-    "Password": password
-  };
+      {
+        "UserName": username,
+        "Password": password
+      };
 }

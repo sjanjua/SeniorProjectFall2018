@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 
-class SignUpScreen extends StatelessWidget
+/*class SignUpScreen extends StatelessWidget
 {
   @override
   Widget build( BuildContext context )
@@ -20,7 +20,7 @@ class SignUpScreen extends StatelessWidget
                         icon: Icon( Icons.exit_to_app ),
                         onPressed: ( ) {
                           Navigator.pop( context );
-                          Navigator.push( context, MaterialPageRoute( builder: ( context ) => logInScreen() ) );
+                          Navigator.push( context, MaterialPageRoute( builder: ( context ) => LogInScreen() ) );
                         }
                     )
                   ],
@@ -113,7 +113,7 @@ class SignUpScreen extends StatelessWidget
                                       RaisedButton(
                                           onPressed: () {
                                             Navigator.pop( context );
-                                            Navigator.push( context, MaterialPageRoute( builder: ( context ) => logInScreen() ) );
+                                            Navigator.push( context, MaterialPageRoute( builder: ( context ) => LogInScreen() ) );
                                           },
                                           color: Colors.cyan,
                                           child: Text( 'Sign Up!' )
@@ -132,3 +132,4 @@ class SignUpScreen extends StatelessWidget
     );
   }
 }
+*/
