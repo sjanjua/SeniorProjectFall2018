@@ -11,7 +11,6 @@ Future< ShippersList > fetchPost() async
   
   if (response.statusCode == 200)
   {
-    // print( json.decode( response.body ) );
     return ShippersList.fromJson( json.decode( response.body ) );
   } 
   else 
@@ -70,6 +69,7 @@ class _ShippersWidgState extends State< ShippersWidg >
     Icons.search,
     color: Colors.white,
   );
+  
   final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = new TextEditingController();
   List<String> _list;
