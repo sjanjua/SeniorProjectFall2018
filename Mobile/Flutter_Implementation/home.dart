@@ -57,9 +57,15 @@ class Post
 }
 
 class Home extends StatelessWidget
- {
-  int _curr = 0;
-  final List<Widget> _children = [];
+{
+  String _username;
+
+  Home( String username )
+  {
+    _username = username;
+  }
+
+
   ProductsWidg products;
 
   @override
@@ -87,8 +93,8 @@ class Home extends StatelessWidget
               child: ListView(
                 children: <Widget>[
                   UserAccountsDrawerHeader(
-                      accountName: Text( "Admin" ),
-                      accountEmail: Text( "admin@email.com" )
+                      accountName: Text( _username ),
+                      accountEmail: Text( "" )
                   ),
                   ListTile(
                       title: Text( "Shipper" ),

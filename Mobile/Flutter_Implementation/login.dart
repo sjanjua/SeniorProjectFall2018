@@ -59,7 +59,7 @@ class logInScreen extends StatelessWidget
                                                 {
                                                   if ( response.body == "{\"Message\":\"Success\"}" )
                                                   {
-                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home( _username ) ) );
                                                   }
 
                                                 else
