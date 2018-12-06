@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'signup.dart';
 import 'searchForItem.dart';
 import 'package:http/http.dart' as http;
 import 'shippers.dart';
-import 'orders.dart';
+import 'suppliers.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -32,9 +31,7 @@ class Shippers
     var list = parsedJson[ 'Shippers' ] as List;
     List< Post > postList = list.map( ( i ) => Post.fromJson( i ) ).toList();
 
-    return Shippers(
-        posts: postList
-    );
+    return Shippers( posts: postList );
   }
 }
 
@@ -96,22 +93,14 @@ class Home extends StatelessWidget {
                   ),
                   ListTile(
                       title: Text( "Supplier" ),
-                      trailing: Icon( Icons.donut_large )
+                      trailing: Icon( Icons.donut_large ),
+                      onTap: (){
+                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => SuppliersWidg() ));
+                      },
                   ),
                   ListTile(
                       title: Text( "Customer" ),
                       trailing: Icon( Icons.donut_small )
-                  ),
-                  ListTile(
-                      title: Text( "Purchase"),
-                    trailing: Icon( Icons.attach_money )
-                  ),
-                  ListTile(
-                      title: Text( "Order" ),
-                      trailing: Icon( Icons.reorder ),
-                      onTap: () {
-                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrderWidg() ) );
-                    },
                   ),
                   Divider(),
                   ListTile(
