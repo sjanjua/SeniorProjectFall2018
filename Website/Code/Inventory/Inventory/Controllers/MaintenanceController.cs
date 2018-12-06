@@ -152,7 +152,39 @@ namespace Inventory.Controllers
                 product = repo.GetById(id.ToString());
             }
 
-            return View(product);
+            EditProduct prod = new EditProduct();
+            prod.ProductID = product.ProductID;
+            prod.ProductName = product.ProductName;
+            prod.UnitsInStock = product.UnitsInStock;
+            prod.UnitsOnOrder = product.UnitsOnOrder;
+            prod.ActiveYN = product.ActiveYN;
+
+            return View(prod);
+        }
+
+        [HttpPost]
+        public ActionResult Product(EditProduct prod)
+        {
+            if (ModelState.IsValid)
+            {
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    Product product = new Product();
+
+                    product.ProductID = prod.ProductID;
+                    product.ProductName = prod.ProductName;
+                    product.UnitsInStock = prod.UnitsInStock;
+                    product.UnitsOnOrder = prod.UnitsOnOrder;
+                    product.ActiveYN = prod.ActiveYN;
+
+                    ProductRepository repo = new ProductRepository(conn);
+                    repo.Save(product);
+                }
+
+                return RedirectToAction("Products");
+            }
+
+            return View(prod);
         }
     }
 }
