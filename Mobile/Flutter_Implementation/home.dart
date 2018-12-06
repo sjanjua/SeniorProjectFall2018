@@ -5,6 +5,7 @@ import 'searchForItem.dart';
 import 'package:http/http.dart' as http;
 import 'shippers.dart';
 import 'suppliers.dart';
+import 'customers.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -100,7 +101,10 @@ class Home extends StatelessWidget {
                   ),
                   ListTile(
                       title: Text( "Customer" ),
-                      trailing: Icon( Icons.donut_small )
+                      trailing: Icon( Icons.donut_small ),
+                      onTap: (){
+                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => CustomersWidg() ));
+                      }
                   ),
                   Divider(),
                   ListTile(
