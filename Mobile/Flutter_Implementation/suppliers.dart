@@ -6,65 +6,69 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 
-Future<Suppliers> fetchPost1() async {
-  final response =
-  await http.get('http://inv.azurewebsites.net/api/data/suppliers');
+Future< SuppliersList > fetchPost() async 
+{
+  final response = await http.get('http://inv.azurewebsites.net/api/data/suppliers');
 
-  if (response.statusCode == 200) {
-    return Suppliers.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to load post1');
+  if (response.statusCode == 200)
+  {
+    return SuppliersList.fromJson( json.decode( response.body ) );
+  } 
+  else 
+  {
+    throw Exception( 'Failed to load post1' );
   }
 }
 
-class Suppliers {
-  final List<Post> posts;
+class SuppliersList 
+{
+  final List< SuppliersPost > posts;
 
-  Suppliers({this.posts});
+  SuppliersList( { this.posts } );
 
-  factory Suppliers.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['Suppliers'] as List;
-    List<Post> postList = list.map((i) => Post.fromJson(i)).toList();
+  factory SuppliersList.fromJson( List< dynamic > parsedJson )
+  {
+    List< SuppliersPost > suppliers = new List< SuppliersPost >();
+    suppliers = parsedJson.map( ( i ) => SuppliersPost.fromJson( i ) ).toList();
 
-    return Suppliers(posts: postList);
+    return SuppliersList( posts: suppliers );
   }
 }
 
-class Post {
-  final int shipperID;
+class SuppliersPost
+{
+  final int    shipperID;
   final String companyName;
-  // final String phone;
 
-  Post({this.shipperID, this.companyName});
+  SuppliersPost( { this.shipperID, this.companyName } );
 
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      shipperID: json['ShipperID'],
-      companyName: json['ShipperName'],
-      //phone: json[ 'Shipper Phone' ]
+  factory SuppliersPost.fromJson (Map< String, dynamic > json )
+  {
+    return SuppliersPost(
+      shipperID:   json['SupplierID'],
+      companyName: json['CompanyName'],
     );
   }
 }
 
-class Post1 {
-  final k = 0;
-}
-
-class SuppliersWidg extends StatefulWidget {
-  SearchList({Key key}) : super(key: key);
+class SuppliersWidg extends StatefulWidget 
+{
+  SuppliersWidg({Key key}) : super(key: key);
   @override
-  _SearchListState createState() => new _SearchListState();
+  _SuppliersWidgState createState() => new _SuppliersWidgState();
 }
 
-class _SearchListState extends State<SearchList> {
+class _SuppliersWidgState extends State< SuppliersWidg > 
+{
   Widget appBarTitle = new Text(
-    "Search For Shippers",
+    "Search For Suppliers",
     style: new TextStyle(color: Colors.white),
   );
   Icon actionIcon = new Icon(
     Icons.search,
     color: Colors.white,
   );
+
   final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = new TextEditingController();
   List<String> _list;
@@ -88,28 +92,39 @@ class _SearchListState extends State<SearchList> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _IsSearching = false;
-    init();
-  }
-
-  void init() {
-  //  _list = List();
-  //  _list.add("Speedy Express");
-  //  _list.add("United Package");
-  //  _list.add("Federal Shipping");
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       key: key,
       appBar: buildBar(context),
-      body: new ListView(
-        padding: new EdgeInsets.symmetric(vertical: 8.0),
-        children: _IsSearching ? _buildSearchList() : _buildList(),
-      ),
+      body: FutureBuilder< SuppliersList >(
+        future: fetchPost(),
+        builder: ( context, snapshot ) {
+          if ( snapshot.hasData )
+          {
+            _list = List();
+
+            for ( int i = 0; i < snapshot.data.posts.length; i++ )
+            {
+              String supplierName = snapshot.data.posts[ i ].companyName.toString();
+              _list.add( supplierName );
+            }
+
+            return ListView.builder(
+              itemCount: _list.length,
+              itemBuilder: ( context, index ) {
+                return ListTile(
+                  title: Text( _list[ index ] )
+                );
+              }
+            );
+          }
+
+          else
+          {
+            return Text( 'Error loading data...' );
+          }
+        }
+      )
     );
   }
 
