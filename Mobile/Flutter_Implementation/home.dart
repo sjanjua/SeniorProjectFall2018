@@ -7,6 +7,7 @@ import 'shippers.dart';
 import 'suppliers.dart';
 import 'customers.dart';
 import 'product.dart';
+import 'orders.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -109,6 +110,13 @@ class Home extends StatelessWidget
                       onTap: (){
                         Navigator.push( context, MaterialPageRoute( builder: ( context ) => CustomersWidg() ));
                       }
+                  ),
+                  ListTile(
+                    title: Text( "Orders" ),
+                    trailing: Icon( Icons.shopping_basket ),
+                    onTap: () {
+                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrdersWidg() ) );
+                    }
                   ),
                   Divider(),
                   ListTile(
