@@ -9,14 +9,14 @@ import 'package:flutter/services.dart' show rootBundle;
 Future< CustomersList > fetchPost() async 
 {
   final response = await http.get('http://inv.azurewebsites.net/api/data/customers');
-  print( response.body );
+  
   if (response.statusCode == 200)
   {
     return CustomersList.fromJson( json.decode( response.body ) );
   } 
   else 
   {
-    throw Exception( 'Failed to load post1' );
+    throw Exception( 'Failed to load post' );
   }
 }
 
@@ -37,7 +37,7 @@ class CustomersList
 
 class CustomersPost
 {
-  final String    customerID;
+  final String customerID;
   final String companyName;
 
   CustomersPost( { this.customerID, this.companyName } );
