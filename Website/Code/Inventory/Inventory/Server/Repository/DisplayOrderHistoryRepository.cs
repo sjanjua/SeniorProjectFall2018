@@ -16,7 +16,26 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<DisplayOrder> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM orders order by orderdate desc limit 20"))
+            using (var command = new MySqlCommand("SELECT * FROM orders o inner join user u on o.UserID = u.UserID order by orderdate desc limit 20"))
+            {
+                return GetRecords(command);
+            }
+        }
+
+        public IEnumerable<DisplayOrder> GetByQuery(string searchQuery)
+        {
+            string sql = "SELECT * FROM orders o inner join user u on o.UserID = u.UserID";
+            
+            if (!String.IsNullOrEmpty(searchQuery))
+            {
+                sql += " where " + searchQuery;
+            }
+            else
+            {
+                sql += " order by orderdate desc limit 20";
+            }
+
+            using (var command = new MySqlCommand(sql))
             {
                 return GetRecords(command);
             }
@@ -34,7 +53,8 @@ namespace Inventory.DataLayer.Repository
                 ShippedAddress = DBUtils.GetString(reader, "ShipAddress"),
                 ShippedCity = DBUtils.GetString(reader, "ShipCity"),
                 ShippedRegion = DBUtils.GetString(reader, "ShipRegion"),
-                Freight = reader.GetDecimal("Freight")
+                Freight = reader.GetDecimal("Freight"),
+                UserName = DBUtils.GetString(reader, "Username")
             };
         }
     }

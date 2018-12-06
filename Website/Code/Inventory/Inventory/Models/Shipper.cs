@@ -15,7 +15,7 @@ namespace Inventory.Models
         [DisplayName("Shipper")]
         public string ShipperName { get; set; }
         [DisplayName("Phone No")]
-        public string Phone { get; set; }
+        public String Phone { get; set; }
         [DisplayName("Active")]
         public string ActiveYN { get; set; }
     }
@@ -26,5 +26,20 @@ namespace Inventory.Models
         public int ShipperID { get; set; }
         [DisplayName("Shipper")]
         public string ShipperName { get; set; }
+    }
+
+    public class CreateShipper
+    {
+        [ScaffoldColumn(false)]
+        public int UserID { get; set; }
+        [ScaffoldColumn(false)]
+        [Display(Name = "Shipper"), Required(ErrorMessage = "Please select SHipper")]
+        public int ShipperID { get; set; }
+        [Display(Name = "Phone No"), Required(ErrorMessage = "Please enter Phone Number")]
+        public String Phone { get; set; }
+        [Display(Name = "Active")]
+        public decimal ActiveYN { get; set; }
+
+        public List<DisplayShipper> ShipperList { get; set; }
     }
 }

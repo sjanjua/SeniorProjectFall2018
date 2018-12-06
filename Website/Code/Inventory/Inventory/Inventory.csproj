@@ -166,11 +166,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Api\ApiNLSController.cs" />
     <Compile Include="Controllers\Api\ApiOrderController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Models\Chart.cs" />
+    <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\SignIn.cs" />
     <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Server\LUIS\LUISAdapter.cs" />
+    <Compile Include="Server\LUIS\LUISResponse.cs" />
+    <Compile Include="Models\SearchQueryResponse.cs" />
+    <Compile Include="Server\Repository\ChartRepository.cs" />
+    <Compile Include="Server\Repository\DashboardRepository.cs" />
     <Compile Include="Server\Repository\DisplayOrderHistoryRepository.cs" />
     <Compile Include="Server\Repository\DisplayProductRepository.cs" />
     <Compile Include="Server\Repository\DisplaySupplierRepository.cs" />
@@ -259,6 +267,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -319,6 +329,13 @@
     <Content Include="Views\Order\CreateOrderDetail.cshtml" />
     <Content Include="Views\Administrators\Users.cshtml" />
     <Content Include="Views\Administrators\UserDetails.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Order\Orders.cshtml" />
+    <Content Include="Views\Maintenance\Product.cshtml" />
+    <Content Include="Views\Maintenance\Products.cshtml" />
+    <Content Include="Views\Maintenance\CreateShipper.cshtml" />
+    <Content Include="Views\Maintenance\CreateProduct.cshtml" />
+    <Content Include="Views\Maintenance\CreateProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

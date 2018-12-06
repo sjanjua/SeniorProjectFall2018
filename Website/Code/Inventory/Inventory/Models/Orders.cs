@@ -73,6 +73,8 @@ namespace Inventory.Models
         public string ShippedRegion { get; set; }
         [Display(Name ="Freight")]
         public decimal Freight { get; set; }
+        [Display(Name ="User")]
+        public string UserName { get; set; }
     }
 
     public class CreateOrder {
