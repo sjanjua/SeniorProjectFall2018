@@ -16,7 +16,7 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<Orders> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM orders"))
+            using (var command = new MySqlCommand("SELECT o.*, u.username FROM orders  o inner join user u on o.UserID = u.UserID "))
             {
                 return GetRecords(command);
             }
@@ -25,7 +25,7 @@ namespace Inventory.DataLayer.Repository
         public Orders GetById(int id)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("SELECT * FROM orders WHERE OrderID = @id"))
+            using (var command = new MySqlCommand("SELECT o.*, u.username FROM orders  o inner join user u on o.UserID = u.UserID WHERE OrderID = @id"))
             {
                 command.Parameters.Add(new MySqlParameter("id", id));
                 return GetRecord(command);
@@ -68,6 +68,21 @@ namespace Inventory.DataLayer.Repository
             return order.OrderID;
         }
 
+        internal void Delete(int orderId)
+        {
+            using (var command = new MySqlCommand("delete from orderdetails where OrderID = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("id", orderId));
+                ExecuteQuery(command);
+            }
+
+            using (var command = new MySqlCommand("delete from orders where OrderID = @id"))
+            {
+                command.Parameters.Add(new MySqlParameter("id", orderId));
+                ExecuteQuery(command);
+            }
+        }
+
         public override Orders PopulateRecord(MySqlDataReader reader)
         {
             return new Orders
@@ -85,9 +100,11 @@ namespace Inventory.DataLayer.Repository
                 ShippedRegion = DBUtils.GetString(reader, "ShipRegion"),
                 ShippedPostalCode = reader.GetString("ShipPostalCode"),
                 ShippedCountry = DBUtils.GetString(reader, "ShipCountry"),
-                Freight = reader.GetDecimal("Freight")
+                Freight = reader.GetDecimal("Freight"),
+                UserName = DBUtils.GetString(reader, "UserName")
             };
         }
 
+        
     }
 }

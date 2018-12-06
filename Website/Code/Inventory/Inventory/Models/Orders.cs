@@ -36,7 +36,9 @@ namespace Inventory.Models
         [Display(Name = "Shipped Country")]
         public string ShippedCountry { get; set; }
         [Display(Name = "Freight")]
-        public decimal Freight { get; set; }    
+        public decimal Freight { get; set; }
+        [Display(Name = "User")]
+        public string UserName { get; set; }
 
         public List<OrderDetails> Details { get; set; }
     }
@@ -94,6 +96,20 @@ namespace Inventory.Models
 
         public List<DisplayCustomer> CustomerList { get; set; }
         public List<DisplayShipper> ShipperList { get; set; }
+    }
+
+    public class EditOrder
+    {
+        [ScaffoldColumn(false)]
+        public int OrderID { get; set; }
+        [Display(Name = "Order Date")]
+        public Nullable<DateTime> OrderDate { get; set; }
+        [Display(Name = "Required Date")]
+        public Nullable<DateTime> RequiredDate { get; set; }
+        [Display(Name = "Shipped Date"), DataType(DataType.Date), Required(ErrorMessage = "Please enter Shipped Date")]
+        public DateTime ShippedDate { get; set; }
+        [Display(Name = "Shipped To")]
+        public string ShippedName { get; set; }
     }
 
     public class DisplayOrderDetails

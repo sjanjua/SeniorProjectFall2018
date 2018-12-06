@@ -124,47 +124,62 @@ namespace Inventory.Controllers
 
         }
 
-        // GET: Order/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult ShipOrder(int id)
         {
-            return View();
+            Orders order;
+            using (MySqlConnection conn = DBUtils.GetConnection())
+            {
+                OrderRepository repo = new OrderRepository(conn);
+                order = repo.GetById(id);
+
+            }
+
+            EditOrder ship = new EditOrder();
+            ship.OrderID = order.OrderID;
+            ship.OrderDate = order.OrderDate;
+            ship.RequiredDate = order.RequiredDate;
+            ship.ShippedName = order.ShippedName;
+            return View(ship);
         }
 
-        // POST: Order/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult ShipOrder(EditOrder ship)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    Orders order = new Orders();
+
+                    order.OrderID = ship.OrderID;
+                    order.ShippedDate = ship.ShippedDate;
+
+                    OrderRepository repo = new OrderRepository(conn);
+                    repo.Save(order);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Order/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return View(ship);
         }
-
-        // POST: Order/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        
+        public ActionResult DeleteOrder(int orderId)
         {
             try
             {
                 // TODO: Add delete logic here
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    OrderRepository orderRepo = new OrderRepository(conn);
+                    orderRepo.Delete(orderId);
+                }               
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
@@ -230,6 +245,26 @@ namespace Inventory.Controllers
             }
 
             return View(orderDetail);
+        }
+              
+        public ActionResult DeleteOrderDetails(int orderId, int productId)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    OrderDetailsRepository orderRepo = new OrderDetailsRepository(conn);
+                    orderRepo.Delete(orderId, productId);
+                }
+
+                return RedirectToAction("OrderDetails", new { id = orderId });
+                
+            }
+            catch
+            {
+                return RedirectToAction("OrderDetails", new { id = orderId });
+            }
         }
     }
 }

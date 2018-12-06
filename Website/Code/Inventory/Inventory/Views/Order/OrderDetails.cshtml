@@ -21,6 +21,7 @@
         <th>
             Quantity
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model.Details)
@@ -35,16 +36,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteOrderDetails", new { orderId = item.OrderID, productId = item.ProductID }, new { onclick = "return confirm('Are you sure you wish to delete?')" })
+            </td>
         </tr>
     }
 
 </table>
 
 
-@{ if (Model.Details.ToArray<Inventory.Models.OrderDetails>().Length > 0)
-    {
-        <div>
-            @Html.ActionLink("Back to Details", "Details", new { id = Model.Details.ToArray<Inventory.Models.OrderDetails>()[0].OrderID })
-        </div>
-    }
-}
+<div>
+    @Html.ActionLink("Back to Details", "Details", new { id = Model.OrderID })
+</div>

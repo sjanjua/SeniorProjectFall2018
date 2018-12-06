@@ -16,7 +16,7 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<DisplayOrder> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM orders o inner join user u on o.UserID = u.UserID order by orderdate desc limit 20"))
+            using (var command = new MySqlCommand("SELECT o.*, u.username FROM orders o inner join user u on o.UserID = u.UserID order by orderdate desc limit 20"))
             {
                 return GetRecords(command);
             }
@@ -24,7 +24,7 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<DisplayOrder> GetByQuery(string searchQuery)
         {
-            string sql = "SELECT * FROM orders o inner join user u on o.UserID = u.UserID";
+            string sql = "SELECT o.*, u.username FROM orders o inner join user u on o.UserID = u.UserID";
             
             if (!String.IsNullOrEmpty(searchQuery))
             {

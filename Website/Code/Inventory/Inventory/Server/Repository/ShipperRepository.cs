@@ -42,13 +42,34 @@ namespace Inventory.DataLayer.Repository
             };
         }
 
-        public void Delete(String id)
+        public Int32 Save(Shipper shipper)
         {
-            using(var command = new MySqlCommand("DELETE FROM shipper WHERE ShipperId = @id"))
+
+            if (shipper.ShipperID > 0)
             {
-                command.Parameters.Add(new MySqlParameter("id", id));
-                ExecuteStoredProc(command);
+                using (var command = new MySqlCommand("UPDATE shipper SET ShipperName = @shippername, phone= @phone, activeyn =@active WHERE ShipperId = @id"))
+                {
+                    command.Parameters.Add(new MySqlParameter("shippername", shipper.ShipperName));
+                    command.Parameters.Add(new MySqlParameter("phone", shipper.Phone));
+                    command.Parameters.Add(new MySqlParameter("active", shipper.ActiveYN));
+                    command.Parameters.Add(new MySqlParameter("id", shipper.ShipperID));
+                    ExecuteQuery(command);
+                }
             }
+            else
+            {
+                using (var command = new MySqlCommand("INSERT INTO shipper (ShipperName, phone, activeyn) Values(@shippername, @phone, @active);"))
+                {
+                    command.Parameters.Add(new MySqlParameter("shippername", shipper.ShipperName));
+                    command.Parameters.Add(new MySqlParameter("phone", shipper.Phone));
+                    command.Parameters.Add(new MySqlParameter("active", shipper.ActiveYN));
+                    ExecuteQuery(command);
+                }
+
+                shipper.ShipperID = GetIdentity();
+            }
+
+            return shipper.ShipperID;
         }
     }
 }

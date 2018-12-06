@@ -61,8 +61,7 @@
             @Html.DisplayFor(modelItem => item.ActiveYN)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) 
-            @Html.ActionLink("Order Details", "OrderDetails", new { id = item.ProductID })
+            @Html.ActionLink("Edit", "Product", new { id = item.ProductID })
         </td>
     </tr>
     }

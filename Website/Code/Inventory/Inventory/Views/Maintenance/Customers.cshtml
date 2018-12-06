@@ -78,6 +78,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Fax)
             </td>
+            <td>
+                @Html.ActionLink("Edit", "Customer", new { id = item.CustomerID })
+            </td>
         </tr>
     }
 

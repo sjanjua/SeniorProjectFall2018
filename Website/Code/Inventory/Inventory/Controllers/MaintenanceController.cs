@@ -24,69 +24,7 @@ namespace Inventory.Controllers
             }
             return View(shippers);
         }
-        // GET: Order/Create
-        public ActionResult Create()
-        {
-            CreateOrder shipper = new CreateOrder();
-
-            using (MySqlConnection conn = DBUtils.GetConnection())
-            {
-
-                DisplayShipperRepository ship = new DisplayShipperRepository(conn);
-                shipper.ShipperList = ship.GetAll().ToList<DisplayShipper>();
-
-                //DisplayProductRepository product = new DisplayProductRepository(conn);
-                //order.ProductList = product.GetAll().ToList<DisplayProduct>();
-
-            }
-
-            return View(shipper);
-        }
-
-        // POST: Order/Create
-        [HttpPost]
-        public ActionResult Create(CreateShipper shipper)
-        {
-
-            if (ModelState.IsValid)
-            {
-                Shipper newShipper = new Shipper();
-                Int32 newOrderID = 0;
-                using (MySqlConnection conn = DBUtils.GetConnection())
-                {
-                    CustomerRepository custRepo = new CustomerRepository(conn);
-                    Logon user = (Logon)Session["User"];
-
-
-                    newShipper.ShipperID = shipper.ShipperID;
-                    newShipper.Phone = shipper.Phone;
-          //         newOrder.RequiredDate = order.RequiredDate;
-          //          newOrder.Freight = order.Freight;
-          //          newOrder.UserID = user.UserID;
-
-
-                //    ShipperRepository orderRepo = new ShipperRepository(conn);
-                 //   newShipperID = orderRepo.Save(newOrder);
-                }
-
-                return RedirectToAction("Details", new { id = newOrderID });
-            }
-
-            using (MySqlConnection conn = DBUtils.GetConnection())
-            {
-
-                DisplayShipperRepository ship = new DisplayShipperRepository(conn);
-               shipper.ShipperList = ship.GetAll().ToList<DisplayShipper>();
-
-                //DisplayProductRepository product = new DisplayProductRepository(conn);
-                //order.ProductList = product.GetAll().ToList<DisplayProduct>();
-
-            }
-
-            return View("Create", shipper);
-
-        }
-
+        
         public ActionResult PartialShippers()
         {
             List<Shipper> shippers = new List<Shipper>();
@@ -107,6 +45,45 @@ namespace Inventory.Controllers
             }
 
             return View(shipper);
+        }
+
+        [HttpPost]
+        public ActionResult Shipper(Shipper ship)
+        {
+            if (ModelState.IsValid)
+            {
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    ShipperRepository repo = new ShipperRepository(conn);
+                    repo.Save(ship);
+                }
+
+                return RedirectToAction("Shippers");
+            }
+            return View(ship);
+        }
+
+        public ActionResult CreateShipper()
+        {
+            Shipper ship = new Shipper();
+
+            return View(ship);
+        }
+
+        [HttpPost]
+        public ActionResult CreateShipper(Shipper ship)
+        {
+            if (ModelState.IsValid)
+            {
+                using (MySqlConnection conn = DBUtils.GetConnection())
+                {
+                    ShipperRepository repo = new ShipperRepository(conn);
+                    repo.Save(ship);
+                }
+
+                return RedirectToAction("Shippers");
+            }
+            return View(ship);
         }
 
         public ActionResult Suppliers()
@@ -143,13 +120,13 @@ namespace Inventory.Controllers
             return View(customers);
         }
 
-        public ActionResult Customer(Int32 id)
+        public ActionResult Customer(string id)
         {
             Customer customer;
             using (MySqlConnection conn = DBUtils.GetConnection())
             {
                 CustomerRepository repo = new CustomerRepository(conn);
-                customer = repo.GetById(id.ToString());
+                customer = repo.GetById(id);
             }
 
             return View(customer);

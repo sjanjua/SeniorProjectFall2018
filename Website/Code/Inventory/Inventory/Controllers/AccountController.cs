@@ -41,7 +41,8 @@ namespace Inventory.Controllers
                     LogonRepository repo = new LogonRepository(conn);
                     users = repo.GetByName(user.UserName);
                 }
-                if (users.Password.Equals(user.Password))
+
+                if (users != null && users.Password.Equals(user.Password))
                 {
                     context.SetAuthenticationToken(user.UserName.ToString(), false, user);
                     Session["User"] = users;
