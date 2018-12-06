@@ -16,7 +16,7 @@ Future< SuppliersList > fetchPost() async
   } 
   else 
   {
-    throw Exception( 'Failed to load post1' );
+    throw Exception( 'Failed to load post' );
   }
 }
 

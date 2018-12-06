@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'shippers.dart';
 import 'suppliers.dart';
 import 'customers.dart';
+import 'product.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -54,9 +55,12 @@ class Post
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatelessWidget
+ {
   int _curr = 0;
   final List<Widget> _children = [];
+  ProductsWidg products;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -119,32 +123,7 @@ class Home extends StatelessWidget {
           ),
           body:
           Center(
-            child: FutureBuilder<Shippers>(
-              future: fetchPost(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-
-                  String output = '';
-
-                  for ( int i = 0; i < snapshot.data.posts.length; i++ )
-                  {
-                    output += (
-                        ' Shipper ID:   ${ snapshot.data.posts[ i ].shipperID } \n' +
-                            ' Company Name: ${ snapshot.data.posts[ i ].companyName } \n' +
-                            ' Phone Number: ${ snapshot.data.posts[ i ].phone } \n\n\n'
-                    );
-                  }
-                  return Text(
-                      output
-                  );
-                }
-                else if (snapshot.hasError)
-                {
-                  return Text("${snapshot.error}");
-                }
-                return CircularProgressIndicator();
-              },
-            ),
+            child: products = ProductsWidg()
           ),
 
           bottomNavigationBar: BottomNavigationBar(
