@@ -1,0 +1,7 @@
+1. Powerpoint for Presentation
+2. Videos demonstration the various sections (try to create one video per section)
+  a) login & administration
+  b) dashboard and maintenance
+  c) Order
+  d) natural language search
+  
