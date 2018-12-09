@@ -15,7 +15,7 @@ namespace Inventory.DataLayer.Repository
 
         public IEnumerable<Product> GetAll()
         {
-            using (var command = new MySqlCommand("SELECT * FROM product"))
+            using (var command = new MySqlCommand("SELECT * FROM product p"))
             {
                 return GetRecords(command);
             }
@@ -28,6 +28,36 @@ namespace Inventory.DataLayer.Repository
                 command.Parameters.Add(new MySqlParameter("id", id));
                 return GetRecord(command);
             }
+        }
+
+        public Int32 Save(Product product)
+        {
+
+            if (product.ProductID > 0)
+            {
+                using (var command = new MySqlCommand("UPDATE product SET unitsinstock = @stock, unitsonorder= @order, activeyn =@active WHERE ProductId = @id"))
+                {
+                    command.Parameters.Add(new MySqlParameter("stock", product.UnitsInStock));
+                    command.Parameters.Add(new MySqlParameter("order", product.UnitsOnOrder));
+                    command.Parameters.Add(new MySqlParameter("active", product.ActiveYN));
+                    command.Parameters.Add(new MySqlParameter("id", product.ProductID));
+                    ExecuteQuery(command);
+                }
+            }
+            else
+            {
+                //using (var command = new MySqlCommand("INSERT INTO shipper (ShipperName, phone, activeyn) Values(@shippername, @phone, @active);"))
+                //{
+                //    command.Parameters.Add(new MySqlParameter("shippername", product.ShipperName));
+                //    command.Parameters.Add(new MySqlParameter("phone", product.Phone));
+                //    command.Parameters.Add(new MySqlParameter("active", product.ActiveYN));
+                //    ExecuteQuery(command);
+                //}
+
+                //product.ShipperID = GetIdentity();
+            }
+
+            return product.ProductID;
         }
 
         public override Product PopulateRecord(MySqlDataReader reader)

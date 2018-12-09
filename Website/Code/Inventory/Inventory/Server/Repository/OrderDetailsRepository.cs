@@ -56,6 +56,16 @@ namespace Inventory.DataLayer.Repository
             //return order.OrderID;
         }
 
+        internal void Delete(int id, int product)
+        {
+            using (var command = new MySqlCommand("delete from orderdetails where OrderID = @id and ProductID = @pid;"))
+            {
+                command.Parameters.Add(new MySqlParameter("pid", product));
+                command.Parameters.Add(new MySqlParameter("id", id));
+                ExecuteQuery(command);
+            }
+        }
+
         public override OrderDetails PopulateRecord(MySqlDataReader reader)
         {
             return new OrderDetails
@@ -69,5 +79,6 @@ namespace Inventory.DataLayer.Repository
             };
         }
 
+        
     }
 }

@@ -7,9 +7,6 @@
 
 <h2>Customers</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -77,6 +74,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Customer", new { id = item.CustomerID })
             </td>
         </tr>
     }

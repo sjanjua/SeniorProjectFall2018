@@ -36,41 +36,48 @@
         <th>
             @Html.DisplayNameFor(model => model.Freight)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequiredDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShippedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShippedName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShippedAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShippedCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShippedRegion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Freight)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.OrderID }) |
-            @Html.ActionLink("Order Details", "OrderDetails", new { id = item.OrderID })
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiredDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippedName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippedAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippedCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippedRegion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Freight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.OrderID })
+                <hr />
+                @Html.ActionLink("Delete", "DeleteOrder", new { orderId = item.OrderID }, new {onclick = "return confirm('Are you sure you wish to delete?')"})
+            </td>
+        </tr>
     }
 
 </table>
