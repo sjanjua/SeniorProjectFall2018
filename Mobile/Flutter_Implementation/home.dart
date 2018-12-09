@@ -8,6 +8,7 @@ import 'suppliers.dart';
 import 'customers.dart';
 import 'product.dart';
 import 'orders.dart';
+import 'naturallanguagesearch.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -122,6 +123,13 @@ class Home extends StatelessWidget
                     trailing: Icon( Icons.shopping_basket ),
                     onTap: () {
                       Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrdersWidg() ) );
+                    }
+                  ),
+                  ListTile(
+                    title: Text( "Natural Language Search" ),
+                    trailing: Icon( Icons.cloud ),
+                    onTap: () {
+                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => NLSWidg() ) );
                     }
                   ),
                   Divider(),
