@@ -7,6 +7,8 @@ import 'shippers.dart';
 import 'suppliers.dart';
 import 'customers.dart';
 import 'product.dart';
+import 'orders.dart';
+import 'naturallanguagesearch.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -56,9 +58,15 @@ class Post
 }
 
 class Home extends StatelessWidget
- {
-  int _curr = 0;
-  final List<Widget> _children = [];
+{
+  String _username;
+
+  Home( String username )
+  {
+    _username = username;
+  }
+
+
   ProductsWidg products;
 
   @override
@@ -86,8 +94,8 @@ class Home extends StatelessWidget
               child: ListView(
                 children: <Widget>[
                   UserAccountsDrawerHeader(
-                      accountName: Text( "Admin" ),
-                      accountEmail: Text( "admin@email.com" )
+                      accountName: Text( _username ),
+                      accountEmail: Text( "" )
                   ),
                   ListTile(
                       title: Text( "Shipper" ),
@@ -109,6 +117,20 @@ class Home extends StatelessWidget
                       onTap: (){
                         Navigator.push( context, MaterialPageRoute( builder: ( context ) => CustomersWidg() ));
                       }
+                  ),
+                  ListTile(
+                    title: Text( "Orders" ),
+                    trailing: Icon( Icons.shopping_basket ),
+                    onTap: () {
+                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrdersWidg() ) );
+                    }
+                  ),
+                  ListTile(
+                    title: Text( "Natural Language Search" ),
+                    trailing: Icon( Icons.cloud ),
+                    onTap: () {
+                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => NLSWidg() ) );
+                    }
                   ),
                   Divider(),
                   ListTile(

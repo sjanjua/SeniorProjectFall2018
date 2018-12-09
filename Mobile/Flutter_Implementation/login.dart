@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'signup.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
@@ -59,7 +58,7 @@ class logInScreen extends StatelessWidget
                                                 {
                                                   if ( response.body == "{\"Message\":\"Success\"}" )
                                                   {
-                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home() ) );
+                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home( _username ) ) );
                                                   }
 
                                                 else
