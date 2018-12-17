@@ -26,7 +26,8 @@ namespace Inventory.DataLayer.Repository
             return new DisplayShipper
             {
                 ShipperID = reader.GetInt32("ShipperId"),
-                ShipperName = reader.GetString("ShipperName")                
+                ShipperName = reader.GetString("ShipperName"),
+                Phone = reader.GetString("Phone")
             };
         }
     }

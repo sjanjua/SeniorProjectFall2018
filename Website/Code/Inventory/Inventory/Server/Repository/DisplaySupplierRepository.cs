@@ -1,4 +1,5 @@
 ﻿using Inventory.Models;
+using Inventory.Utils;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,16 @@ namespace Inventory.DataLayer.Repository
             return new DisplaySupplier
             {
                 SupplierID = reader.GetInt32("SupplierId"),
-                CompanyName = reader.GetString("CompanyName")                
+                CompanyName = reader.GetString("CompanyName"),
+                ContactName = reader.GetString("ContactName"),
+                ContactTitle = reader.GetString("ContactTitle"),
+                Address = reader.GetString("Address"),
+                City = reader.GetString("City"),
+                Region = DBUtils.GetString(reader, "Region"),
+                PostalCode = reader.GetString("PostalCode"),
+                Country = reader.GetString("Country"),
+                Phone = reader.GetString("Phone"),
+                Fax = DBUtils.GetString(reader, "Fax")
             };
         }
     }
