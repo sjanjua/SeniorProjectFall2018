@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
+import 'globals.dart';
 
 Future< SuppliersList > fetchPost() async 
 {
@@ -62,7 +63,7 @@ class _SuppliersWidgState extends State< SuppliersWidg >
 {
   Widget appBarTitle = new Text(
     "Search For Suppliers",
-    style: new TextStyle(color: Colors.white),
+    style: Globals.textStyle,
   );
   Icon actionIcon = new Icon(
     Icons.search,
@@ -94,6 +95,7 @@ class _SuppliersWidgState extends State< SuppliersWidg >
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Globals.backgroundColor,
       key: key,
       appBar: buildBar(context),
       body: FutureBuilder< SuppliersList >(
@@ -112,8 +114,16 @@ class _SuppliersWidgState extends State< SuppliersWidg >
             return ListView.builder(
               itemCount: _list.length,
               itemBuilder: ( context, index ) {
-                return ListTile(
-                  title: Text( _list[ index ] )
+                return Card(
+                  elevation: 8.0,
+                  margin: EdgeInsets.symmetric( horizontal: 10.0, vertical: 10.0 ),
+                  child: Container(
+                    decoration: BoxDecoration( color: Globals.barColor ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric( horizontal: 10.0, vertical: 6.0 ),
+                      title: Text( _list[ index ], style: Globals.textStyle, textAlign: TextAlign.center )
+                    ),
+                  )
                 );
               }
             );
