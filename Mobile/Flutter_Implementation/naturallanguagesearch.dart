@@ -50,7 +50,7 @@ class _NLSWidgState extends State< NLSWidg >
             padding: EdgeInsets.fromLTRB( 30.0, 60.0, 30.0, 50.0 ),
             child: Column(
               children: <Widget>[
-                TextField( controller: controller ),
+                TextField( controller: controller, decoration: InputDecoration( hintText: 'Enter query to search for orders' ) ),
                 MaterialButton( 
                   onPressed: () {
                     queryField = controller.text;
