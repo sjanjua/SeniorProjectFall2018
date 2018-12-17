@@ -121,7 +121,7 @@ class _CustomersWidgState extends State< CustomersWidg >
 
           else
           {
-            return Text( 'Error loading data...' );
+            return Text( 'Loading...' );
           }
         }
       )

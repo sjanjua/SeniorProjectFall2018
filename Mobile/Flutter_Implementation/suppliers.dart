@@ -121,7 +121,7 @@ class _SuppliersWidgState extends State< SuppliersWidg >
 
           else
           {
-            return Text( 'Error loading data...' );
+            return Text( 'Loading...' );
           }
         }
       )
