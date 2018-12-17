@@ -200,7 +200,7 @@ class _OrdersWidgState extends State< OrdersWidg >
 
           else
           {
-            return Text( 'Error loading data...' );
+            return Text( 'Loading...' );
           }
         }
       )
