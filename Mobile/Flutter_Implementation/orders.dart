@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
+import 'globals.dart';
 
 Future< OrdersList > fetchPost() async 
 {
@@ -117,7 +118,7 @@ class _OrdersWidgState extends State< OrdersWidg >
 {
   Widget appBarTitle = new Text(
     "Search For Orders",
-    style: new TextStyle(color: Colors.white),
+    style: Globals.textStyle,
   );
   Icon actionIcon = new Icon(
     Icons.search,
@@ -149,6 +150,7 @@ class _OrdersWidgState extends State< OrdersWidg >
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Globals.backgroundColor,
       key: key,
       appBar: buildBar(context),
       body: FutureBuilder< OrdersList >(
@@ -180,18 +182,46 @@ class _OrdersWidgState extends State< OrdersWidg >
             return ListView.builder(
               itemCount: _list.length,
               itemBuilder: ( context, index ) {
-                return ListTile( 
-                  title: Text(
-                      'Order ID: '        + _list.elementAt( index ).orderID.toString()        + '\n' +
-                      'Order Date: '      + _list.elementAt( index ).orderDate.toString()      + '\n' +
-                      'Required Date: '   + _list.elementAt( index ).requiredDate.toString()   + '\n' +
-                      'Shipped Date: '    + _list.elementAt( index ).shippedDate.toString()    + '\n' +
-                      'Shipped Address: ' + _list.elementAt( index ).shippedAddress.toString() + '\n' +
-                      'Shipped City: '    + _list.elementAt( index ).shippedCity.toString()    + '\n' +
-                      'Shipped Region: '  + _list.elementAt( index ).shippedRegion.toString()  + '\n' +
-                      'Shipped Name: '    + _list.elementAt( index ).shippedName.toString()    + '\n' +
-                      'Freight: '         + _list.elementAt( index ).freightNumber.toString()  + '\n' +
-                      'Username: '        + _list.elementAt( index ).userName.toString()       + '\n'
+                return Card(
+                  elevation: 8.0,
+                  margin: new EdgeInsets.symmetric( horizontal: 10.0, vertical: 10.0 ),
+                  child: Container(
+                    decoration: BoxDecoration( 
+                      color: Globals.barColor
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric( horizontal: 10.0, vertical: 6.0 ),
+                      title: Row(
+                        children: <Widget>[
+                          Text( 
+                            'Order ID:         ' + '\n' +
+                            'Order Date:       ' + '\n' +
+                            'Required Date:    ' + '\n' +
+                            'Shipped Date:     ' + '\n' +
+                            'Shipped Address:  ' + '\n' +
+                            'Shipped City:     ' + '\n' + 
+                            'Shipped Region:   ' + '\n' + 
+                            'Shipped Name:     ' + '\n' +
+                            'Freight:          ' + '\n' + 
+                            'User:             ',
+                            style: Globals.textStyle
+                          ),
+                          Text( 
+                            _list.elementAt( index ).orderID.toString()        + '\n' +
+                            _list.elementAt( index ).orderDate.toString()      + '\n' +
+                            _list.elementAt( index ).requiredDate.toString()   + '\n' +
+                            _list.elementAt( index ).shippedDate.toString()    + '\n' +
+                            _list.elementAt( index ).shippedAddress.toString() + '\n' +
+                            _list.elementAt( index ).shippedCity.toString()    + '\n' +
+                            _list.elementAt( index ).shippedRegion.toString()  + '\n' +
+                            _list.elementAt( index ).shippedName.toString()    + '\n' +
+                            _list.elementAt( index ).freightNumber.toString()  + '\n' +
+                            _list.elementAt( index ).userName.toString(),
+                            style: Globals.textStyle
+                          )
+                        ],
+                      )
+                    )
                   )
                 );
               }
