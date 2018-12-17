@@ -3,6 +3,7 @@ import 'home.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'globals.dart';
 
 class logInScreen extends StatelessWidget
 {
@@ -19,16 +20,19 @@ class logInScreen extends StatelessWidget
     return MaterialApp(
         title: 'Login Screen',
         theme: ThemeData(
-            primarySwatch: Colors.blueGrey
+          brightness: Brightness.dark,
+          primaryColor: Globals.barColor,
         ),
         home: Builder(
             builder: ( context ) => Scaffold(
+                backgroundColor: Globals.backgroundColor,
                 appBar: AppBar(
-                    title: Text( 'Inventory Management System' )
+                  centerTitle: true,
+                  title: Text( 'Inventory Management System', style: Globals.textStyle )
                 ),
                 body: Center(
                     child: Container(
-                        padding: EdgeInsets.fromLTRB( 35.0, 200.0, 35.0, 35.0 ),
+                        padding: EdgeInsets.fromLTRB( 35.0, 150.0, 35.0, 35.0 ),
                         child: Column(
                             children: <Widget>[
                               Form(
@@ -37,7 +41,7 @@ class logInScreen extends StatelessWidget
                                   child: formUI()
                               ),
                               Container(
-                                padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0 , 0.0),
+                                padding: EdgeInsets.fromLTRB(0.0, 60.0, 0.0 , 0.0),
                                 child: Column(
                                   children: <Widget>[
                                     RaisedButton(
@@ -58,7 +62,7 @@ class logInScreen extends StatelessWidget
                                                 {
                                                   if ( response.body == "{\"Message\":\"Success\"}" )
                                                   {
-                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => Home( _username ) ) );
+                                                    Navigator.push( context, MaterialPageRoute( builder: ( context ) => HomeWidg( username: _username, ) ) );
                                                   }
 
                                                 else
@@ -103,7 +107,8 @@ class logInScreen extends StatelessWidget
                                         }
                                       },
                                       color: Colors.cyan,
-                                      child: Text( 'Login' ),
+                                      child: Text( 'Login', style: Globals.textStyle ),
+                                      elevation: 15.0,
                                     ),
                                   ],
                                 ),

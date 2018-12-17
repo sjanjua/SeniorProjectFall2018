@@ -25,9 +25,9 @@ class _NLSWidgState extends State< NLSWidg >
   Widget build( BuildContext context )
   {
     return MaterialApp(
-      theme: ThemeData( 
-        primarySwatch: Colors.blueGrey
-      ),
+      // theme: ThemeData( 
+      //   brightness: Brightness.dark
+      // ),
       home: Scaffold(
         body: Center(
           child: Padding(
@@ -35,7 +35,9 @@ class _NLSWidgState extends State< NLSWidg >
             child: Column(
               children: <Widget>[
                 TextField( controller: controller ),
-                Text( queryResponse ),
+                SingleChildScrollView(
+                  child: Text( queryResponse )
+                ),
                 MaterialButton( 
                   onPressed: () {
                     queryField = controller.text;
@@ -45,16 +47,30 @@ class _NLSWidgState extends State< NLSWidg >
                     createQueryPost( post ).then(
                       ( response )
                       {
-                        print( response.body );
                         OrdersList products = OrdersList.fromJson( json.decode( response.body ) );
+                        String buffer = '';
+                        String str = '';
 
                         for ( int i = 0; i < products.posts.length; i++ )
                         {
-                          print( products.posts[ i ].freightNumber.toString()   + '\n' + 
-                                 products.posts[ i ].orderDate.toString() + '\n' + '\n' );
+                          buffer = '------------------------' + '\n' + 
+                                    products.posts[ i ].orderID.toString()        + '\n' + 
+                                    products.posts[ i ].orderDate.toString()      + '\n' +
+                                    products.posts[ i ].requiredDate.toString()   + '\n' +
+                                    products.posts[ i ].shippedDate.toString()    + '\n' +
+                                    products.posts[ i ].shippedAddress.toString() + '\n' +
+                                    products.posts[ i ].shippedCity.toString()    + '\n' +
+                                    products.posts[ i ].shippedRegion.toString()  + '\n' +
+                                    products.posts[ i ].shippedName.toString()    + '\n' +
+                                    products.posts[ i ].freightNumber.toString()  + '\n' +
+                                    products.posts[ i ].userName.toString()       + '\n' + 
+                                    '------------------------' + '\n';
+                          str += buffer;
+                          print( buffer );
                         }
                   
-                        queryResponse = response.body;
+                        queryResponse = str;
+                        
                       }
                     );
                   },
@@ -110,3 +126,45 @@ class QueryPost
     "Query": query
   };
 }
+
+// TextField( controller: controller ),
+//                 Text( queryResponse ),
+//                 MaterialButton( 
+//                   onPressed: () {
+//                     queryField = controller.text;
+
+//                     QueryPost post = QueryPost( query: queryField );
+
+//                     createQueryPost( post ).then(
+//                       ( response )
+//                       {
+//                         OrdersList products = OrdersList.fromJson( json.decode( response.body ) );
+//                         String buffer = '';
+//                         String str = '';
+
+//                         for ( int i = 0; i < products.posts.length; i++ )
+//                         {
+//                           buffer = '------------------------' + '\n' + 
+//                                     products.posts[ i ].orderID.toString()        + '\n' + 
+//                                     products.posts[ i ].orderDate.toString()      + '\n' +
+//                                     products.posts[ i ].requiredDate.toString()   + '\n' +
+//                                     products.posts[ i ].shippedDate.toString()    + '\n' +
+//                                     products.posts[ i ].shippedAddress.toString() + '\n' +
+//                                     products.posts[ i ].shippedCity.toString()    + '\n' +
+//                                     products.posts[ i ].shippedRegion.toString()  + '\n' +
+//                                     products.posts[ i ].shippedName.toString()    + '\n' +
+//                                     products.posts[ i ].freightNumber.toString()  + '\n' +
+//                                     products.posts[ i ].userName.toString()       + '\n' + 
+//                                     '------------------------' + '\n';
+//                           str += buffer;
+//                           print( buffer );
+//                         }
+                  
+//                         queryResponse = str;
+//                       }
+//                     );
+//                   },
+//                   child: Text( 'Submit' ),
+//                   color: Colors.blueGrey,
+//                   elevation: 15.0
+//                 )

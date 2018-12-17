@@ -9,6 +9,7 @@ import 'customers.dart';
 import 'product.dart';
 import 'orders.dart';
 import 'naturallanguagesearch.dart';
+import 'globals.dart';
 
 Future<Shippers> fetchPost() async
 {
@@ -57,11 +58,24 @@ class Post
   }
 }
 
-class Home extends StatelessWidget
+class HomeWidg extends StatefulWidget
 {
   String _username;
 
-  Home( String username )
+  HomeWidg( { Key key, String username } ) : super( key: key )
+  {
+    _username = username;
+  }
+
+  @override
+  _HomeWidgState createState() => _HomeWidgState( _username );
+}
+
+class _HomeWidgState extends State< HomeWidg >
+{
+  String _username;
+
+  _HomeWidgState( String username )
   {
     _username = username;
   }
@@ -70,98 +84,109 @@ class Home extends StatelessWidget
   ProductsWidg products;
 
   @override
+  void initState()
+  {
+    super.initState();
+    products = ProductsWidg();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Inventory Management System',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        brightness: Brightness.dark,
+        primaryColor: Globals.barColor
       ),
       home: Scaffold(
+          backgroundColor: Globals.backgroundColor,
           appBar: AppBar(
-            title: Text('Dashboard'),
+            centerTitle: true,
+            title: Text( 'Dashboard - Current Inventory', style: Globals.textStyle ), 
             actions: <Widget>[
-              IconButton(
-                  icon: Icon( Icons.shopping_cart ),
-                  onPressed: () {}
-              ),
-              IconButton(
-                  icon: Icon( Icons.monetization_on ),
-                  onPressed: () {}
+              IconButton( 
+                icon: Icon( Icons.refresh ),
+                onPressed: () { 
+                  setState( () {
+                    products = ProductsWidg();
+                  });
+                },
               )
             ],
           ),
-          drawer: Drawer(
-              child: ListView(
+          drawer: sideDrawer( context, _username ),
+          body: products,
+          bottomNavigationBar: BottomAppBar(
+              color: Globals.barColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  UserAccountsDrawerHeader(
-                      accountName: Text( _username ),
-                      accountEmail: Text( "" )
-                  ),
-                  ListTile(
-                      title: Text( "Shipper" ),
-                      trailing: Icon( Icons.android ),
-                      onTap: () {
-                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => ShippersWidg() ) );
-                      },
-                  ),
-                  ListTile(
-                      title: Text( "Supplier" ),
-                      trailing: Icon( Icons.donut_large ),
-                      onTap: (){
-                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => SuppliersWidg() ));
-                      },
-                  ),
-                  ListTile(
-                      title: Text( "Customer" ),
-                      trailing: Icon( Icons.donut_small ),
-                      onTap: (){
-                        Navigator.push( context, MaterialPageRoute( builder: ( context ) => CustomersWidg() ));
-                      }
-                  ),
-                  ListTile(
-                    title: Text( "Orders" ),
-                    trailing: Icon( Icons.shopping_basket ),
-                    onTap: () {
-                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrdersWidg() ) );
-                    }
-                  ),
-                  ListTile(
-                    title: Text( "Natural Language Search" ),
-                    trailing: Icon( Icons.cloud ),
-                    onTap: () {
-                      Navigator.push( context, MaterialPageRoute( builder: ( context ) => NLSWidg() ) );
-                    }
-                  ),
-                  Divider(),
-                  ListTile(
-                      title: Text( 'Log Out' ),
-                      trailing: Icon( Icons.exit_to_app ),
-                      onTap: () {
-                        Navigator.pop( context );
-                      }
+                  IconButton(
+                    icon: Icon( Icons.search ),
+                    onPressed: () {}
                   )
                 ],
               )
-          ),
-          body:
-          Center(
-            child: products = ProductsWidg()
-          ),
-
-          bottomNavigationBar: BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon( Icons.home ),
-                    title: Text( 'Home' )
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon( Icons.search ),
-                    title: Text( 'Search For Item' ),
-
-                )
-              ]
           )
       ),
     );
   }
+}
+
+Drawer sideDrawer( BuildContext context, String _username )
+{
+  return Drawer(
+    child: ListView(
+      children: <Widget>[
+        UserAccountsDrawerHeader(
+            accountName: Text( 'Current User:   ' + _username, style: Globals.textStyle ),
+            accountEmail: Text( "" )
+        ),
+        ListTile(
+            title: Text( "Shipper", style: Globals.textStyle ),
+            trailing: Icon( Icons.android ),
+            onTap: () {
+              Navigator.push( context, MaterialPageRoute( builder: ( context ) => ShippersWidg() ) );
+            },
+        ),
+        ListTile(
+            title: Text( "Supplier", style: Globals.textStyle ),
+            trailing: Icon( Icons.donut_large ),
+            onTap: (){
+              Navigator.push( context, MaterialPageRoute( builder: ( context ) => SuppliersWidg() ));
+            },
+        ),
+        ListTile(
+            title: Text( "Customer", style: Globals.textStyle ),
+            trailing: Icon( Icons.donut_small ),
+            onTap: (){
+              Navigator.push( context, MaterialPageRoute( builder: ( context ) => CustomersWidg() ));
+            }
+        ),
+        ListTile(
+          title: Text( "Orders", style: Globals.textStyle ),
+          trailing: Icon( Icons.shopping_basket ),
+          onTap: () {
+            Navigator.push( context, MaterialPageRoute( builder: ( context ) => OrdersWidg() ) );
+          }
+        ),
+        ListTile(
+          title: Text( "Natural Language Search", style: Globals.textStyle ),
+          trailing: Icon( Icons.cloud ),
+          onTap: () {
+            Navigator.push( context, MaterialPageRoute( builder: ( context ) => NLSWidg() ) );
+          }
+        ),
+        Divider(),
+        ListTile(
+            title: Text( 'Log Out', style: Globals.textStyle ),
+            trailing: Icon( Icons.exit_to_app ),
+            onTap: () {
+              Navigator.pop( context );
+            }
+        )
+      ],
+    )
+  );
 }
