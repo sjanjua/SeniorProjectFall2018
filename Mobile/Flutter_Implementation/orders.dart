@@ -117,14 +117,10 @@ class OrdersWidg extends StatefulWidget
 class _OrdersWidgState extends State< OrdersWidg > 
 {
   Widget appBarTitle = new Text(
-    "Search For Orders",
+    "Recent Orders",
     style: Globals.textStyle,
   );
-  Icon actionIcon = new Icon(
-    Icons.search,
-    color: Colors.white,
-  );
-
+  
   final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = new TextEditingController();
   List< Order > _list;
@@ -152,7 +148,10 @@ class _OrdersWidgState extends State< OrdersWidg >
     return new Scaffold(
       backgroundColor: Globals.backgroundColor,
       key: key,
-      appBar: buildBar(context),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text( 'Recent Orders', style: Globals.textStyle ), 
+      ),
       body: FutureBuilder< OrdersList >(
         future: fetchPost(),
         builder: ( context, snapshot ) {
@@ -237,64 +236,64 @@ class _OrdersWidgState extends State< OrdersWidg >
     );
   }
 
-  Widget buildBar(BuildContext context) {
-    return new AppBar(centerTitle: true, title: appBarTitle, actions: <Widget>[
-      new IconButton(
-        icon: actionIcon,
-        onPressed: () {
-          setState(() {
-            if (this.actionIcon.icon == Icons.search) {
-              this.actionIcon = new Icon(
-                Icons.close,
-                color: Colors.white,
-              );
-              this.appBarTitle = new TextField(
-                controller: _searchQuery,
-                style: new TextStyle(
-                  color: Colors.white,
-                ),
-                decoration: new InputDecoration(
-                    prefixIcon: new Icon(Icons.search, color: Colors.white),
-                    hintText: "Search...",
-                    hintStyle: new TextStyle(color: Colors.white)),
-              );
-              _handleSearchStart();
-            } else {
-              _handleSearchEnd();
-            }
-          });
-        },
-      ),
-    ]);
-  }
+//   Widget buildBar(BuildContext context) {
+//     return new AppBar(centerTitle: true, title: appBarTitle, actions: <Widget>[
+//       new IconButton(
+//         icon: actionIcon,
+//         onPressed: () {
+//           setState(() {
+//             if (this.actionIcon.icon == Icons.search) {
+//               this.actionIcon = new Icon(
+//                 Icons.close,
+//                 color: Colors.white,
+//               );
+//               this.appBarTitle = new TextField(
+//                 controller: _searchQuery,
+//                 style: new TextStyle(
+//                   color: Colors.white,
+//                 ),
+//                 decoration: new InputDecoration(
+//                     prefixIcon: new Icon(Icons.search, color: Colors.white),
+//                     hintText: "Search...",
+//                     hintStyle: new TextStyle(color: Colors.white)),
+//               );
+//               _handleSearchStart();
+//             } else {
+//               _handleSearchEnd();
+//             }
+//           });
+//         },
+//       ),
+//     ]);
+//   }
 
-  void _handleSearchStart() {
-    setState(() {
-      _IsSearching = true;
-    });
-  }
+//   void _handleSearchStart() {
+//     setState(() {
+//       _IsSearching = true;
+//     });
+//   }
 
-  void _handleSearchEnd() {
-    setState(() {
-      this.actionIcon = new Icon(
-        Icons.search,
-        color: Colors.white,
-      );
-      this.appBarTitle = new Text(
-        "Search Sample",
-        style: new TextStyle(color: Colors.white),
-      );
-      _IsSearching = false;
-      _searchQuery.clear();
-    });
-  }
-}
+//   void _handleSearchEnd() {
+//     setState(() {
+//       this.actionIcon = new Icon(
+//         Icons.search,
+//         color: Colors.white,
+//       );
+//       this.appBarTitle = new Text(
+//         "Search Sample",
+//         style: new TextStyle(color: Colors.white),
+//       );
+//       _IsSearching = false;
+//       _searchQuery.clear();
+//     });
+//   }
+// }
 
-class ChildItem extends StatelessWidget {
-  final String name;
-  ChildItem(this.name);
-  @override
-  Widget build(BuildContext context) {
-    return new ListTile(title: new Text(this.name));
-  }
+// class ChildItem extends StatelessWidget {
+//   final String name;
+//   ChildItem(this.name);
+//   @override
+//   Widget build(BuildContext context) {
+//     return new ListTile(title: new Text(this.name));
+//   }
 }
