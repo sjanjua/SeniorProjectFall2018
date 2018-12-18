@@ -11,6 +11,13 @@ import 'orders.dart';
 import 'naturallanguagesearch.dart';
 import 'globals.dart';
 
+
+//************************************************************************************************
+//Home Page for the App and the main screen from which functionality is stemmed 
+//Upon proper login validation user is brought to the home page 
+//************************************************************************************************ 
+
+//Fetchpost to get the endpoint for shippers from the rest api 
 Future<Shippers> fetchPost() async
 {
   final response = await http.get('http://inv.azurewebsites.net/api/data/');
@@ -23,8 +30,10 @@ Future<Shippers> fetchPost() async
   {
     throw Exception('Failed to load post');
   }
-}
+}//END of fetchpost 
 
+
+//Class for shippers that parses the JSON that was retreived by the fetchpost 
 class Shippers
 {
   final List< Post > posts;
@@ -38,8 +47,10 @@ class Shippers
 
     return Shippers( posts: postList );
   }
-}
+}//End of Shiipers class
 
+
+//Shippers post class assigns the values from the parsed json to each of the corresponding app variables 
 class Post
 {
   final int    shipperID;
@@ -56,8 +67,10 @@ class Post
         phone: json[ 'Phone' ]
     );
   }
-}
+}//END of shippers post class 
 
+
+//HomeWidg class that instantiates a widget for home 
 class HomeWidg extends StatefulWidget
 {
   String _username;
@@ -69,8 +82,10 @@ class HomeWidg extends StatefulWidget
 
   @override
   _HomeWidgState createState() => _HomeWidgState( _username );
-}
+}//END of HomeWidg class
 
+
+//class HomeWidgState creates the state of the home widget that it will be initialized to when called 
 class _HomeWidgState extends State< HomeWidg >
 {
   String _username;
@@ -90,6 +105,7 @@ class _HomeWidgState extends State< HomeWidg >
     products = ProductsWidg();
   }
 
+  //Visual layout for the text and buttons used in the Home widget 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -132,8 +148,11 @@ class _HomeWidgState extends State< HomeWidg >
       ),
     );
   }
-}
+}//END of HomeWidgState 
 
+
+//Menu structure to allow user to select a functionality of an the app 
+//Contains links to the other pages of the app 
 Drawer sideDrawer( BuildContext context, String _username )
 {
   return Drawer(
@@ -189,4 +208,4 @@ Drawer sideDrawer( BuildContext context, String _username )
       ],
     )
   );
-}
+}//END of Drawer menu
