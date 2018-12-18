@@ -106,7 +106,7 @@ class logInScreen extends StatelessWidget
                                           );
                                         }
                                       },
-                                      color: Colors.cyan,
+                                      color: Colors.cyan[ 700 ],
                                       child: Text( 'Login', style: Globals.textStyle ),
                                       elevation: 15.0,
                                     ),

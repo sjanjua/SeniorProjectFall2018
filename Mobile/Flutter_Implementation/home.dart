@@ -144,21 +144,21 @@ Drawer sideDrawer( BuildContext context, String _username )
             accountEmail: Text( "" )
         ),
         ListTile(
-            title: Text( "Shipper", style: Globals.textStyle ),
+            title: Text( "Shippers", style: Globals.textStyle ),
             trailing: Icon( Icons.android ),
             onTap: () {
               Navigator.push( context, MaterialPageRoute( builder: ( context ) => ShippersWidg() ) );
             },
         ),
         ListTile(
-            title: Text( "Supplier", style: Globals.textStyle ),
+            title: Text( "Suppliers", style: Globals.textStyle ),
             trailing: Icon( Icons.donut_large ),
             onTap: (){
               Navigator.push( context, MaterialPageRoute( builder: ( context ) => SuppliersWidg() ));
             },
         ),
         ListTile(
-            title: Text( "Customer", style: Globals.textStyle ),
+            title: Text( "Customers", style: Globals.textStyle ),
             trailing: Icon( Icons.donut_small ),
             onTap: (){
               Navigator.push( context, MaterialPageRoute( builder: ( context ) => CustomersWidg() ));

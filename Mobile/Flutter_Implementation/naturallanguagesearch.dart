@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'orders.dart';
+import 'globals.dart';
 
 class NLSWidg extends StatefulWidget
 {
@@ -20,24 +21,36 @@ class _NLSWidgState extends State< NLSWidg >
   String queryField = 'n/a';
   TextEditingController controller = TextEditingController();
   String queryResponse = 'n/a';
+  OrdersList products;
+
+  @override
+  void initState()
+  {
+    super.initState();
+
+    products = OrdersList(
+      posts: < OrdersPost >[
+        OrdersPost()
+      ]
+    );
+  }
 
   @override 
   Widget build( BuildContext context )
   {
     return MaterialApp(
-      // theme: ThemeData( 
-      //   brightness: Brightness.dark
-      // ),
+      theme: ThemeData( 
+        brightness: Brightness.dark,
+        primaryColor: Globals.barColor
+      ),
       home: Scaffold(
+        backgroundColor: Globals.backgroundColor,
         body: Center(
           child: Padding(
-            padding: EdgeInsets.fromLTRB( 30.0, 100.0, 30.0, 50.0 ),
+            padding: EdgeInsets.fromLTRB( 30.0, 60.0, 30.0, 50.0 ),
             child: Column(
               children: <Widget>[
-                TextField( controller: controller ),
-                SingleChildScrollView(
-                  child: Text( queryResponse )
-                ),
+                TextField( controller: controller, decoration: InputDecoration( hintText: 'Enter query to search for orders' ) ),
                 MaterialButton( 
                   onPressed: () {
                     queryField = controller.text;
@@ -47,36 +60,89 @@ class _NLSWidgState extends State< NLSWidg >
                     createQueryPost( post ).then(
                       ( response )
                       {
-                        OrdersList products = OrdersList.fromJson( json.decode( response.body ) );
-                        String buffer = '';
-                        String str = '';
+                        
+                        // String buffer = '';
+                        // String str = '';
 
-                        for ( int i = 0; i < products.posts.length; i++ )
-                        {
-                          buffer = '------------------------' + '\n' + 
-                                    products.posts[ i ].orderID.toString()        + '\n' + 
-                                    products.posts[ i ].orderDate.toString()      + '\n' +
-                                    products.posts[ i ].requiredDate.toString()   + '\n' +
-                                    products.posts[ i ].shippedDate.toString()    + '\n' +
-                                    products.posts[ i ].shippedAddress.toString() + '\n' +
-                                    products.posts[ i ].shippedCity.toString()    + '\n' +
-                                    products.posts[ i ].shippedRegion.toString()  + '\n' +
-                                    products.posts[ i ].shippedName.toString()    + '\n' +
-                                    products.posts[ i ].freightNumber.toString()  + '\n' +
-                                    products.posts[ i ].userName.toString()       + '\n' + 
-                                    '------------------------' + '\n';
-                          str += buffer;
-                          print( buffer );
-                        }
+                        // for ( int i = 0; i < products.posts.length; i++ )
+                        // {
+                        //   buffer = '------------------------' + '\n' + 
+                        //             products.posts[ i ].orderID.toString()        + '\n' + 
+                        //             products.posts[ i ].orderDate.toString()      + '\n' +
+                        //             products.posts[ i ].requiredDate.toString()   + '\n' +
+                        //             products.posts[ i ].shippedDate.toString()    + '\n' +
+                        //             products.posts[ i ].shippedAddress.toString() + '\n' +
+                        //             products.posts[ i ].shippedCity.toString()    + '\n' +
+                        //             products.posts[ i ].shippedRegion.toString()  + '\n' +
+                        //             products.posts[ i ].shippedName.toString()    + '\n' +
+                        //             products.posts[ i ].freightNumber.toString()  + '\n' +
+                        //             products.posts[ i ].userName.toString()       + '\n' + 
+                        //             '------------------------' + '\n';
+                        //   str += buffer;
+                        //   //print( buffer );
+                        // }
                   
-                        queryResponse = str;
+                        // queryResponse = str;
+
+                        setState( () {
+                          products = OrdersList.fromJson( json.decode( response.body ) );
+                        });
                         
                       }
                     );
                   },
-                  child: Text( 'Submit' ),
-                  color: Colors.blueGrey,
+                  child: Text( 'Submit', style: Globals.textStyle ),
+                  color: Colors.cyan[ 700 ],
                   elevation: 15.0
+                ),
+                Expanded( 
+                  child: ListView.builder(
+                  itemCount: products.posts.length,
+                  itemBuilder: ( context, index ) {
+                    return Card(
+                  elevation: 8.0,
+                  margin: new EdgeInsets.symmetric( horizontal: 10.0, vertical: 10.0 ),
+                  child: Container(
+                    decoration: BoxDecoration( 
+                      color: Globals.barColor
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric( horizontal: 10.0, vertical: 6.0 ),
+                      title: Row(
+                        children: <Widget>[
+                          Text( 
+                            'Order ID:         ' + '\n' +
+                            'Order Date:       ' + '\n' +
+                            'Required Date:    ' + '\n' +
+                            'Shipped Date:     ' + '\n' +
+                            'Shipped Address:  ' + '\n' +
+                            'Shipped City:     ' + '\n' + 
+                            'Shipped Region:   ' + '\n' + 
+                            'Shipped Name:     ' + '\n' +
+                            'Freight:          ' + '\n' + 
+                            'User:             ',
+                            style: Globals.textStyle
+                          ),
+                          Text( 
+                            products.posts.elementAt( index ).orderID.toString()        + '\n' +
+                            products.posts.elementAt( index ).orderDate.toString()      + '\n' +
+                            products.posts.elementAt( index ).requiredDate.toString()   + '\n' +
+                            products.posts.elementAt( index ).shippedDate.toString()    + '\n' +
+                            products.posts.elementAt( index ).shippedAddress.toString() + '\n' +
+                            products.posts.elementAt( index ).shippedCity.toString()    + '\n' +
+                            products.posts.elementAt( index ).shippedRegion.toString()  + '\n' +
+                            products.posts.elementAt( index ).shippedName.toString()    + '\n' +
+                            products.posts.elementAt( index ).freightNumber.toString()  + '\n' +
+                            products.posts.elementAt( index ).userName.toString(),
+                            style: Globals.textStyle
+                          )
+                        ],
+                      )
+                    )
+                  )
+                );},  
+                // child: Text( queryResponse )
+              ),
                 )
               ]
             )
@@ -85,6 +151,8 @@ class _NLSWidgState extends State< NLSWidg >
       ) 
     );
   }
+
+  
 
   Future< http.Response > createQueryPost( QueryPost post ) async
   {
@@ -126,45 +194,3 @@ class QueryPost
     "Query": query
   };
 }
-
-// TextField( controller: controller ),
-//                 Text( queryResponse ),
-//                 MaterialButton( 
-//                   onPressed: () {
-//                     queryField = controller.text;
-
-//                     QueryPost post = QueryPost( query: queryField );
-
-//                     createQueryPost( post ).then(
-//                       ( response )
-//                       {
-//                         OrdersList products = OrdersList.fromJson( json.decode( response.body ) );
-//                         String buffer = '';
-//                         String str = '';
-
-//                         for ( int i = 0; i < products.posts.length; i++ )
-//                         {
-//                           buffer = '------------------------' + '\n' + 
-//                                     products.posts[ i ].orderID.toString()        + '\n' + 
-//                                     products.posts[ i ].orderDate.toString()      + '\n' +
-//                                     products.posts[ i ].requiredDate.toString()   + '\n' +
-//                                     products.posts[ i ].shippedDate.toString()    + '\n' +
-//                                     products.posts[ i ].shippedAddress.toString() + '\n' +
-//                                     products.posts[ i ].shippedCity.toString()    + '\n' +
-//                                     products.posts[ i ].shippedRegion.toString()  + '\n' +
-//                                     products.posts[ i ].shippedName.toString()    + '\n' +
-//                                     products.posts[ i ].freightNumber.toString()  + '\n' +
-//                                     products.posts[ i ].userName.toString()       + '\n' + 
-//                                     '------------------------' + '\n';
-//                           str += buffer;
-//                           print( buffer );
-//                         }
-                  
-//                         queryResponse = str;
-//                       }
-//                     );
-//                   },
-//                   child: Text( 'Submit' ),
-//                   color: Colors.blueGrey,
-//                   elevation: 15.0
-//                 )
