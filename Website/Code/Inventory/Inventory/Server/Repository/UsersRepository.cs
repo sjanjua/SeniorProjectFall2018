@@ -1,4 +1,5 @@
 ﻿using Inventory.Models;
+using Inventory.Utils;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Inventory.DataLayer.Repository
         public Users GetByName(string name)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("select * from user WHERE UserName = @name"))
+            using (var command = new MySqlCommand("select u.*, aes_decrypt(Password,'seniorproject') as DecryptPassword from user u WHERE UserName = @name"))
             {
                 command.Parameters.Add(new MySqlParameter("name", name));
                 return GetRecord(command);
@@ -36,7 +37,7 @@ namespace Inventory.DataLayer.Repository
         public Users GetById(String id)
         {
             // PARAMETERIZED QUERIES!
-            using (var command = new MySqlCommand("select * from user WHERE UserID = @id"))
+            using (var command = new MySqlCommand("select u.*, aes_decrypt(Password,'seniorproject') as DecryptPassword from user u WHERE UserID = @id"))
             {
                 command.Parameters.Add(new MySqlParameter("id", id));
                 return GetRecord(command);
@@ -106,14 +107,14 @@ namespace Inventory.DataLayer.Repository
             {
                 UserID = reader.GetInt32("UserID"),
                 UserName = reader.GetString("UserName"),
-                Password = reader.GetString("Password"),
-                FirstName = reader.GetString("FirstName"),
-                LastName = reader.GetString("LastName"),
-                PhoneNumber = reader.GetString("PhoneNumber"),
-                Street = reader.GetString("Street"),
-                City = reader.GetString("City"),
-                ZipCode = reader.GetString("ZipCode"),
-                Email = reader.GetString("Email"),
+                Password = reader.GetString("DecryptPassword"),
+                FirstName = DBUtils.GetString(reader, "FirstName"),
+                LastName = DBUtils.GetString(reader, "LastName"),
+                PhoneNumber = DBUtils.GetString(reader, "PhoneNumber"),
+                Street = DBUtils.GetString(reader, "Street"),
+                City = DBUtils.GetString(reader, "City"),
+                ZipCode = DBUtils.GetString(reader, "ZipCode"),
+                Email = DBUtils.GetString(reader, "Email"),
                 RoleID = reader.GetInt16("RoleID"),
                 ActiveYN = reader.GetString("ActiveYN")
             };

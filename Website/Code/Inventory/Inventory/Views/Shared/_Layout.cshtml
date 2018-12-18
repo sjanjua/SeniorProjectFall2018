@@ -36,7 +36,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="#">Inventory Management System</a>&nbsp;&nbsp;Welcome
-        @{Inventory.Models.Logon usr = (Inventory.Models.Logon)Session["User"]; }
+        @{Inventory.Models.Users usr = (Inventory.Models.Users)Session["User"]; }
         @usr.UserName.ToUpper()
         <div>
             <div class="search-container">
@@ -56,18 +56,24 @@
                     <i class="fa fa-home fa-2x"></i>
                 </a>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" onclick="location.href='@Url.Action("Administrator", "Administrators")'" role="button">Administration</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Maintenance</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Shippers", "Maintenance")'">Shipper</a>
-                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Suppliers", "Maintenance")'">Supplier</a>
-                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Customers", "Maintenance")'">Customer</a>
-                            <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Products", "Maintenance")'">Product</a>
-                        </div>
-                    </li>
+                    @if (usr.RoleID == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" onclick="location.href='@Url.Action("Administrator", "Administrators")'" role="button">Administration</a>
+                        </li>
+                    }
+                    @if (usr.RoleID == 1 || usr.RoleID == 2)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Maintenance</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Shippers", "Maintenance")'">Shipper</a>
+                                <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Suppliers", "Maintenance")'">Supplier</a>
+                                <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Customers", "Maintenance")'">Customer</a>
+                                <a class="dropdown-item" href="#" onclick="location.href='@Url.Action("Products", "Maintenance")'">Product</a>
+                            </div>
+                        </li>
+                    }
                     <li class="nav-item dropdown">
                         <a class="nav-link active" href="#" onclick="location.href='@Url.Action("Index", "Order")'">Order</a>
                     </li>
@@ -85,7 +91,7 @@
             <p>&copy;2018 - Senior Project Fall</p>
         </footer>
     </div>
-    
+
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         $('.tree-toggle').click(function () {

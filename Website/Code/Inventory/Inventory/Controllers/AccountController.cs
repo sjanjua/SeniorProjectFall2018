@@ -35,10 +35,10 @@ namespace Inventory.Controllers
         {
             if (ModelState.IsValid)
             {
-                Logon users = null;
+                Users users = null;
                 using (MySqlConnection conn = DBUtils.GetConnection())
                 {
-                    LogonRepository repo = new LogonRepository(conn);
+                    UsersRepository repo = new UsersRepository(conn);
                     users = repo.GetByName(user.UserName);
                 }
 
