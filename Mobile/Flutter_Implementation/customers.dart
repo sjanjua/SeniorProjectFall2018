@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'home.dart';
 import 'signup.dart';
 import 'dart:async';
@@ -7,20 +7,27 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'globals.dart';
 
+
+//Customers page connects to database via JSON and allows user to return  information about customers 
+
+
+//Customer list post that pulls the JSON endpoint from the rest api 
 Future< CustomersList > fetchPost() async 
 {
-  final response = await http.get('http://inv.azurewebsites.net/api/data/customers');
+  final response = await http.get('http://inv.azurewebsites.net/api/data/customers'); //JSON endpoint 
   
   if (response.statusCode == 200)
   {
-    return CustomersList.fromJson( json.decode( response.body ) );
+    return CustomersList.fromJson( json.decode( response.body ) );//returns the post 
   } 
   else 
   {
-    throw Exception( 'Failed to load post' );
+    throw Exception( 'Failed to load post' );//error message
   }
-}
+}//END of the Endpoint post fetch 
 
+
+//Class customer list that parses the endpoint data and returns it back to the user as a list 
 class CustomersList 
 {
   final List< CustomersPost > posts;
@@ -34,8 +41,12 @@ class CustomersList
 
     return CustomersList( posts: customers );
   }
-}
+} 
+//END of class CustomersList 
 
+
+//Customers post class that has all of the variables that each customer may have and assigns the variables that match 
+//from the JSON to the variable for each customer seen on the app screen 
 class CustomersPost
 {
   final String customerID;
@@ -81,15 +92,20 @@ class CustomersPost
       fax:           json[ 'Fax' ]
     );
   }
-}
+}//END of CustomersPost class all variables have been imported 
 
+
+//CustomerWidg Class --> Making the template for a widget for Customers in the app 
 class CustomersWidg extends StatefulWidget 
 {
   CustomersWidg({Key key}) : super(key: key);
   @override
   _CustomersWidgState createState() => new _CustomersWidgState();
 }
+//END of CustomerWidg Class 
 
+//CustomerWidgState Class initializes a customer widget with particular color and text to be used
+//when a new customerWidg gets a new state 
 class _CustomersWidgState extends State< CustomersWidg > 
 {
   Widget appBarTitle = new Text(
@@ -101,6 +117,7 @@ class _CustomersWidgState extends State< CustomersWidg >
     color: Colors.white,
   );
 
+  //checking for the search results for customers 
   final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = new TextEditingController();
   List< CustomersPost > _list;
@@ -141,6 +158,7 @@ class _CustomersWidgState extends State< CustomersWidg >
 
             CustomersPost post;
 
+            //loop to return the data visually for each customer in the list 
             for ( int i = 0; i < snapshot.data.posts.length; i++ )
             {
               String customerID   = snapshot.data.posts[ i ].customerID;
@@ -172,6 +190,8 @@ class _CustomersWidgState extends State< CustomersWidg >
               _list.add( post );
             }
 
+            //formatting the gui for the customers posts Widget 
+            //Structure for text, color, size 
             return ListView.builder(
               itemCount: _list.length,
               itemBuilder: ( context, index ) {
@@ -235,8 +255,12 @@ class _CustomersWidgState extends State< CustomersWidg >
         }
       )
     );
-  }
+  }// End of widget and gui construction for customers page 
+  //END OF WORKING CODE FOR CUSTOMERS
 
+  
+  //Scrap code below 
+  //******************************************************************************************************************************
 //   List<ChildItem> _buildList() {
 //     return _list.map((contact) => new ChildItem(contact)).toList();
 //   }
@@ -316,4 +340,5 @@ class _CustomersWidgState extends State< CustomersWidg >
 //   Widget build(BuildContext context) {
 //     return new ListTile(title: new Text(this.name));
 //   }
-}
+} 
+//********************************************************************************************************************************
