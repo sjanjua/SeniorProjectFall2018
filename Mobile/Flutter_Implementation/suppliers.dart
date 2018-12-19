@@ -7,6 +7,12 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'globals.dart';
 
+//********************************************************************
+//suppliers.dart adds the functionality to see suppliers by 
+//Fetch post to get supplier information from the JSON 
+//pulls the data from the supplier endpoint and feeds it to the app
+//shippers option is accessible from the homepage 
+//*********************************************************************
 Future< SuppliersList > fetchPost() async 
 {
   final response = await http.get('http://inv.azurewebsites.net/api/data/suppliers');
@@ -21,6 +27,7 @@ Future< SuppliersList > fetchPost() async
   }
 }
 
+//Class for a suppliers list that parses the JSON post from the endpoint 
 class SuppliersList 
 {
   final List< SuppliersPost > posts;
@@ -36,6 +43,8 @@ class SuppliersList
   }
 }
 
+//Making the class for supplier post that takes the parsed JSON and puts the JSON variables 
+//into the local variables inside the app
 class SuppliersPost
 {
   final int    supplierID;
@@ -83,12 +92,14 @@ class SuppliersPost
   }
 }
 
+//Supplierswidget instantiation 
 class SuppliersWidg extends StatefulWidget 
 {
   SuppliersWidg({Key key}) : super(key: key);
   @override
   _SuppliersWidgState createState() => new _SuppliersWidgState();
 }
+
 
 class _SuppliersWidgState extends State< SuppliersWidg > 
 {
@@ -123,6 +134,7 @@ class _SuppliersWidgState extends State< SuppliersWidg >
     });
   }
 
+  //building the widget for the user interface
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
