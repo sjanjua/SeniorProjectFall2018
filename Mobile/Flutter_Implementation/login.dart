@@ -5,15 +5,23 @@ import 'dart:convert';
 import 'dart:io';
 import 'globals.dart';
 
+//**************************************************
+//Login Screen for the mobile 
+//**************************************************
+//connects to the home page upon validation and returns error if not validated 
+
+//creating a log in screen widget 
 class logInScreen extends StatelessWidget
 {
   final GlobalKey< FormState > _formKey = GlobalKey< FormState >();
   bool _autoValidate = false;
 
+  //login post takes in a users username and password 
   LoginPost post;
   String _username;
   String _password;
 
+  //building the widget for the login screen 
   @override
   Widget build( BuildContext context )
   {
@@ -122,6 +130,9 @@ class logInScreen extends StatelessWidget
     );
   }
 
+  
+  //UI for the widget for a user account 
+  //uses the users email and password 
   Widget formUI() {
 
     Column column = Column(
@@ -161,18 +172,21 @@ class logInScreen extends StatelessWidget
     return column;
   }
 
+  //Grabs a decode the login post 
   LoginPost postFromJson( String str )
   {
     final jsonData = json.decode( str );
     return LoginPost.fromJson( jsonData );
   }
 
+  //Encodes a login post 
   String postToJson( LoginPost data )
   {
     final dyn = data.toJson();
     return json.encode( dyn );
   }
 
+  //Pulls the account JSON to validate the login of a user 
   Future< http.Response > createLoginPost( LoginPost post ) async
   {
     final response = await http.post(
@@ -186,6 +200,7 @@ class logInScreen extends StatelessWidget
 
 }
 
+//login post class using the username and password 
 class LoginPost
 {
   String username;
