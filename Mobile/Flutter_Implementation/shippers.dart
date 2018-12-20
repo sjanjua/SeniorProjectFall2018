@@ -6,9 +6,16 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'globals.dart';
 
+//************************************************************************************* 
+//Shipper page to view the Shippers that are moving the inventory 
+//One of the functionalities that is accessible from the home page once
+//a user has successfully logged into the app 
+//************************************************************************************* 
+
+//Fetch the endpoint from the rest api to be used in the app 
 Future< ShippersList > fetchPost() async 
 {
-  final response = await http.get('http://inv.azurewebsites.net/api/data/shippers');
+  final response = await http.get('http://inv.azurewebsites.net/api/data/shippers'); //endpoint for shippers 
   
   if (response.statusCode == 200)
   {
@@ -16,17 +23,19 @@ Future< ShippersList > fetchPost() async
   } 
   else 
   {
-    throw Exception('Failed to load post');
+    throw Exception('Failed to load post'); //error message if the endpoint cannot be reached 
   }
 }
 
+//Shippers List Class that parses the JSON so that it can be manipulated inside the app 
 class ShippersList
 {
   final List< ShippersPost > posts;
 
   ShippersList( { this.posts } );
 
-  factory ShippersList.fromJson( List< dynamic > parsedJson )
+  //List parses the JSON and adds the shippers to a list 
+  factory ShippersList.fromJson( List< dynamic > parsedJson ) 
   {
     List< ShippersPost > shippers = new List< ShippersPost >();
     shippers = parsedJson.map( ( i ) => ShippersPost.fromJson( i ) ).toList();
@@ -35,6 +44,9 @@ class ShippersList
   }
 }
 
+//Class for the shipper posts that contains the attributes that each shipper post has 
+//Each shipper has--> an ID, a Name, and  Phone number  
+//Class takes each parsed JSON value and assigns it to the appropriate variable in each post 
 class ShippersPost
 {
   int    shipperID;
@@ -53,7 +65,7 @@ class ShippersPost
   }
 }
 
-
+//Instantiate a Shipper widget 
 class ShippersWidg extends StatefulWidget
 {
   ShippersWidg({Key key}) : super(key: key);
@@ -62,6 +74,7 @@ class ShippersWidg extends StatefulWidget
   _ShippersWidgState createState() => new _ShippersWidgState();
 }
 
+//Setting up widget to search for shippers 
 class _ShippersWidgState extends State< ShippersWidg > 
 {
   Widget appBarTitle = new Text(
@@ -73,6 +86,7 @@ class _ShippersWidgState extends State< ShippersWidg >
     color: Colors.white,
   );
   
+  //Shipper searching mechanics 
   final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery = new TextEditingController();
   List< ShippersPost > _list;
@@ -96,6 +110,8 @@ class _ShippersWidgState extends State< ShippersWidg >
     });
   }
 
+  //Building the shippers Widget displaying the shippers that were searched for 
+  //outputs the shippers in a list 
   @override
   Widget build(BuildContext context) {
 
@@ -234,6 +250,7 @@ class _ShippersWidgState extends State< ShippersWidg >
 //   }
 // }
 
+//Child item class for building the shipper widget 
 class ChildItem extends StatelessWidget {
   final String name;
   ChildItem(this.name);

@@ -7,20 +7,28 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'globals.dart';
 
+//*************************************************************************************** 
+//Order.dart 
+//Extends from the home page after user has logged into the app  
+//*************************************************************************************** 
+
+//Fetch post o retrieve the endpoint from the rest api 
 Future< OrdersList > fetchPost() async 
 {
-  final response = await http.get('http://inv.azurewebsites.net/api/data/orders');
+  final response = await http.get('http://inv.azurewebsites.net/api/data/orders'); //JSON format endpoint 
   
   if (response.statusCode == 200)
   {
-    return OrdersList.fromJson( json.decode( response.body ) );
+    return OrdersList.fromJson( json.decode( response.body ) ); //decoding the endpoint 
   } 
   else 
   {
-    throw Exception( 'Failed to load post' );
+    throw Exception( 'Failed to load post' ); //error message if the endpoint cannot be retrived and decoded 
   }
-}
+}//END of fetchpost 
 
+
+//Class for the Orders list 
 class OrdersList 
 {
   final List< OrdersPost > posts;
@@ -34,10 +42,14 @@ class OrdersList
 
     return OrdersList( posts: orders );
   }
-}
+}//END of OrdersList class 
 
+
+//Orders Post class 
+//Each post gets the corresponding parsed JSON attribute 
 class OrdersPost
 {
+  //attributes of each of the Orders 
   final int    orderID;
   final String orderDate;
   final String requiredDate;
@@ -78,8 +90,10 @@ class OrdersPost
       userName:       json[ 'UserName' ]
     );
   }
-}
+}//END of the OrderPost class 
 
+
+//Order Class that contains all of attributes for each order 
 class Order
 {
   final int    orderID;
@@ -105,8 +119,10 @@ class Order
       this.freightNumber,
       this.userName
   });
-}
+}//END of the Order class 
 
+
+//Instantiating an Order widget 
 class OrdersWidg extends StatefulWidget 
 {
   OrdersWidg({Key key}) : super(key: key);
@@ -114,6 +130,7 @@ class OrdersWidg extends StatefulWidget
   _OrdersWidgState createState() => new _OrdersWidgState();
 }
 
+//Full order Widget that will allow the user to view the orders 
 class _OrdersWidgState extends State< OrdersWidg > 
 {
   Widget appBarTitle = new Text(
@@ -143,6 +160,7 @@ class _OrdersWidgState extends State< OrdersWidg >
     });
   }
 
+  //Construction of the widget and its internals below 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -160,7 +178,7 @@ class _OrdersWidgState extends State< OrdersWidg >
             _list = List();
             Order order;
 
-            for ( int i = 0; i < snapshot.data.posts.length; i++ )
+            for ( int i = 0; i < snapshot.data.posts.length; i++ ) //loop goes through each part of each post and adds them to a string 
             {
               order = Order(
                   orderID:        snapshot.data.posts[ i ].orderID,
@@ -175,7 +193,7 @@ class _OrdersWidgState extends State< OrdersWidg >
                   userName:       snapshot.data.posts[ i ].userName.toString()
               );
 
-              _list.add( order );
+              _list.add( order ); //adding each order to the list 
             }
 
             return ListView.builder(
@@ -210,7 +228,7 @@ class _OrdersWidgState extends State< OrdersWidg >
                             _list.elementAt( index ).orderDate.toString()      + '\n' +
                             _list.elementAt( index ).requiredDate.toString()   + '\n' +
                             _list.elementAt( index ).shippedDate.toString()    + '\n' +
-                            _list.elementAt( index ).shippedAddress.toString() + '\n' +
+                            _list.elementAt( index ).shippedAddress.toString() + '\n' + //Formatting the text 
                             _list.elementAt( index ).shippedCity.toString()    + '\n' +
                             _list.elementAt( index ).shippedRegion.toString()  + '\n' +
                             _list.elementAt( index ).shippedName.toString()    + '\n' +
@@ -234,7 +252,11 @@ class _OrdersWidgState extends State< OrdersWidg >
         }
       )
     );
-  }
+  }//END of Order widget  
+  //END OF WORKING CODE  
+  
+  
+  
 
 //   Widget buildBar(BuildContext context) {
 //     return new AppBar(centerTitle: true, title: appBarTitle, actions: <Widget>[

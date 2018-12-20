@@ -7,20 +7,28 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'globals.dart';
 
+//**************************************************************************************** 
+//Product.dart 
+//adds the functionality for products to the app that is accessible from then home page  
+//**************************************************************************************** 
+
+//Fetch Post for the endpoint from the rest api 
 Future< ProductsList > fetchPost() async 
 {
-  final response = await http.get('http://inv.azurewebsites.net/api/data/products');
+  final response = await http.get('http://inv.azurewebsites.net/api/data/products'); //endpoint 
   
   if (response.statusCode == 200)
   {
-    return ProductsList.fromJson( json.decode( response.body ) );
+    return ProductsList.fromJson( json.decode( response.body ) ); //decoding the JSON endpoint 
   } 
   else 
   {
-    throw Exception( 'Failed to load post' );
+    throw Exception( 'Failed to load post' ); //error message if the endpoint cannot be retrieved 
   }
 }
 
+//Products List class 
+//Parsing the JSON endpoint to be used to make the products list 
 class ProductsList 
 {
   final List< ProductsPost > posts;
@@ -36,6 +44,8 @@ class ProductsList
   }
 }
 
+//Products Post class that assigns each product post with the corresponding 
+//JSON attributes 
 class ProductsPost
 {
   final int    productID;
@@ -65,6 +75,8 @@ class ProductsPost
   }
 }
 
+//Product class 
+//defines the attributes that each product should have 
 class Product
 {
   int    productID;
@@ -86,6 +98,7 @@ class Product
   );
 }
 
+//Instantiate a Products widget 
 class ProductsWidg extends StatefulWidget 
 {
   ProductsWidg({Key key}) : super( key: key);
@@ -93,12 +106,14 @@ class ProductsWidg extends StatefulWidget
   _ProductsWidgState createState() => new _ProductsWidgState();
 }
 
+//Set up the Widget and the text in the widget to display the products list 
 class _ProductsWidgState extends State< ProductsWidg > 
 {
 
   final key = new GlobalKey<ScaffoldState>();
   List< Product > _list;
 
+  //Building the widget 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -116,11 +131,11 @@ class _ProductsWidgState extends State< ProductsWidg >
             {
               Color color = Globals.barColor;
 
-              if ( snapshot.data.posts[ i ].unitsInStock <= 20 )
+              if ( snapshot.data.posts[ i ].unitsInStock <= 20 ) //color coded red if there are less than 20 units 
               {
                 color = Colors.red;
               }
-              else if ( snapshot.data.posts[ i ].unitsInStock <= 50 )
+              else if ( snapshot.data.posts[ i ].unitsInStock <= 50 ) //yellow otherwise 
               {
                 color = Colors.yellow;
               }
