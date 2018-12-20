@@ -83,7 +83,7 @@ namespace Inventory.Controllers
                 {
                     CustomerRepository custRepo = new CustomerRepository(conn);
                     Customer cust = custRepo.GetById(order.CustomerID);
-                    Logon user = (Logon)Session["User"];
+                    Users user = (Users)Session["User"];
 
 
                     newOrder.CustomerID = order.CustomerID;

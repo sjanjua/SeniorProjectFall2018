@@ -18,7 +18,7 @@ namespace Inventory.DataLayer.Repository
         {
             // DBAs across the country are having strokes 
             //  over this next command!
-            using (var command = new MySqlCommand("select * from user WHERE ActiveYN = 'Y' order by RoleID, FirstName"))
+            using (var command = new MySqlCommand("select u.*, aes_decrypt(Password,'seniorproject') as DecryptPassword from user u WHERE ActiveYN = 'Y' order by RoleID, FirstName"))
             {
                 return GetRecords(command);
             }
