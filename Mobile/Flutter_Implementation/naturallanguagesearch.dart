@@ -11,6 +11,7 @@ import 'globals.dart';
 //Promotes for a more enhanced user experience and easier searches 
 //******************************************************************************************* 
 
+
 //Instantiating a natural language search widget 
 class NLSWidg extends StatefulWidget
 {
@@ -19,6 +20,8 @@ class NLSWidg extends StatefulWidget
   @override 
   _NLSWidgState createState() => _NLSWidgState();
 }
+
+
 
 //Building and formatting the widget that user will have access to in the app 
 class _NLSWidgState extends State< NLSWidg >
