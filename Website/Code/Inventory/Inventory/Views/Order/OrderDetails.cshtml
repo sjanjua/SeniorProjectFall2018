@@ -1,14 +1,14 @@
 ﻿@model Inventory.Models.DisplayOrderDetails
 
 @{
-    ViewBag.Title = "OrderDetails";
+    ViewBag.Title = "Add Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>OrderDetails</h2>
+<h2>Add Products</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateOrderDetail", new { id = Model.OrderID })
+    @Html.ActionLink("Add New Product", "CreateOrderDetail", new { id = Model.OrderID })
 </p>
 <table class="table">
     <tr>

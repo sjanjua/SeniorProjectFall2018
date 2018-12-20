@@ -1,14 +1,13 @@
 ﻿@model Inventory.Models.Orders
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Order Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Order Details</h2>
 
 <div>
-    <h4>Orders</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -95,6 +94,6 @@
 </div>
 <p>
     @Html.ActionLink("Ship Order", "ShipOrder", new { id = Model.OrderID }) |
-    @Html.ActionLink("Order Details", "OrderDetails", new { id = Model.OrderID }) |
+    @Html.ActionLink("Add Products", "OrderDetails", new { id = Model.OrderID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
