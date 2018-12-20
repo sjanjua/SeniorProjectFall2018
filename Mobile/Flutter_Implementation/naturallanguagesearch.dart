@@ -6,15 +6,21 @@ import 'package:http/http.dart' as http;
 import 'orders.dart';
 import 'globals.dart';
 
+//******************************************************************************************* 
+//Natural language search capabilities being added to the order aspect of the app 
+//Promotes for a more enhanced user experience and easier searches 
+//******************************************************************************************* 
+
+//Instantiating a natural language search widget 
 class NLSWidg extends StatefulWidget
 {
   NLSWidg( {Key key } ) : super( key: key );
 
   @override 
   _NLSWidgState createState() => _NLSWidgState();
-
 }
 
+//Building and formatting the widget that user will have access to in the app 
 class _NLSWidgState extends State< NLSWidg >
 {
 
@@ -35,6 +41,7 @@ class _NLSWidgState extends State< NLSWidg >
     );
   }
 
+  //Construction of the widget 
   @override 
   Widget build( BuildContext context )
   {
@@ -50,7 +57,7 @@ class _NLSWidgState extends State< NLSWidg >
             padding: EdgeInsets.fromLTRB( 30.0, 60.0, 30.0, 50.0 ),
             child: Column(
               children: <Widget>[
-                TextField( controller: controller, decoration: InputDecoration( hintText: 'Enter query to search for orders' ) ),
+                TextField( controller: controller, decoration: InputDecoration( hintText: 'Enter query to search for orders' ) ), //prompting user for query 
                 MaterialButton( 
                   onPressed: () {
                     queryField = controller.text;
@@ -85,7 +92,7 @@ class _NLSWidgState extends State< NLSWidg >
                         // queryResponse = str;
 
                         setState( () {
-                          products = OrdersList.fromJson( json.decode( response.body ) );
+                          products = OrdersList.fromJson( json.decode( response.body ) ); 
                         });
                         
                       }
@@ -150,35 +157,42 @@ class _NLSWidgState extends State< NLSWidg >
         )
       ) 
     );
-  }
+  }//END of Natural language search widget 
 
   
-
+  //gets the endpoint for natural language search usage using a Query Post 
+  //returns the response 
   Future< http.Response > createQueryPost( QueryPost post ) async
   {
     final response = await http.post(
-      Uri.parse( 'http://inv.azurewebsites.net/api/nls' ),
+      Uri.parse( 'http://inv.azurewebsites.net/api/nls' ),              //rest api endpoint 
       headers: { HttpHeaders.contentTypeHeader: 'application/json' },
       body: postToJson( post )
     );
 
     return response;
-  }
+  }//END of create query post Response is returned 
 
+  
+  //Post the queryPost data to JSON 
   String postToJson( QueryPost data )
   {
     final dyn = data.toJson();
     return json.encode( dyn );
-  }
+  }//END postToJson 
 
+  
+  //decode queryPost data from Json 
   QueryPost postFromJson( String str )
   {
     final jsonData = json.decode( str );
     return QueryPost.fromJson( jsonData );
-  }
+  }//END postFromJson 
 
-}
+}//END of NLSWidgetState 
 
+//Class for QueryPost 
+//Assigns the Json value for a query to the local varaible for that attribute 
 class QueryPost
 {
   String query;
@@ -193,4 +207,5 @@ class QueryPost
   {
     "Query": query
   };
-}
+}//END of QueryPost class 
+//END OF NATURAL LANGUAGE SEARCH CODE
