@@ -250,6 +250,7 @@ class _ShippersWidgState extends State< ShippersWidg >
 //   }
 // }
 
+//Child item class for building the shipper widget 
 class ChildItem extends StatelessWidget {
   final String name;
   ChildItem(this.name);
